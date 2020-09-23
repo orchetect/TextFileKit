@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import TextFile
+@testable import TextFileKit
 
 class CSV_Tests: XCTestCase {
 	
