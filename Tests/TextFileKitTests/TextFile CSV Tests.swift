@@ -1,6 +1,12 @@
+//
+//  TextFile CSV Tests.swift
+//  TextFileKit
+//
 //  Created by Steffan Andrews on 2020-08-26.
 //  Copyright © 2020 Steffan Andrews. All rights reserved.
 //
+
+#if !os(watchOS)
 
 import XCTest
 @testable import TextFileKit
@@ -128,3 +134,5 @@ extension CSV_Tests {
 	}
 	
 }
+
+#endif
