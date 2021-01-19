@@ -6,7 +6,6 @@
 //  Copyright © 2020 Steffan Andrews. All rights reserved.
 //
 
-import Foundation
 @_implementationOnly import OTCore
 
 extension TextFile {
@@ -69,9 +68,9 @@ extension TextFile {
 					return outString
 					
 				})
-					.joined(separator: Self.sepChar.string)
+				.joined(separator: Self.sepChar.string)
 			})
-				.joined(separator: Self.newLineChar.string)
+			.joined(separator: Self.newLineChar.string)
 			
 		}
 		

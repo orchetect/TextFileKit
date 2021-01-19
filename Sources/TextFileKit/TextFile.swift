@@ -6,8 +6,6 @@
 //  Copyright © 2020 Steffan Andrews. All rights reserved.
 //
 
-import Foundation
-
 /// CUSTOM SHARED:
 /// Family of Text File parsing and constructing entities.
 public enum TextFile {
