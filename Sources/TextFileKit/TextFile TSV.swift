@@ -12,38 +12,37 @@ extension TextFile {
 	
 	// tested with Google Sheets, Microsoft Excel, and Apple Numbers
 	
-	/// CUSTOM SHARED:
 	/// TSV (Tab-Separated Values) text file format.
 	public struct TSV: StringArrayTableRepresentable {
 		
-		// consts
+		// MARK: - Constants
 		
 		internal static let sepChar: Character = "\t"
 		internal static let newLineChar: Character = Character.newLine
 		
 		public static let fileExtension = "tsv"
 		
-		// vars
+		// MARK: - Variables
 		
 		public var table: StringTable = []
 		
-		// init
+		// MARK: - Init
 		
 		public init(table: StringTable = []) {
 			self.table = table
 		}
 		
-		public init(rawData: String) {
-			table = Self.parseTSV(text: rawData)
+		public init(rawText: String) {
+			table = Self.parseTSV(text: rawText)
 		}
 		
-		// rawData
+		// MARK: - RawText
 		
-		public var rawData: String {
+		public var rawText: String {
 			
-			table.map ({ row in
+			table.map { row in
 				
-				row.map ({ textString in
+				row.map { textString in
 					
 					var outString = textString
 					var needsQuoteWrapping = false
@@ -67,9 +66,10 @@ extension TextFile {
 					
 					return outString
 					
-				})
+				}
 				.joined(separator: Self.sepChar.string)
-			})
+				
+			}
 			.joined(separator: Self.newLineChar.string)
 			
 		}

@@ -29,7 +29,7 @@ class TSV_Tests: XCTestCase {
 
 // MARK: - Basic
 
-fileprivate let tsvData_Basic = """
+fileprivate let tsvRawText_Basic = """
 header1	header2	header3
 1	2	3
 a	b	c
@@ -44,11 +44,11 @@ fileprivate let tsvTable_Basic: StringTable =
 
 extension TSV_Tests {
 
-	func test_Init_RawData_Basic() {
+	func test_Init_RawText_Basic() {
 		
-		let sv = TextFile.TSV(rawData: tsvData_Basic)
+		let sv = TextFile.TSV(rawText: tsvRawText_Basic)
 		
-		XCTAssertEqual(sv.rawData, tsvData_Basic)
+		XCTAssertEqual(sv.rawText, tsvRawText_Basic)
 		XCTAssertEqual(sv.table, tsvTable_Basic)
 		
 	}
@@ -57,7 +57,7 @@ extension TSV_Tests {
 		
 		let sv = TextFile.TSV(table: tsvTable_Basic)
 		
-		XCTAssertEqual(sv.rawData, tsvData_Basic)
+		XCTAssertEqual(sv.rawText, tsvRawText_Basic)
 		XCTAssertEqual(sv.table, tsvTable_Basic)
 		
 	}
@@ -67,7 +67,7 @@ extension TSV_Tests {
 
 // MARK: - Single column
 
-fileprivate let tsvData_SingleColumn = """
+fileprivate let tsvRawText_SingleColumn = """
 header1
 1
 a
@@ -82,11 +82,11 @@ fileprivate let tsvTable_SingleColumn: StringTable =
 
 extension TSV_Tests {
 	
-	func test_Init_RawData_SingleColumn() {
+	func test_Init_RawText_SingleColumn() {
 		
-		let sv = TextFile.TSV(rawData: tsvData_SingleColumn)
+		let sv = TextFile.TSV(rawText: tsvRawText_SingleColumn)
 		
-		XCTAssertEqual(sv.rawData, tsvData_SingleColumn)
+		XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
 		XCTAssertEqual(sv.table, tsvTable_SingleColumn)
 		
 	}
@@ -95,7 +95,7 @@ extension TSV_Tests {
 		
 		let sv = TextFile.TSV(table: tsvTable_SingleColumn)
 		
-		XCTAssertEqual(sv.rawData, tsvData_SingleColumn)
+		XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
 		XCTAssertEqual(sv.table, tsvTable_SingleColumn)
 		
 	}
@@ -105,7 +105,7 @@ extension TSV_Tests {
 
 // MARK: - Quoted fields
 
-fileprivate let tsvData_QuotedFields = #"""
+fileprivate let tsvRawText_QuotedFields = #"""
 header1	"header	2"	header3
 1	2	3 "quoted" here
 "one line
@@ -124,11 +124,11 @@ fileprivate let tsvTable_QuotedFields: StringTable =
 
 extension TSV_Tests {
 	
-	func test_Init_RawData_QuotedFields() {
+	func test_Init_RawText_QuotedFields() {
 		
-		let sv = TextFile.TSV(rawData: tsvData_QuotedFields)
+		let sv = TextFile.TSV(rawText: tsvRawText_QuotedFields)
 		
-		XCTAssertEqual(sv.rawData, tsvData_QuotedFields)
+		XCTAssertEqual(sv.rawText, tsvRawText_QuotedFields)
 		XCTAssertEqual(sv.table, tsvTable_QuotedFields)
 		
 	}

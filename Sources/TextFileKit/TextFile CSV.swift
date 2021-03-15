@@ -14,38 +14,37 @@ extension TextFile {
 	
 	// tested with Google Sheets, Microsoft Excel, and Apple Numbers
 	
-	/// CUSTOM SHARED:
 	/// CSV (Comma-Separated Values) text file format.
 	public struct CSV: StringArrayTableRepresentable {
 		
-		// consts
+		// MARK: - Constants
 		
 		internal static let sepChar: Character = ","
 		internal static let newLineChar: Character = Character.newLine
 		
 		public static let fileExtension = "csv"
 		
-		// vars
+		// MARK: - Variables
 		
 		public var table: StringTable = []
 		
-		// init
+		// MARK: - Init
 		
 		public init(table: StringTable = []) {
 			self.table = table
 		}
 		
-		public init(rawData: String) {
-			table = Self.parseCSV(text: rawData)
+		public init(rawText: String) {
+			table = Self.parseCSV(text: rawText)
 		}
 		
-		// rawData
+		// MARK: - rawText
 		
-		public var rawData: String {
+		public var rawText: String {
 			
-			table.map ({ row in
+			table.map { row in
 				
-				row.map ({ textString in
+				row.map { textString in
 					
 					var outString = textString
 					
@@ -60,9 +59,10 @@ extension TextFile {
 					
 					return outString
 					
-				})
+				}
 				.joined(separator: Self.sepChar.string)
-			})
+				
+			}
 			.joined(separator: Self.newLineChar.string)
 			
 		}

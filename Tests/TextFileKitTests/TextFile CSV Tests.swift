@@ -29,7 +29,7 @@ class CSV_Tests: XCTestCase {
 
 // MARK: - Basic
 
-fileprivate let csvData_Basic = """
+fileprivate let csvRawText_Basic = """
 header1,header2,header3
 1,2,3
 a,b,c
@@ -44,11 +44,11 @@ fileprivate let csvTable_Basic: StringTable =
 
 extension CSV_Tests {
 	
-	func test_Init_RawData_Basic() {
+	func test_Init_RawText_Basic() {
 		
-		let sv = TextFile.CSV(rawData: csvData_Basic)
+		let sv = TextFile.CSV(rawText: csvRawText_Basic)
 		
-		XCTAssertEqual(sv.rawData, csvData_Basic)
+		XCTAssertEqual(sv.rawText, csvRawText_Basic)
 		XCTAssertEqual(sv.table, csvTable_Basic)
 		
 	}
@@ -57,7 +57,7 @@ extension CSV_Tests {
 		
 		let sv = TextFile.CSV(table: csvTable_Basic)
 		
-		XCTAssertEqual(sv.rawData, csvData_Basic)
+		XCTAssertEqual(sv.rawText, csvRawText_Basic)
 		XCTAssertEqual(sv.table, csvTable_Basic)
 		
 	}
@@ -67,7 +67,7 @@ extension CSV_Tests {
 
 // MARK: - Single column
 
-fileprivate let csvData_SingleColumn = """
+fileprivate let csvRawText_SingleColumn = """
 header1
 1
 a
@@ -82,11 +82,11 @@ fileprivate let csvTable_SingleColumn: StringTable =
 
 extension CSV_Tests {
 	
-	func test_Init_RawData_SingleColumn() {
+	func test_Init_RawText_SingleColumn() {
 		
-		let sv = TextFile.CSV(rawData: csvData_SingleColumn)
+		let sv = TextFile.CSV(rawText: csvRawText_SingleColumn)
 		
-		XCTAssertEqual(sv.rawData, csvData_SingleColumn)
+		XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
 		XCTAssertEqual(sv.table, csvTable_SingleColumn)
 		
 	}
@@ -95,7 +95,7 @@ extension CSV_Tests {
 		
 		let sv = TextFile.CSV(table: csvTable_SingleColumn)
 		
-		XCTAssertEqual(sv.rawData, csvData_SingleColumn)
+		XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
 		XCTAssertEqual(sv.table, csvTable_SingleColumn)
 		
 	}
@@ -105,7 +105,7 @@ extension CSV_Tests {
 
 // MARK: - Quoted fields
 
-fileprivate let csvData_QuotedFields = #"""
+fileprivate let csvRawText_QuotedFields = #"""
 header1,"header, 2",header3
 1,2,"3 ""quoted"" here"
 "one line
@@ -124,11 +124,11 @@ fileprivate let csvTable_QuotedFields: StringTable =
 
 extension CSV_Tests {
 	
-	func test_Init_RawData_QuotedFields() {
+	func test_Init_RawText_QuotedFields() {
 		
-		let sv = TextFile.CSV(rawData: csvData_QuotedFields)
+		let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
 		
-		XCTAssertEqual(sv.rawData, csvData_QuotedFields)
+		XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
 		XCTAssertEqual(sv.table, csvTable_QuotedFields)
 		
 	}
