@@ -42,7 +42,11 @@ extension StringTable {
     public subscript(safe row: Int, col: Int) -> Element.Element? {
         
         get {
-            self[safe: row]?[safe: col]
+            guard self.indices.contains(row),
+                  self[row].indices.contains(col)
+            else { return nil }
+            
+            return self[row][col]
         }
         set {
             guard row < self.rowCount,

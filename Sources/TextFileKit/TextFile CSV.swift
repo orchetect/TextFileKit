@@ -3,7 +3,7 @@
 //  TextFileKit • https://github.com/orchetect/TextFileKit
 //
 
-@_implementationOnly import OTCore
+import Foundation
 
 extension TextFile {
     
@@ -17,7 +17,7 @@ extension TextFile {
         // MARK: - Constants
         
         internal static let sepChar: Character = ","
-        internal static let newLineChar: Character = Character.newLine
+        internal static let newLineChar: Character = "\n"
         
         public static let fileExtension = "csv"
         
@@ -57,10 +57,10 @@ extension TextFile {
                     return outString
                     
                 }
-                .joined(separator: Self.sepChar.string)
+                .joined(separator: String(Self.sepChar))
                 
             }
-            .joined(separator: Self.newLineChar.string)
+            .joined(separator: String(Self.newLineChar))
             
         }
         
