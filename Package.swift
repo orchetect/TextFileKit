@@ -14,13 +14,13 @@ let package = Package(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/orchetect/OTCore", from: "1.1.10")
+        // none
     ],
     
     targets: [
         .target(
             name: "TextFileKit",
-            dependencies: ["OTCore"]),
+            dependencies: []),
         .testTarget(
             name: "TextFileKitTests",
             dependencies: ["TextFileKit"])
