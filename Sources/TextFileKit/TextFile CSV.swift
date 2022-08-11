@@ -6,14 +6,12 @@
 import Foundation
 
 extension TextFile {
-    
     // CSV format: https://en.wikipedia.org/wiki/Comma-separated_values
     
     // tested with Google Sheets, Microsoft Excel, and Apple Numbers
     
     /// CSV (Comma-Separated Values) text file format.
     public struct CSV: StringArrayTableRepresentable {
-        
         // MARK: - Constants
         
         internal static let sepChar: Character = ","
@@ -38,7 +36,6 @@ extension TextFile {
         // MARK: - rawText
         
         public var rawText: String {
-            
             table.map { row in
                 
                 row.map { textString in
@@ -55,23 +52,16 @@ extension TextFile {
                     { outString = outString.quoted }
                     
                     return outString
-                    
                 }
                 .joined(separator: String(Self.sepChar))
-                
             }
             .joined(separator: String(Self.newLineChar))
-            
         }
-        
     }
-    
 }
 
 extension TextFile.CSV {
-    
     internal static func parseCSV(text: String) -> StringTable {
-        
         // prep
         
         let text = text + String(newLineChar) // append newline to assist the parser
@@ -87,7 +77,6 @@ extension TextFile.CSV {
         // parse
         
         for char in text {
-            
             // helpers
             
             func closeField() {
@@ -98,12 +87,12 @@ extension TextFile.CSV {
             
             func closeRecord() {
                 // if empty line, don't add it
-                if record.count == 1 && record[0] == "" {
+                if record.count == 1, record[0] == "" {
                     record = []
                     return
                 }
                 
-                if record.count > 0 {
+                if !record.isEmpty {
                     result.append(record)
                     record = []
                 }
@@ -124,20 +113,18 @@ extension TextFile.CSV {
                 
             case "\"":
                 // consider it a quoted field if a quote is the first character
-                if !quoteOpen && fieldString.count == 0 {
+                if !quoteOpen, fieldString.isEmpty {
                     quoteOpen = true
                     continue
                 }
                 
-                if fieldString.count > 0 {
-                    
+                if !fieldString.isEmpty {
                     if lastCharWasMidstreamQuote {
                         fieldString += "\""
                         lastCharWasMidstreamQuote = false
                     } else {
                         lastCharWasMidstreamQuote = true
                     }
-                    
                 }
                 
             case newLineChar:
@@ -155,15 +142,11 @@ extension TextFile.CSV {
                 fieldString.append(char)
                 
                 lastCharWasMidstreamQuote = false
-                
             }
-            
         }
         
         // return
         
         return result
-        
     }
-    
 }

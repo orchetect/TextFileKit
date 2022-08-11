@@ -6,12 +6,10 @@
 import Foundation
 
 extension TextFile {
-    
     // tested with Google Sheets, Microsoft Excel, and Apple Numbers
     
     /// TSV (Tab-Separated Values) text file format.
     public struct TSV: StringArrayTableRepresentable {
-        
         // MARK: - Constants
         
         internal static let sepChar: Character = "\t"
@@ -36,7 +34,6 @@ extension TextFile {
         // MARK: - RawText
         
         public var rawText: String {
-            
             table.map { row in
                 
                 row.map { textString in
@@ -51,8 +48,8 @@ extension TextFile {
                     
                     // escape double-quotes
                     // (only necessary if the string needs to be wrote-wrapped for another reason (ie: string contains a tab char))
-                    if outString.contains("\"")
-                        && needsQuoteWrapping
+                    if outString.contains("\""),
+                       needsQuoteWrapping
                     {
                         outString = outString.replacingOccurrences(of: "\"", with: "\"\"")
                     }
@@ -62,23 +59,16 @@ extension TextFile {
                     }
                     
                     return outString
-                    
                 }
                 .joined(separator: String(Self.sepChar))
-                
             }
             .joined(separator: String(Self.newLineChar))
-            
         }
-        
     }
-    
 }
 
 extension TextFile.TSV {
-    
     internal static func parseTSV(text: String) -> StringTable {
-        
         // prep
         
         let text = text + String(newLineChar) // append newline to assist the parser
@@ -94,7 +84,6 @@ extension TextFile.TSV {
         // parse
         
         for char in text {
-            
             // helpers
             
             func closeField() {
@@ -105,12 +94,12 @@ extension TextFile.TSV {
             
             func closeRecord() {
                 // if empty line, don't add it
-                if record.count == 1 && record[0] == "" {
+                if record.count == 1, record[0] == "" {
                     record = []
                     return
                 }
                 
-                if record.count > 0 {
+                if !record.isEmpty {
                     result.append(record)
                     record = []
                 }
@@ -134,13 +123,12 @@ extension TextFile.TSV {
                 
             case "\"":
                 // consider it a quoted field if a quote is the first character
-                if !quoteOpen && fieldString.count == 0 {
+                if !quoteOpen, fieldString.isEmpty {
                     quoteOpen = true
                     continue
                 }
                 
-                if fieldString.count > 0 {
-                    
+                if !fieldString.isEmpty {
                     if quoteOpen {
                         if lastCharWasMidstreamQuote {
                             fieldString += "\""
@@ -152,7 +140,6 @@ extension TextFile.TSV {
                         fieldString.append(char)
                         lastCharWasMidstreamQuote = false
                     }
-                    
                 }
                 
             case newLineChar:
@@ -170,15 +157,11 @@ extension TextFile.TSV {
                 fieldString.append(char)
                 
                 lastCharWasMidstreamQuote = false
-                
             }
-            
         }
         
         // return
         
         return result
-        
     }
-    
 }

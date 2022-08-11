@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    
     name: "TextFileKit",
     
     products: [
         .library(
             name: "TextFileKit",
-            targets: ["TextFileKit"])
+            targets: ["TextFileKit"]
+        )
     ],
     
     dependencies: [
@@ -20,10 +20,11 @@ let package = Package(
     targets: [
         .target(
             name: "TextFileKit",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "TextFileKitTests",
-            dependencies: ["TextFileKit"])
+            dependencies: ["TextFileKit"]
+        )
     ]
-    
 )

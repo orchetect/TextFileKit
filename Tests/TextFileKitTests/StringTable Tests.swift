@@ -9,12 +9,10 @@ import XCTest
 @testable import TextFileKit
 
 class StringTable_Tests: XCTestCase {
-    
     override func setUp() { super.setUp() }
     override func tearDown() { super.tearDown() }
     
     func testRead() {
-        
         let st: StringTable =
             [
                 ["1A", "1B"],
@@ -27,11 +25,9 @@ class StringTable_Tests: XCTestCase {
         
         XCTAssertEqual(st[2][0], "3A")
         XCTAssertEqual(st[2][1], "3B")
-        
     }
     
     func testWrite() {
-        
         var st: StringTable =
             [
                 ["1A", "1B"],
@@ -53,11 +49,9 @@ class StringTable_Tests: XCTestCase {
         
         XCTAssertEqual(st[3][0], "4A")
         XCTAssertEqual(st[3][1], "4B")
-        
     }
     
     func testEquatable() {
-        
         let st1: StringTable =
             [
                 ["1A", "1B"],
@@ -73,11 +67,9 @@ class StringTable_Tests: XCTestCase {
             ]
         
         XCTAssertEqual(st1, st2)
-        
     }
     
     func testNumberOfRowsColumns() {
-        
         var st: StringTable
         
         st = []
@@ -90,24 +82,26 @@ class StringTable_Tests: XCTestCase {
         XCTAssertEqual(st.rowCount, 1)
         XCTAssertEqual(st.columnCount, 2)
         
-        st = [["-", "-", "-"],
-              ["-", "-", "-"]]
+        st = [
+            ["-", "-", "-"],
+            ["-", "-", "-"]
+        ]
         
         XCTAssertEqual(st.rowCount, 2)
         XCTAssertEqual(st.columnCount, 3)
         
         // edge cases
         
-        st = [["-"],
-              ["-", "-", "-"]]
+        st = [
+            ["-"],
+            ["-", "-", "-"]
+        ]
         
         XCTAssertEqual(st.rowCount, 2)
         XCTAssertEqual(st.columnCount, 1)
-        
     }
     
     func testSubscript() {
-        
         var st: StringTable =
             [
                 ["1A", "1B"],
@@ -120,11 +114,9 @@ class StringTable_Tests: XCTestCase {
         
         st[0, 1] = "1Bnew"
         XCTAssertEqual(st[0, 1], "1Bnew")
-        
     }
     
     func testSafeSubscript() {
-        
         var st: StringTable =
             [
                 ["1A", "1B"],
@@ -150,9 +142,7 @@ class StringTable_Tests: XCTestCase {
         
         st[safe: 3, 0] = "4A"
         XCTAssertEqual(st[safe: 3, 0], nil)
-        
     }
-    
 }
 
 #endif
