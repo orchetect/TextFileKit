@@ -1,6 +1,7 @@
 //
 //  StringTable.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 /// String table addressed as `self[row][column]`, `self[row, column]` or `self[safe: row, column]`.

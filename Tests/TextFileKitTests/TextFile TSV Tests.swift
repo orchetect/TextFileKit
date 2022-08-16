@@ -1,6 +1,7 @@
 //
 //  TextFile TSV Tests.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 #if !os(watchOS)

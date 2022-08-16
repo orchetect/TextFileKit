@@ -1,6 +1,7 @@
 //
 //  StringArrayTableRepresentable.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 /// Protocol describing file formats which can be encoded to/from a `StringTable` (String Array table of rows and columns).

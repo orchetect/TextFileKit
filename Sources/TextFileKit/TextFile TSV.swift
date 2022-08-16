@@ -1,6 +1,7 @@
 //
 //  TextFile TSV.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
