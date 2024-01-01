@@ -28,12 +28,11 @@ fileprivate let csvRawText_Basic = """
     a,b,c
     """
 
-fileprivate let csvTable_Basic: StringTable =
-    [
-        ["header1", "header2", "header3"],
-        ["1", "2", "3"],
-        ["a", "b", "c"]
-    ]
+fileprivate let csvTable_Basic: StringTable = [
+    ["header1", "header2", "header3"],
+    ["1", "2", "3"],
+    ["a", "b", "c"]
+]
 
 extension CSV_Tests {
     func test_Init_RawText_Basic() {
@@ -59,12 +58,11 @@ fileprivate let csvRawText_SingleColumn = """
     a
     """
 
-fileprivate let csvTable_SingleColumn: StringTable =
-    [
-        ["header1"],
-        ["1"],
-        ["a"]
-    ]
+fileprivate let csvTable_SingleColumn: StringTable = [
+    ["header1"],
+    ["1"],
+    ["a"]
+]
 
 extension CSV_Tests {
     func test_Init_RawText_SingleColumn() {
@@ -85,21 +83,20 @@ extension CSV_Tests {
 // MARK: - Quoted fields
 
 fileprivate let csvRawText_QuotedFields = #"""
-header1,"header, 2",header3
-1,2,"3 ""quoted"" here"
-"one line
-another line",b,c
-q,w,"e
-""quoted"", stuff"
-"""#
+    header1,"header, 2",header3
+    1,2,"3 ""quoted"" here"
+    "one line
+    another line",b,c
+    q,w,"e
+    ""quoted"", stuff"
+    """#
 
-fileprivate let csvTable_QuotedFields: StringTable =
-    [
-        ["header1", "header, 2", "header3"],
-        ["1", "2", "3 \"quoted\" here"],
-        ["one line\nanother line", "b", "c"],
-        ["q", "w", "e\n\"quoted\", stuff"]
-    ]
+fileprivate let csvTable_QuotedFields: StringTable = [
+    ["header1", "header, 2", "header3"],
+    ["1", "2", "3 \"quoted\" here"],
+    ["one line\nanother line", "b", "c"],
+    ["q", "w", "e\n\"quoted\", stuff"]
+]
 
 extension CSV_Tests {
     func test_Init_RawText_QuotedFields() {
