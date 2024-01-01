@@ -76,7 +76,7 @@ extension TextFile.TSV {
         
         // flags and registers
         var quoteOpen = false
-        var lastCharWasMidstreamQuote = false
+        var previousCharWasMidstreamQuote = false
         var fieldString = ""
         var record: [String] = []
         
@@ -109,7 +109,7 @@ extension TextFile.TSV {
             switch char {
             case sepChar:
                 // close quoted field if preceding char was a quote
-                if lastCharWasMidstreamQuote == true { quoteOpen = false }
+                if previousCharWasMidstreamQuote == true { quoteOpen = false }
                 
                 // close field, if we're not in the middle of a quoted field
                 if !quoteOpen {
@@ -118,7 +118,7 @@ extension TextFile.TSV {
                     fieldString.append(char)
                 }
                 
-                lastCharWasMidstreamQuote = false
+                previousCharWasMidstreamQuote = false
                 
             case "\"":
                 // consider it a quoted field if a quote is the first character
@@ -129,33 +129,33 @@ extension TextFile.TSV {
                 
                 if !fieldString.isEmpty {
                     if quoteOpen {
-                        if lastCharWasMidstreamQuote {
+                        if previousCharWasMidstreamQuote {
                             fieldString += "\""
-                            lastCharWasMidstreamQuote = false
+                            previousCharWasMidstreamQuote = false
                         } else {
-                            lastCharWasMidstreamQuote = true
+                            previousCharWasMidstreamQuote = true
                         }
                     } else {
                         fieldString.append(char)
-                        lastCharWasMidstreamQuote = false
+                        previousCharWasMidstreamQuote = false
                     }
                 }
                 
             case newLineChar:
                 // close record, if we're not in the middle of a quoted field
-                if !quoteOpen || (quoteOpen && lastCharWasMidstreamQuote) {
+                if !quoteOpen || (quoteOpen && previousCharWasMidstreamQuote) {
                     closeField()
                     closeRecord()
                 } else {
                     fieldString.append(char)
                 }
                 
-                lastCharWasMidstreamQuote = false
+                previousCharWasMidstreamQuote = false
                 
             default:
                 fieldString.append(char)
                 
-                lastCharWasMidstreamQuote = false
+                previousCharWasMidstreamQuote = false
             }
         }
         
