@@ -89,7 +89,7 @@ fileprivate let csvRawText_QuotedFields = #"""
     another line",b,c
     q,w,"e
     ""quoted"", stuff"
-    a,"""",b,""""""
+    """",a,""""""
     """#
 
 fileprivate let csvTable_QuotedFields: StringTable = [
@@ -97,7 +97,7 @@ fileprivate let csvTable_QuotedFields: StringTable = [
     ["1", "2", "3 \"quoted\" here"],
     ["one line\nanother line", "b", "c"],
     ["q", "w", "e\n\"quoted\", stuff"],
-    ["a", "\"", "b", "\"\""]
+    ["\"", "a", "\"\""]
 ]
 
 extension CSV_Tests {
@@ -113,15 +113,15 @@ extension CSV_Tests {
 
 fileprivate let csvRawText_CommaContainingFields = #"""
     header1,header2,header3
-    data one, "data, two", data three
-    some one, ""some, two A", "some, two B"", some three
-    other one, "other,, two", other three
+    data one,"""data, two""",data three
+    some one,"""some, two A"", ""some, two B""",some three
+    other one,"""other,, two""",other three
     """#
 
 fileprivate let csvTable_CommaContainingFields: StringTable = [
     ["header1", "header2", "header3"],
     ["data one", "data, two", "data three"],
-    ["some one", #""some, two A", "some, two B""#, "some three"],
+    ["some one", "\"some, two A\", \"some, two B\"", "some three"],
     ["other one", "other,, two", "other three"]
 ]
 
