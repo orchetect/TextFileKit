@@ -117,13 +117,11 @@ extension TextFile.CSV {
                     continue
                 }
                 
-                if !fieldString.isEmpty {
-                    if previousCharWasMidstreamQuote {
-                        fieldString += "\""
-                        previousCharWasMidstreamQuote = false
-                    } else {
-                        previousCharWasMidstreamQuote = true
-                    }
+                if previousCharWasMidstreamQuote {
+                    fieldString += "\""
+                    previousCharWasMidstreamQuote = false
+                } else {
+                    previousCharWasMidstreamQuote = true
                 }
                 
             case newLineChar:
