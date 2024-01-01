@@ -89,17 +89,44 @@ fileprivate let csvRawText_QuotedFields = #"""
     another line",b,c
     q,w,"e
     ""quoted"", stuff"
+    a,"""",b,""""""
     """#
 
 fileprivate let csvTable_QuotedFields: StringTable = [
     ["header1", "header, 2", "header3"],
     ["1", "2", "3 \"quoted\" here"],
     ["one line\nanother line", "b", "c"],
-    ["q", "w", "e\n\"quoted\", stuff"]
+    ["q", "w", "e\n\"quoted\", stuff"],
+    ["a", "\"", "b", "\"\""]
 ]
 
 extension CSV_Tests {
     func test_Init_RawText_QuotedFields() {
+        let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
+        
+        XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
+        XCTAssertEqual(sv.table, csvTable_QuotedFields)
+    }
+}
+
+// MARK: - Comma-Containing fields
+
+fileprivate let csvRawText_CommaContainingFields = #"""
+    header1,header2,header3
+    data one, "data, two", data three
+    some one, ""some, two A", "some, two B"", some three
+    other one, "other,, two", other three
+    """#
+
+fileprivate let csvTable_CommaContainingFields: StringTable = [
+    ["header1", "header2", "header3"],
+    ["data one", "data, two", "data three"],
+    ["some one", #""some, two A", "some, two B""#, "some three"],
+    ["other one", "other,, two", "other three"]
+]
+
+extension CSV_Tests {
+    func test_Init_RawText_CommaContainingFields() {
         let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
         
         XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
