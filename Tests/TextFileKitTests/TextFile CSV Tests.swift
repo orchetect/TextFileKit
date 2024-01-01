@@ -38,15 +38,15 @@ extension CSV_Tests {
     func test_Init_RawText_Basic() {
         let sv = TextFile.CSV(rawText: csvRawText_Basic)
         
-        XCTAssertEqual(sv.rawText, csvRawText_Basic)
         XCTAssertEqual(sv.table, csvTable_Basic)
+        XCTAssertEqual(sv.rawText, csvRawText_Basic)
     }
     
     func test_Init_Table_Basic() {
         let sv = TextFile.CSV(table: csvTable_Basic)
         
-        XCTAssertEqual(sv.rawText, csvRawText_Basic)
         XCTAssertEqual(sv.table, csvTable_Basic)
+        XCTAssertEqual(sv.rawText, csvRawText_Basic)
     }
 }
 
@@ -75,8 +75,8 @@ extension CSV_Tests {
     func test_Init_Table_SingleColumn() {
         let sv = TextFile.CSV(table: csvTable_SingleColumn)
         
-        XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
         XCTAssertEqual(sv.table, csvTable_SingleColumn)
+        XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
     }
 }
 
@@ -104,8 +104,8 @@ extension CSV_Tests {
     func test_Init_RawText_QuotedFields() {
         let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
         
-        XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
         XCTAssertEqual(sv.table, csvTable_QuotedFields)
+        XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
     }
 }
 
@@ -127,10 +127,10 @@ fileprivate let csvTable_CommaContainingFields: StringTable = [
 
 extension CSV_Tests {
     func test_Init_RawText_CommaContainingFields() {
-        let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
+        let sv = TextFile.CSV(rawText: csvRawText_CommaContainingFields)
         
-        XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
-        XCTAssertEqual(sv.table, csvTable_QuotedFields)
+        XCTAssertEqual(sv.table, csvTable_CommaContainingFields)
+        XCTAssertEqual(sv.rawText, csvRawText_CommaContainingFields)
     }
 }
 

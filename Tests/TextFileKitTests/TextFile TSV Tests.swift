@@ -38,15 +38,15 @@ extension TSV_Tests {
     func test_Init_RawText_Basic() {
         let sv = TextFile.TSV(rawText: tsvRawText_Basic)
         
-        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
         XCTAssertEqual(sv.table, tsvTable_Basic)
+        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
     }
     
     func test_Init_Table_Basic() {
         let sv = TextFile.TSV(table: tsvTable_Basic)
         
-        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
         XCTAssertEqual(sv.table, tsvTable_Basic)
+        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
     }
 }
 
@@ -68,15 +68,15 @@ extension TSV_Tests {
     func test_Init_RawText_SingleColumn() {
         let sv = TextFile.TSV(rawText: tsvRawText_SingleColumn)
         
-        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
         XCTAssertEqual(sv.table, tsvTable_SingleColumn)
+        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
     }
     
     func test_Init_Table_SingleColumn() {
         let sv = TextFile.TSV(table: tsvTable_SingleColumn)
         
-        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
         XCTAssertEqual(sv.table, tsvTable_SingleColumn)
+        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
     }
 }
 
@@ -102,8 +102,8 @@ extension TSV_Tests {
     func test_Init_RawText_QuotedFields() {
         let sv = TextFile.TSV(rawText: tsvRawText_QuotedFields)
         
-        XCTAssertEqual(sv.rawText, tsvRawText_QuotedFields)
         XCTAssertEqual(sv.table, tsvTable_QuotedFields)
+        XCTAssertEqual(sv.rawText, tsvRawText_QuotedFields)
     }
 }
 

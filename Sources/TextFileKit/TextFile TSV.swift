@@ -36,9 +36,7 @@ extension TextFile {
         
         public var rawText: String {
             table.map { row in
-                
                 row.map { textString in
-                    
                     var outString = textString
                     var needsQuoteWrapping = false
                     
