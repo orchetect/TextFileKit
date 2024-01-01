@@ -107,6 +107,15 @@ extension CSV_Tests {
         XCTAssertEqual(sv.table, csvTable_QuotedFields)
         XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
     }
+    
+    func testInterFieldQuotes() {
+        func parse(_ rawCSV: String) -> StringTable {
+            TextFile.CSV.parseCSV(text: rawCSV)
+        }
+        XCTAssertEqual(parse("\"a\""), [["a"]])
+        XCTAssertEqual(parse("\"\"\"\""), [["\""]])
+        XCTAssertEqual(parse("\"\"\"a\"\"\""), [["\"a\""]])
+    }
 }
 
 // MARK: - Comma-Containing fields
@@ -120,9 +129,9 @@ fileprivate let csvRawText_CommaContainingFields = #"""
 
 fileprivate let csvTable_CommaContainingFields: StringTable = [
     ["header1", "header2", "header3"],
-    ["data one", "data, two", "data three"],
+    ["data one", "\"data, two\"", "data three"],
     ["some one", "\"some, two A\", \"some, two B\"", "some three"],
-    ["other one", "other,, two", "other three"]
+    ["other one", "\"other,, two\"", "other three"]
 ]
 
 extension CSV_Tests {
