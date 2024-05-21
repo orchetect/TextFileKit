@@ -13,7 +13,7 @@ extension StringTable {
         count
     }
     
-    /// Number of rows in the columns table.
+    /// Number of columns in the string table.
     /// The first row determines number of columns for the entire table.
     public var columnCount: Int {
         first?.count ?? 0
