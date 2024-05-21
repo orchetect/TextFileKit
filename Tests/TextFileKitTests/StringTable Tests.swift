@@ -144,6 +144,67 @@ class StringTable_Tests: XCTestCase {
         st[safe: 3, 0] = "4A"
         XCTAssertEqual(st[safe: 3, 0], nil)
     }
+    
+    func testColumnCharCountsA() {
+        let table: StringTable = []
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 0)
+    }
+    
+    func testColumnCharCountsB() {
+        let table: StringTable = [[]]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 0)
+    }
+    
+    func testColumnCharCountsC() {
+        let table: StringTable = [["H1"]]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 1)
+        
+        XCTAssertEqual(ranges[0], 2 ... 2)
+    }
+    
+    func testColumnCharCountsD() {
+        let table: StringTable = [["H1", "H2", "H3"]]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 3)
+        
+        XCTAssertEqual(ranges[0], 2 ... 2)
+        XCTAssertEqual(ranges[1], 2 ... 2)
+        XCTAssertEqual(ranges[2], 2 ... 2)
+    }
+    
+    func testColumnCharCountsE() {
+        let table: StringTable = [["H1", "", "H3_"]]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 3)
+        
+        XCTAssertEqual(ranges[0], 2 ... 2)
+        XCTAssertEqual(ranges[1], 0 ... 0)
+        XCTAssertEqual(ranges[2], 3 ... 3)
+    }
+    
+    func testColumnCharCountsF() {
+        let table: StringTable = [["H1"], [""], ["R2"]]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 1)
+        
+        XCTAssertEqual(ranges[0], 0 ... 2)
+    }
+    
+    func testColumnCharCountsG() {
+        let table: StringTable = [
+            ["H1", "H2", "H3"],
+            ["", "abc", "ab"]
+        ]
+        let ranges = table.columnCharCounts
+        XCTAssertEqual(ranges.count, 3)
+        
+        XCTAssertEqual(ranges[0], 0 ... 2)
+        XCTAssertEqual(ranges[1], 2 ... 3)
+        XCTAssertEqual(ranges[2], 2 ... 2)
+    }
 }
 
 #endif

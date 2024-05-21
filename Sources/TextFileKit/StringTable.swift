@@ -52,3 +52,34 @@ extension StringTable {
         }
     }
 }
+
+extension StringTable {
+    /// Returns the min and max character count for each column.
+    /// The `upperBound` can be useful for resizing columns to fit the column's data.
+    ///
+    /// - Returns: `[Column Index: Min Char Count ... Max Char Count]`
+    public var columnCharCounts: [Int: ClosedRange<Int>] {
+        reduce(into: [:]) { dict, rowValues in
+            // iterate columns for current row
+            for (columnOffset, rowValue) in rowValues.enumerated() {
+                let cellCharCount = rowValue.count
+                let defaultRange = cellCharCount ... cellCharCount
+                
+                // ensure all columns have a value, even if it's default of 0
+                if dict[columnOffset] == nil {
+                    dict[columnOffset] = defaultRange
+                }
+                
+                // update stored range if cell character count is outside stored range
+                var range = dict[columnOffset] ?? defaultRange
+                if range.upperBound < cellCharCount {
+                    range = range.lowerBound ... cellCharCount
+                }
+                if range.lowerBound > cellCharCount {
+                    range = cellCharCount ... range.upperBound
+                }
+                if dict[columnOffset] != range { dict[columnOffset] = range }
+            }
+        }
+    }
+}
