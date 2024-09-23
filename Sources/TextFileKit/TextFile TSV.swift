@@ -10,7 +10,7 @@ extension TextFile {
     // tested with Google Sheets, Microsoft Excel, and Apple Numbers
     
     /// TSV (Tab-Separated Values) text file format.
-    public struct TSV: StringArrayTableRepresentable {
+    public struct TSV: StringTableRepresentable {
         // MARK: - Constants
         
         internal static let sepChar: Character = "\t"

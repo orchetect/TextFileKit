@@ -12,7 +12,7 @@ extension TextFile {
     // tested with Google Sheets, Microsoft Excel, and Apple Numbers
     
     /// CSV (Comma-Separated Values) text file format.
-    public struct CSV: StringArrayTableRepresentable {
+    public struct CSV: StringTableRepresentable {
         // MARK: - Constants
         
         internal static let sepChar: Character = ","
