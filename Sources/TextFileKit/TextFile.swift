@@ -4,5 +4,5 @@
 //  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
-/// Family of Text File parsing and constructing entities.
+/// Namespace for TextFileKit text file parsing and construction facilities.
 public enum TextFile { }

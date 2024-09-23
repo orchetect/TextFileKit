@@ -5,7 +5,7 @@
 //
 
 /// Protocol describing file formats which can be encoded to/from a `StringTable` (String Array table of rows and columns).
-public protocol StringArrayTableRepresentable {
+public protocol StringArrayTableRepresentable where Self: Sendable {
     /// Raw data store as an Array table addressed as `self[row][column]`, `self[row, column]` or `self[safe: row, column]`.
     var table: StringTable { get set }
     
