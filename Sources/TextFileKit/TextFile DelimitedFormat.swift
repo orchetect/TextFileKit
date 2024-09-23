@@ -1,8 +1,7 @@
 //
-//  DelimitedFormat.swift
-//  TextFileKit
-//
-//  Created by Steffan Andrews on 2024-09-22.
+//  TextFile DelimitedFormat.swift
+//  TextFileKit • https://github.com/orchetect/TextFileKit
+//  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(UniformTypeIdentifiers)
