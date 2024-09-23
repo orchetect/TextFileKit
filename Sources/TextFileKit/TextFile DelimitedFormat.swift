@@ -1,5 +1,5 @@
 //
-//  DelimitedTextFileFormat.swift
+//  DelimitedFormat.swift
 //  TextFileKit
 //
 //  Created by Steffan Andrews on 2024-09-22.
@@ -9,13 +9,15 @@
 import UniformTypeIdentifiers
 #endif
 
-public enum DelimitedTextFileFormat: Equatable, Hashable, CaseIterable, Sendable {
-    case csv
-    case tsv
+extension TextFile {
+    public enum DelimitedFormat: Equatable, Hashable, CaseIterable, Sendable {
+        case csv
+        case tsv
+    }
 }
 
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension DelimitedTextFileFormat {
+extension TextFile.DelimitedFormat {
     /// Returns the UTI (Uniform Type Identifier) for the file format.
     public var utType: UTType {
         switch self {
@@ -35,7 +37,7 @@ extension DelimitedTextFileFormat {
     }
 }
 
-extension DelimitedTextFileFormat {
+extension TextFile.DelimitedFormat {
     /// Returns the file extension used for the file format.
     public var fileExtension: String {
         switch self {
