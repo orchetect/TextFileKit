@@ -4,12 +4,10 @@
 //  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
-#if !os(watchOS)
-
 import XCTest
 @testable import TextFileKit
 
-class TSV_Tests: XCTestCase {
+final class TSV_Tests: XCTestCase {
     override func setUp() { super.setUp() }
     override func tearDown() { super.tearDown() }
     
@@ -106,5 +104,3 @@ extension TSV_Tests {
         XCTAssertEqual(sv.rawText, tsvRawText_QuotedFields)
     }
 }
-
-#endif

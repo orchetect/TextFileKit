@@ -4,22 +4,16 @@
 //  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
-#if !os(watchOS)
-
 import XCTest
 @testable import TextFileKit
 
-class StringTable_Tests: XCTestCase {
-    override func setUp() { super.setUp() }
-    override func tearDown() { super.tearDown() }
-    
+final class StringTable_Tests: XCTestCase {
     func testRead() {
-        let st: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A", "3B"]
-            ]
+        let st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
         
         XCTAssertEqual(st[0][0], "1A")
         XCTAssertEqual(st[0][1], "1B")
@@ -29,12 +23,11 @@ class StringTable_Tests: XCTestCase {
     }
     
     func testWrite() {
-        var st: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A", "3B"]
-            ]
+        var st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
         
         // update
         
@@ -53,19 +46,17 @@ class StringTable_Tests: XCTestCase {
     }
     
     func testEquatable() {
-        let st1: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A", "3B"]
-            ]
+        let st1: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
         
-        let st2: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A", "3B"]
-            ]
+        let st2: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
         
         XCTAssertEqual(st1, st2)
     }
@@ -103,12 +94,11 @@ class StringTable_Tests: XCTestCase {
     }
     
     func testSubscript() {
-        var st: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A", "3B"]
-            ]
+        var st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
         
         XCTAssertEqual(st[0, 0], "1A")
         XCTAssertEqual(st[0, 1], "1B")
@@ -118,12 +108,11 @@ class StringTable_Tests: XCTestCase {
     }
     
     func testSafeSubscript() {
-        var st: StringTable =
-            [
-                ["1A", "1B"],
-                ["2A", "2B"],
-                ["3A"]
-            ]
+        var st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A"]
+        ]
         
         // existing
         
@@ -206,5 +195,3 @@ class StringTable_Tests: XCTestCase {
         XCTAssertEqual(ranges[2], 2 ... 2)
     }
 }
-
-#endif

@@ -4,12 +4,10 @@
 //  © 2022 Steffan Andrews • Licensed under MIT License
 //
 
-#if !os(watchOS)
-
 import XCTest
 @testable import TextFileKit
 
-class CSV_Tests: XCTestCase {
+final class CSV_Tests: XCTestCase {
     override func setUp() { super.setUp() }
     override func tearDown() { super.tearDown() }
     
@@ -142,5 +140,3 @@ extension CSV_Tests {
         XCTAssertEqual(sv.rawText, csvRawText_CommaContainingFields)
     }
 }
-
-#endif
