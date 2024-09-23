@@ -1,7 +1,7 @@
 //
 //  StringTable.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
 /// String table addressed as `self[row][column]`, `self[row, column]` or `self[safe: row, column]`.
@@ -20,7 +20,8 @@ extension StringTable {
     }
     
     /// Access a cell of the table.
-    /// Ensure the cell exists before accessing it or an exception will be thrown, the same as standard array subscript behavior.
+    /// Ensure the cell exists before accessing it or an exception will be thrown,
+    /// the same as standard array subscript behavior.
     public subscript(row: Int, col: Int) -> Element.Element {
         get {
             self[row][col]

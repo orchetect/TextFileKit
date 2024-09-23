@@ -1,11 +1,11 @@
 //
 //  TextFile CSV Tests.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
-import XCTest
 @testable import TextFileKit
+import XCTest
 
 final class CSV_Tests: XCTestCase {
     override func setUp() { super.setUp() }
@@ -20,13 +20,13 @@ final class CSV_Tests: XCTestCase {
 
 // MARK: - Basic
 
-fileprivate let csvRawText_Basic = """
+private let csvRawText_Basic = """
     header1,header2,header3
     1,2,3
     a,b,c
     """
 
-fileprivate let csvTable_Basic: StringTable = [
+private let csvTable_Basic: StringTable = [
     ["header1", "header2", "header3"],
     ["1", "2", "3"],
     ["a", "b", "c"]
@@ -50,13 +50,13 @@ extension CSV_Tests {
 
 // MARK: - Single column
 
-fileprivate let csvRawText_SingleColumn = """
+private let csvRawText_SingleColumn = """
     header1
     1
     a
     """
 
-fileprivate let csvTable_SingleColumn: StringTable = [
+private let csvTable_SingleColumn: StringTable = [
     ["header1"],
     ["1"],
     ["a"]
@@ -80,17 +80,17 @@ extension CSV_Tests {
 
 // MARK: - Quoted fields
 
-fileprivate let csvRawText_QuotedFields = #"""
-    header1,"header, 2",header3
-    1,2,"3 ""quoted"" here"
-    "one line
-    another line",b,c
-    q,w,"e
-    ""quoted"", stuff"
-    """",a,""""""
-    """#
+private let csvRawText_QuotedFields = #"""
+header1,"header, 2",header3
+1,2,"3 ""quoted"" here"
+"one line
+another line",b,c
+q,w,"e
+""quoted"", stuff"
+"""",a,""""""
+"""#
 
-fileprivate let csvTable_QuotedFields: StringTable = [
+private let csvTable_QuotedFields: StringTable = [
     ["header1", "header, 2", "header3"],
     ["1", "2", "3 \"quoted\" here"],
     ["one line\nanother line", "b", "c"],
@@ -118,14 +118,14 @@ extension CSV_Tests {
 
 // MARK: - Comma-Containing fields
 
-fileprivate let csvRawText_CommaContainingFields = #"""
-    header1,header2,header3
-    data one,"""data, two""",data three
-    some one,"""some, two A"", ""some, two B""",some three
-    other one,"""other,, two""",other three
-    """#
+private let csvRawText_CommaContainingFields = #"""
+header1,header2,header3
+data one,"""data, two""",data three
+some one,"""some, two A"", ""some, two B""",some three
+other one,"""other,, two""",other three
+"""#
 
-fileprivate let csvTable_CommaContainingFields: StringTable = [
+private let csvTable_CommaContainingFields: StringTable = [
     ["header1", "header2", "header3"],
     ["data one", "\"data, two\"", "data three"],
     ["some one", "\"some, two A\", \"some, two B\"", "some three"],

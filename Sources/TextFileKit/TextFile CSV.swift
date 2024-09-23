@@ -1,7 +1,7 @@
 //
 //  TextFile CSV.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -15,8 +15,8 @@ extension TextFile {
     public struct CSV: StringTableRepresentable {
         // MARK: - Constants
         
-        internal static let sepChar: Character = ","
-        internal static let newLineChar: Character = "\n"
+        static let sepChar: Character = ","
+        static let newLineChar: Character = "\n"
         
         public static let fileExtension = "csv"
         
@@ -60,7 +60,7 @@ extension TextFile {
 }
 
 extension TextFile.CSV {
-    internal static func parseCSV(text: String) -> StringTable {
+    static func parseCSV(text: String) -> StringTable {
         // prep
         
         let text = text + String(newLineChar) // append newline to assist the parser

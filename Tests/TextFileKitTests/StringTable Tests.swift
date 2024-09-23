@@ -1,11 +1,11 @@
 //
 //  StringTable Tests.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
-import XCTest
 @testable import TextFileKit
+import XCTest
 
 final class StringTable_Tests: XCTestCase {
     func testRead() {

@@ -1,7 +1,7 @@
 //
 //  TextFile TSV.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
 import Foundation
@@ -13,8 +13,8 @@ extension TextFile {
     public struct TSV: StringTableRepresentable {
         // MARK: - Constants
         
-        internal static let sepChar: Character = "\t"
-        internal static let newLineChar: Character = "\n"
+        static let sepChar: Character = "\t"
+        static let newLineChar: Character = "\n"
         
         public static let fileExtension = "tsv"
         
@@ -46,7 +46,8 @@ extension TextFile {
                     { needsQuoteWrapping = true }
                     
                     // escape double-quotes
-                    // (only necessary if the string needs to be wrote-wrapped for another reason (ie: string contains a tab char))
+                    // (only necessary if the string needs to be wrote-wrapped for another reason
+                    // (ie: string contains a tab char))
                     if outString.contains("\""),
                        needsQuoteWrapping
                     {
@@ -67,7 +68,7 @@ extension TextFile {
 }
 
 extension TextFile.TSV {
-    internal static func parseTSV(text: String) -> StringTable {
+    static func parseTSV(text: String) -> StringTable {
         // prep
         
         let text = text + String(newLineChar) // append newline to assist the parser

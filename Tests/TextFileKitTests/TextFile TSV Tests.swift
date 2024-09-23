@@ -1,11 +1,11 @@
 //
 //  TextFile TSV Tests.swift
 //  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2022 Steffan Andrews • Licensed under MIT License
+//  © 2021-2024 Steffan Andrews • Licensed under MIT License
 //
 
-import XCTest
 @testable import TextFileKit
+import XCTest
 
 final class TSV_Tests: XCTestCase {
     override func setUp() { super.setUp() }
@@ -20,13 +20,13 @@ final class TSV_Tests: XCTestCase {
 
 // MARK: - Basic
 
-fileprivate let tsvRawText_Basic = """
+private let tsvRawText_Basic = """
     header1	header2	header3
     1	2	3
     a	b	c
     """
 
-fileprivate let tsvTable_Basic: StringTable = [
+private let tsvTable_Basic: StringTable = [
     ["header1", "header2", "header3"],
     ["1", "2", "3"],
     ["a", "b", "c"]
@@ -50,13 +50,13 @@ extension TSV_Tests {
 
 // MARK: - Single column
 
-fileprivate let tsvRawText_SingleColumn = """
+private let tsvRawText_SingleColumn = """
     header1
     1
     a
     """
 
-fileprivate let tsvTable_SingleColumn: StringTable = [
+private let tsvTable_SingleColumn: StringTable = [
     ["header1"],
     ["1"],
     ["a"]
@@ -80,16 +80,16 @@ extension TSV_Tests {
 
 // MARK: - Quoted fields
 
-fileprivate let tsvRawText_QuotedFields = #"""
-    header1	"header	2"	header3
-    1	2	3 "quoted" here
-    "one line
-    another line"	b	c
-    q	w	"e
-    ""quoted""	stuff"
-    """#
+private let tsvRawText_QuotedFields = #"""
+header1	"header	2"	header3
+1	2	3 "quoted" here
+"one line
+another line"	b	c
+q	w	"e
+""quoted""	stuff"
+"""#
 
-fileprivate let tsvTable_QuotedFields: StringTable = [
+private let tsvTable_QuotedFields: StringTable = [
     ["header1", "header\t2", "header3"],
     ["1", "2", "3 \"quoted\" here"],
     ["one line\nanother line", "b", "c"],
