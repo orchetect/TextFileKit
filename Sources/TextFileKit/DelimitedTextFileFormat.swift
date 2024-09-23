@@ -14,7 +14,7 @@ public enum DelimitedTextFileFormat: Equatable, Hashable, CaseIterable, Sendable
     case tsv
 }
 
-@available(macOS 11.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension DelimitedTextFileFormat {
     /// Returns the UTI (Uniform Type Identifier) for the file format.
     public var utType: UTType {
