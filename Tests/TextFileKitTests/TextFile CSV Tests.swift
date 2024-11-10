@@ -5,16 +5,13 @@
 //
 
 @testable import TextFileKit
-import XCTest
+import Testing
 
-final class CSV_Tests: XCTestCase {
-    override func setUp() { super.setUp() }
-    override func tearDown() { super.tearDown() }
-    
-    func testInit() {
+@Suite struct CSV_Tests {
+    @Test func init_Default() {
         let sv = TextFile.CSV()
         
-        XCTAssertEqual(sv.table, [])
+        #expect(sv.table == [])
     }
 }
 
@@ -33,18 +30,18 @@ private let csvTable_Basic: StringTable = [
 ]
 
 extension CSV_Tests {
-    func test_Init_RawText_Basic() {
+    @Test func init_RawText_Basic() {
         let sv = TextFile.CSV(rawText: csvRawText_Basic)
         
-        XCTAssertEqual(sv.table, csvTable_Basic)
-        XCTAssertEqual(sv.rawText, csvRawText_Basic)
+        #expect(sv.table == csvTable_Basic)
+        #expect(sv.rawText == csvRawText_Basic)
     }
     
-    func test_Init_Table_Basic() {
+    @Test func init_Table_Basic() {
         let sv = TextFile.CSV(table: csvTable_Basic)
         
-        XCTAssertEqual(sv.table, csvTable_Basic)
-        XCTAssertEqual(sv.rawText, csvRawText_Basic)
+        #expect(sv.table == csvTable_Basic)
+        #expect(sv.rawText == csvRawText_Basic)
     }
 }
 
@@ -63,18 +60,18 @@ private let csvTable_SingleColumn: StringTable = [
 ]
 
 extension CSV_Tests {
-    func test_Init_RawText_SingleColumn() {
+    @Test func init_RawText_SingleColumn() {
         let sv = TextFile.CSV(rawText: csvRawText_SingleColumn)
         
-        XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
-        XCTAssertEqual(sv.table, csvTable_SingleColumn)
+        #expect(sv.rawText == csvRawText_SingleColumn)
+        #expect(sv.table == csvTable_SingleColumn)
     }
     
-    func test_Init_Table_SingleColumn() {
+    @Test func init_Table_SingleColumn() {
         let sv = TextFile.CSV(table: csvTable_SingleColumn)
         
-        XCTAssertEqual(sv.table, csvTable_SingleColumn)
-        XCTAssertEqual(sv.rawText, csvRawText_SingleColumn)
+        #expect(sv.table == csvTable_SingleColumn)
+        #expect(sv.rawText == csvRawText_SingleColumn)
     }
 }
 
@@ -99,20 +96,20 @@ private let csvTable_QuotedFields: StringTable = [
 ]
 
 extension CSV_Tests {
-    func test_Init_RawText_QuotedFields() {
+    @Test func init_RawText_QuotedFields() {
         let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
         
-        XCTAssertEqual(sv.table, csvTable_QuotedFields)
-        XCTAssertEqual(sv.rawText, csvRawText_QuotedFields)
+        #expect(sv.table == csvTable_QuotedFields)
+        #expect(sv.rawText == csvRawText_QuotedFields)
     }
     
-    func testInterFieldQuotes() {
+    @Test func interFieldQuotes() {
         func parse(_ rawCSV: String) -> StringTable {
             TextFile.CSV.parseCSV(text: rawCSV)
         }
-        XCTAssertEqual(parse("\"a\""), [["a"]])
-        XCTAssertEqual(parse("\"\"\"\""), [["\""]])
-        XCTAssertEqual(parse("\"\"\"a\"\"\""), [["\"a\""]])
+        #expect(parse("\"a\"") == [["a"]])
+        #expect(parse("\"\"\"\"") == [["\""]])
+        #expect(parse("\"\"\"a\"\"\"") == [["\"a\""]])
     }
 }
 
@@ -133,10 +130,10 @@ private let csvTable_CommaContainingFields: StringTable = [
 ]
 
 extension CSV_Tests {
-    func test_Init_RawText_CommaContainingFields() {
+    @Test func init_RawText_CommaContainingFields() {
         let sv = TextFile.CSV(rawText: csvRawText_CommaContainingFields)
         
-        XCTAssertEqual(sv.table, csvTable_CommaContainingFields)
-        XCTAssertEqual(sv.rawText, csvRawText_CommaContainingFields)
+        #expect(sv.table == csvTable_CommaContainingFields)
+        #expect(sv.rawText == csvRawText_CommaContainingFields)
     }
 }

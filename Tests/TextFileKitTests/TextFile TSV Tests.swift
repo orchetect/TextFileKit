@@ -5,16 +5,13 @@
 //
 
 @testable import TextFileKit
-import XCTest
+import Testing
 
-final class TSV_Tests: XCTestCase {
-    override func setUp() { super.setUp() }
-    override func tearDown() { super.tearDown() }
-    
-    func testInit() {
+@Suite struct TSV_Tests {
+    @Test func init_Default() {
         let sv = TextFile.TSV()
         
-        XCTAssertEqual(sv.table, [])
+        #expect(sv.table == [])
     }
 }
 
@@ -33,18 +30,18 @@ private let tsvTable_Basic: StringTable = [
 ]
 
 extension TSV_Tests {
-    func test_Init_RawText_Basic() {
+    @Test func init_RawText_Basic() {
         let sv = TextFile.TSV(rawText: tsvRawText_Basic)
         
-        XCTAssertEqual(sv.table, tsvTable_Basic)
-        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
+        #expect(sv.table == tsvTable_Basic)
+        #expect(sv.rawText == tsvRawText_Basic)
     }
     
-    func test_Init_Table_Basic() {
+    @Test func init_Table_Basic() {
         let sv = TextFile.TSV(table: tsvTable_Basic)
         
-        XCTAssertEqual(sv.table, tsvTable_Basic)
-        XCTAssertEqual(sv.rawText, tsvRawText_Basic)
+        #expect(sv.table == tsvTable_Basic)
+        #expect(sv.rawText == tsvRawText_Basic)
     }
 }
 
@@ -63,18 +60,18 @@ private let tsvTable_SingleColumn: StringTable = [
 ]
 
 extension TSV_Tests {
-    func test_Init_RawText_SingleColumn() {
+    @Test func init_RawText_SingleColumn() {
         let sv = TextFile.TSV(rawText: tsvRawText_SingleColumn)
         
-        XCTAssertEqual(sv.table, tsvTable_SingleColumn)
-        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
+        #expect(sv.table == tsvTable_SingleColumn)
+        #expect(sv.rawText == tsvRawText_SingleColumn)
     }
     
-    func test_Init_Table_SingleColumn() {
+    @Test func init_Table_SingleColumn() {
         let sv = TextFile.TSV(table: tsvTable_SingleColumn)
         
-        XCTAssertEqual(sv.table, tsvTable_SingleColumn)
-        XCTAssertEqual(sv.rawText, tsvRawText_SingleColumn)
+        #expect(sv.table == tsvTable_SingleColumn)
+        #expect(sv.rawText == tsvRawText_SingleColumn)
     }
 }
 
@@ -97,10 +94,10 @@ private let tsvTable_QuotedFields: StringTable = [
 ]
 
 extension TSV_Tests {
-    func test_Init_RawText_QuotedFields() {
+    @Test func init_RawText_QuotedFields() {
         let sv = TextFile.TSV(rawText: tsvRawText_QuotedFields)
         
-        XCTAssertEqual(sv.table, tsvTable_QuotedFields)
-        XCTAssertEqual(sv.rawText, tsvRawText_QuotedFields)
+        #expect(sv.table == tsvTable_QuotedFields)
+        #expect(sv.rawText == tsvRawText_QuotedFields)
     }
 }
