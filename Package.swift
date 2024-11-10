@@ -9,19 +9,10 @@ let package = Package(
         .macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)
     ],
     products: [
-        .library(
-            name: "TextFileKit",
-            targets: ["TextFileKit"]
-        )
+        .library(name: "TextFileKit", targets: ["TextFileKit"])
     ],
     targets: [
-        .target(
-            name: "TextFileKit",
-            dependencies: []
-        ),
-        .testTarget(
-            name: "TextFileKitTests",
-            dependencies: ["TextFileKit"]
-        )
+        .target(name: "TextFileKit"),
+        .testTarget(name: "TextFileKitTests", dependencies: ["TextFileKit"])
     ]
 )
