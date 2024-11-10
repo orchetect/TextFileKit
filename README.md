@@ -1,6 +1,6 @@
 # TextFileKit
 
-[![CI Build Status](https://github.com/orchetect/TextFileKit/actions/workflows/build.yml/badge.svg)](https://github.com/orchetect/TextFileKit/actions/workflows/build.yml) [![Platforms - macOS | iOS | tvOS | watchOS | visionOS](https://img.shields.io/badge/platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS%20|%20visionOS-lightgrey.svg?style=flat)](https://developer.apple.com/swift) ![Swift 5.3-6.0](https://img.shields.io/badge/Swift-5.3–6.0-orange.svg?style=flat) [![Xcode 12-16](https://img.shields.io/badge/Xcode-12–16-blue.svg?style=flat)](https://developer.apple.com/swift) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/TextFileKit/blob/main/LICENSE)
+[![CI Build Status](https://github.com/orchetect/TextFileKit/actions/workflows/build.yml/badge.svg)](https://github.com/orchetect/TextFileKit/actions/workflows/build.yml) [![Platforms - macOS | iOS | tvOS | watchOS | visionOS](https://img.shields.io/badge/platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS%20|%20visionOS-blue.svg?style=flat)](https://developer.apple.com/swift) ![Swift 5.3-6.0](https://img.shields.io/badge/Swift-5.3–6.0-blue.svg?style=flat) [![Xcode 12-16](https://img.shields.io/badge/Xcode-12–16-blue.svg?style=flat)](https://developer.apple.com/swift) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/TextFileKit/blob/main/LICENSE)
 
 Read and write common delimited text file formats, including:
 
