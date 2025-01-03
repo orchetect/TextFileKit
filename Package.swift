@@ -10,8 +10,18 @@ let package = Package(
     products: [
         .library(name: "TextFileKit", targets: ["TextFileKit"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/orchetect/swift-testing-extensions", .upToNextMajor(from: "0.2.0")),
+    ],
     targets: [
         .target(name: "TextFileKit"),
-        .testTarget(name: "TextFileKitTests", dependencies: ["TextFileKit"])
+        .testTarget(
+            name: "TextFileKitTests",
+            dependencies: [
+                "TextFileKit",
+                .product(name: "TestingExtensions", package: "swift-testing-extensions")
+            ],
+            resources: [.copy("TestResource/Text Files")]
+        )
     ]
 )

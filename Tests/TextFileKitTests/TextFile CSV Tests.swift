@@ -6,6 +6,7 @@
 
 @testable import TextFileKit
 import Testing
+import TestingExtensions
 
 @Suite struct CSV_Tests {
     @Test func init_Default() {
@@ -135,5 +136,39 @@ extension CSV_Tests {
         
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.rawText == csvRawText_CommaContainingFields)
+    }
+}
+
+// MARK: - BOM (Byte Order Mark) Tests
+
+extension CSV_Tests {
+    static let utf8_BOM_Test_Table: StringTable = [
+        ["Field1", "Field2"],
+        ["Row1A", "Row1B"],
+        ["Row2A", "Row2B"]
+    ]
+    
+    @Test func utf8BOM_initURL() throws {
+        let url = try #require(try TestResource.TextFiles.utf8_BOM_Test_csv.url())
+        
+        let sv = try TextFile.CSV(file: url)
+        
+        let table = sv.table
+        try #require(table.count == 3)
+        #expect(table[0] == Self.utf8_BOM_Test_Table[0])
+        #expect(table[1] == Self.utf8_BOM_Test_Table[1])
+        #expect(table[2] == Self.utf8_BOM_Test_Table[2])
+    }
+    
+    @Test func utf8BOM_initRawData() throws {
+        let data = try #require(try TestResource.TextFiles.utf8_BOM_Test_csv.data())
+        
+        let sv = try TextFile.CSV(rawData: data)
+        
+        let table = sv.table
+        try #require(table.count == 3)
+        #expect(table[0] == Self.utf8_BOM_Test_Table[0])
+        #expect(table[1] == Self.utf8_BOM_Test_Table[1])
+        #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
 }
