@@ -121,18 +121,33 @@ header1,header2,header3
 data one,"""data, two""",data three
 some one,"""some, two A"", ""some, two B""",some three
 other one,"""other,, two""",other three
+item1,$4.50,description1
+item2,"$1,720.00",description2
+item3,-$4.50,description3
+item4,"-$1,720.00",description4
 """#
 
 private let csvTable_CommaContainingFields: StringTable = [
     ["header1", "header2", "header3"],
     ["data one", "\"data, two\"", "data three"],
     ["some one", "\"some, two A\", \"some, two B\"", "some three"],
-    ["other one", "\"other,, two\"", "other three"]
+    ["other one", "\"other,, two\"", "other three"],
+    ["item1", "$4.50", "description1"],
+    ["item2", "$1,720.00", "description2"],
+    ["item3", "-$4.50", "description3"],
+    ["item4", "-$1,720.00", "description4"]
 ]
 
 extension CSV_Tests {
     @Test func init_RawText_CommaContainingFields() {
         let sv = TextFile.CSV(rawText: csvRawText_CommaContainingFields)
+        
+        #expect(sv.table == csvTable_CommaContainingFields)
+        #expect(sv.rawText == csvRawText_CommaContainingFields)
+    }
+    
+    @Test func init_stringTable_CommaContainingFields() {
+        let sv = TextFile.CSV(table: csvTable_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.rawText == csvRawText_CommaContainingFields)
