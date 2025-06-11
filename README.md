@@ -11,10 +11,7 @@ Read and write common delimited text file formats, including:
 
 ### Swift Package Manager (SPM)
 
-To add TextFileKit to your Xcode project:
-
-1. Select File → Swift Packages → Add Package Dependency
-2. Add package using  `https://github.com/orchetect/TextFileKit` as the URL.
+Add this package to your Xcode project or Swift package using `https://github.com/orchetect/TextFileKit` as the URL.
 
 ## Roadmap
 
@@ -30,6 +27,13 @@ Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/TextF
 
 This library was formerly known as SwiftHex.
 
+## Community & Support
+
+Please do not email maintainers for technical support. Several options are available for issues and questions:
+
+- Questions and feature ideas can be posted to [Discussions](https://github.com/orchetect/TextFileKit/discussions).
+- If an issue is a verifiable bug with reproducible steps it may be posted in [Issues](https://github.com/orchetect/TextFileKit/issues).
+
 ## Contributions
 
-Contributions are welcome. Feel free to post an Issue to discuss.
+Contributions are welcome. Posting in [Discussions](https://github.com/orchetect/TextFileKit/discussions) first prior to new submitting PRs for features or modifications is encouraged.
