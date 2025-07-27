@@ -175,8 +175,32 @@ extension CSV_Tests {
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
+    @Test func utf8BOM_CRLF_initURL() throws {
+        let url = try #require(try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url())
+        
+        let sv = try TextFile.CSV(file: url)
+        
+        let table = sv.table
+        try #require(table.count == 3)
+        #expect(table[0] == Self.utf8_BOM_Test_Table[0])
+        #expect(table[1] == Self.utf8_BOM_Test_Table[1])
+        #expect(table[2] == Self.utf8_BOM_Test_Table[2])
+    }
+    
     @Test func utf8BOM_initRawData() throws {
         let data = try #require(try TestResource.TextFiles.utf8_BOM_Test_csv.data())
+        
+        let sv = try TextFile.CSV(rawData: data)
+        
+        let table = sv.table
+        try #require(table.count == 3)
+        #expect(table[0] == Self.utf8_BOM_Test_Table[0])
+        #expect(table[1] == Self.utf8_BOM_Test_Table[1])
+        #expect(table[2] == Self.utf8_BOM_Test_Table[2])
+    }
+    
+    @Test func utf8BOM_CRLF_initRawData() throws {
+        let data = try #require(try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data())
         
         let sv = try TextFile.CSV(rawData: data)
         

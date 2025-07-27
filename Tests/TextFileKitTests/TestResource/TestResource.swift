@@ -16,5 +16,9 @@ extension TestResource {
         static let utf8_BOM_Test_csv = TestResource.File(
             name: "utf8-bom-test", ext: "csv", subFolder: "Text Files"
         )
+        
+        static let utf8_BOM_CRLF_Test_csv = TestResource.File(
+            name: "utf8-bom-crlf-test", ext: "csv", subFolder: "Text Files"
+        )
     }
 }
