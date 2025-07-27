@@ -50,11 +50,13 @@ extension StringTableRepresentable {
             usedLossyConversion: &usedLossyConversion
         ),
               rawValue != 0,
-              let rawText = nsString as? String
+              var rawText = nsString as? String
         else {
             throw TextFile.ParserError.unrecognizedTextEncoding
         }
         let /*encoding*/ _ = String.Encoding(rawValue: rawValue) // TODO: not used
+        
+        rawText = rawText.replacingOccurrences(of: "\r\n", with: "\n") // TODO: hacky line-ending conversion
         
         self.init(rawText: rawText)
     }
