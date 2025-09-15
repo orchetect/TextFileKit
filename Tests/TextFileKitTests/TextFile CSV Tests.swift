@@ -164,7 +164,7 @@ extension CSV_Tests {
     ]
     
     @Test func utf8BOM_initURL() throws {
-        let url = try #require(try TestResource.TextFiles.utf8_BOM_Test_csv.url())
+        let url = try TestResource.TextFiles.utf8_BOM_Test_csv.url()
         
         let sv = try TextFile.CSV(file: url)
         
@@ -176,7 +176,7 @@ extension CSV_Tests {
     }
     
     @Test func utf8BOM_CRLF_initURL() throws {
-        let url = try #require(try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url())
+        let url = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url()
         
         let sv = try TextFile.CSV(file: url)
         
@@ -188,7 +188,7 @@ extension CSV_Tests {
     }
     
     @Test func utf8BOM_initRawData() throws {
-        let data = try #require(try TestResource.TextFiles.utf8_BOM_Test_csv.data())
+        let data = try TestResource.TextFiles.utf8_BOM_Test_csv.data()
         
         let sv = try TextFile.CSV(rawData: data)
         
@@ -200,7 +200,7 @@ extension CSV_Tests {
     }
     
     @Test func utf8BOM_CRLF_initRawData() throws {
-        let data = try #require(try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data())
+        let data = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data()
         
         let sv = try TextFile.CSV(rawData: data)
         
