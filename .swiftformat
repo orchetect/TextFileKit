@@ -23,7 +23,7 @@
 --funcattributes prev-line
 --groupedextension "MARK: %c"
 --guardelse auto
---header "\n {file}\n TextFileKit • https://github.com/orchetect/TextFileKit\n © 2021-{year} Steffan Andrews • Licensed under MIT License\n"
+--header "\n {file}\n swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools\n © 2021-{year} Steffan Andrews • Licensed under MIT License\n"
 --hexgrouping 4,8
 --hexliteralcase uppercase
 --ifdef no-indent

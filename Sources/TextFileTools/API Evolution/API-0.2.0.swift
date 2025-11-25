@@ -1,7 +1,7 @@
 //
 //  API-0.2.0.swift
-//  TextFileKit • https://github.com/orchetect/TextFileKit
-//  © 2021-2024 Steffan Andrews • Licensed under MIT License
+//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
 @available(*, renamed: "StringTableRepresentable")
