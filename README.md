@@ -11,15 +11,22 @@ Read and write common delimited text file formats, including:
 
 ### Swift Package Manager (SPM)
 
-Add this package to your Xcode project using `https://github.com/orchetect/swift-textfile-tools` as the URL, or to a Swift package Package.swift:
+To add this package to an Xcode app project, use:
+
+ `https://github.com/orchetect/swift-textfile-tools` as the URL.
+
+To add this package to a Swift package, add the dependency to your package and target in Package.swift:
+
 ```swift
 let package = Package(
-    // ...
-    dependencies: [.package("https://github.com/orchetect/swift-textfile-tools", from: 0.2.2)],
+    dependencies: [
+        .package(url: "https://github.com/orchetect/swift-textfile-tools", from: "0.3.0")
+    ],
     targets: [
         .target(
-            // ...
-            dependencies: [.product(name: "TextFileTools", package: "swift-textfile-tools")]
+            dependencies: [
+                .product(name: "TextFileTools", package: "swift-textfile-tools")
+            ]
         )
     ]
 )
@@ -52,4 +59,4 @@ Contributions are welcome. Posting in [Discussions](https://github.com/orchetect
 
 ## Legacy
 
-This repository was formerly known as TextFileKit. 
+This repository was formerly known as TextFileKit.
