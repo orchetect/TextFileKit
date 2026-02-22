@@ -7,6 +7,8 @@ Read and write common delimited text file formats, including:
 - CSV (comma-separated values)
 - TSV (tab-separated values)
 
+This library implements the full CSV and TSV specifications, including proper escape sequences to assure the widest compatibility.
+
 ## Installation
 
 ### Swift Package Manager (SPM)
@@ -43,8 +45,6 @@ Coded by a bunch of 🐹 hamsters in a trench coat that calls itself [@orchetect
 ## License
 
 Licensed under the MIT license. See [LICENSE](https://github.com/orchetect/swift-textfile-tools/blob/master/LICENSE) for details.
-
-This library was formerly known as SwiftHex.
 
 ## Community & Support
 
