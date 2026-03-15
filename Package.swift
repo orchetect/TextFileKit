@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "TextFileTools", targets: ["TextFileTools"])
     ],
     dependencies: [
-        .package(url: "https://github.com/orchetect/swift-testing-extensions", from: "0.2.4"),
+        .package(url: "https://github.com/orchetect/swift-testing-extensions", from: "0.3.0"),
     ],
     targets: [
         .target(name: "TextFileTools"),

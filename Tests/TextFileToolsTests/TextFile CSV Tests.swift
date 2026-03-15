@@ -4,6 +4,7 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
+import class Foundation.Bundle
 @testable import TextFileTools
 import Testing
 import TestingExtensions
