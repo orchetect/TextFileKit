@@ -6,13 +6,9 @@
 
 #if canImport(Darwin)
 import struct Foundation.Data
-import class Foundation.NSString
-import struct Foundation.ObjCBool
 import struct Foundation.URL
 #else
 import struct FoundationEssentials.Data
-import class Foundation.NSString
-import struct Foundation.ObjCBool
 import struct FoundationEssentials.URL
 #endif
 
@@ -46,28 +42,37 @@ extension StringTableRepresentable {
     /// Initialize from text file.
     public init(file: URL) throws {
         let rawData = try Data(contentsOf: file)
-        try self.init(rawData: rawData)
+        
+        var (text, encoding) = try rawData.decodeString(file: file)
+        _ = encoding // not using encoding after successful string decode
+        
+        text = text.fixedLineBreaks
+        
+        self.init(rawText: text)
     }
     
-    /// Initialize from raw data.
-    public init(rawData: Data) throws {
-        var usedLossyConversion: ObjCBool = false // TODO: not used
-        var nsString: NSString?
-        guard case let rawValue = NSString.stringEncoding(
-            for: rawData,
-            encodingOptions: nil,
-            convertedString: &nsString,
-            usedLossyConversion: &usedLossyConversion
-        ),
-              rawValue != 0,
-              var rawText = nsString as? String
-        else {
-            throw TextFile.ParserError.unrecognizedTextEncoding
+    /// Initialize from raw data with the specified text encoding.
+    public init(rawData: Data, encoding: String.Encoding) throws(TextFile.ParserError) {
+        guard var text = String(data: rawData, encoding: encoding) else {
+            throw .invalidTextEncoding
         }
-        let /*encoding*/ _ = String.Encoding(rawValue: rawValue) // TODO: not used
         
-        rawText = rawText.replacingOccurrences(of: "\r\n", with: "\n") // TODO: hacky line-ending conversion
+        text = text.fixedLineBreaks
         
-        self.init(rawText: rawText)
+        self.init(rawText: text)
+    }
+            
+    /// Initialize from raw data, auto-detecting text encoding.
+    ///
+    /// - Note: On non-Apple platforms, if reading from a text file on disk, it is more efficient
+    ///   to call ``init(file:)`` rather than read the contents of the file and supply it to this method,
+    ///   as this method relies on rewriting the data to a file on disk in order to decode.
+    public init(rawData: Data) throws {
+        var (text, encoding) = try rawData.decodeString()
+        _ = encoding // not using encoding after successful string decode
+        
+        text = text.fixedLineBreaks
+        
+        self.init(rawText: text)
     }
 }
