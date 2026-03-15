@@ -105,3 +105,14 @@ jobs:
         ID: ${{ steps.sim-setup.outputs.id }}
         PLATFORM: ${{ steps.sim-setup.outputs.platform }}
         WORKSPACEPATH: ${{ steps.sim-setup.outputs.workspace-path }}
+  
+  linux:
+    name: Tests (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@main
+    - name: Build
+      run: swift build
+    - name: Unit Tests
+      run: swift test
