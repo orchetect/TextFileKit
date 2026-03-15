@@ -1,8 +1,8 @@
 # swift-textfile
 
-[![Platforms - macOS | iOS | tvOS | watchOS | visionOS | Linux](https://img.shields.io/badge/platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS%20|%20visionOS%20|%20Linux-blue.svg?style=flat)](https://developer.apple.com/swift) ![Swift 5.3-6.2](https://img.shields.io/badge/Swift-5.3–6.2-blue.svg?style=flat) [![Xcode 12-26](https://img.shields.io/badge/Xcode-12–26-blue.svg?style=flat)](https://developer.apple.com/swift) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-textfile/blob/main/LICENSE)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-textfile%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/orchetect/swift-textfile) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-textfile%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/orchetect/swift-textfile) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-textfile/blob/main/LICENSE)
 
-Read and write common delimited text file formats, including:
+Read and write common delimited text file formats in Swift on Apple platforms and Linux, including:
 
 - CSV (comma-separated values)
 - TSV (tab-separated values)
