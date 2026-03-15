@@ -4,7 +4,17 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
+#if canImport(Darwin)
+import struct Foundation.Data
+import class Foundation.NSString
+import struct Foundation.ObjCBool
+import struct Foundation.URL
+#else
+import struct FoundationEssentials.Data
+import class FoundationEssentials.NSString
+import struct Foundation.ObjCBool
+import struct FoundationEssentials.URL
+#endif
 
 /// Protocol describing file formats which can be encoded to/from a ``StringTable``
 /// (String Array table of rows and columns).

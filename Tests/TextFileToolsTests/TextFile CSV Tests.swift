@@ -5,9 +5,9 @@
 //
 
 import class Foundation.Bundle
-@testable import TextFileTools
 import Testing
 import TestingExtensions
+@testable import TextFileTools
 
 @Suite struct CSV_Tests {
     @Test func init_Default() {

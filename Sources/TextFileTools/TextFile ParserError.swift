@@ -4,7 +4,7 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
+import protocol Foundation.LocalizedError
 
 extension TextFile {
     public enum ParserError: LocalizedError {

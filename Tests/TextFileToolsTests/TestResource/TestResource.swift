@@ -4,7 +4,7 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
+import class Foundation.Bundle
 import Testing
 import TestingExtensions
 

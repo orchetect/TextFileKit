@@ -4,8 +4,8 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-@testable import TextFileTools
 import Testing
+@testable import TextFileTools
 
 @Suite struct TSV_Tests {
     @Test func init_Default() {

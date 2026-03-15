@@ -4,8 +4,6 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
-
 extension TextFile {
     // CSV format: https://en.wikipedia.org/wiki/Comma-separated_values
     

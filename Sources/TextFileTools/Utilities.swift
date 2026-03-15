@@ -4,8 +4,6 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
-
 extension String {
     /// Wrap a string with double-quotes.
     @inlinable var quoted: Self {

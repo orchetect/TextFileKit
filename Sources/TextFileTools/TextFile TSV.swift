@@ -4,8 +4,6 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-import Foundation
-
 extension TextFile {
     // tested with Google Sheets, Microsoft Excel, and Apple Numbers
     
