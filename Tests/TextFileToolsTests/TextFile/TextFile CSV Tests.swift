@@ -10,7 +10,7 @@ import TestingExtensions
 @testable import TextFileTools
 
 @Suite struct CSV_Tests {
-    @Test func init_Default() {
+    @Test func init_Default() async {
         let sv = TextFile.CSV()
         
         #expect(sv.table == [])
@@ -32,14 +32,14 @@ private let csvTable_Basic: StringTable = [
 ]
 
 extension CSV_Tests {
-    @Test func init_RawText_Basic() {
+    @Test func init_RawText_Basic() async {
         let sv = TextFile.CSV(rawText: csvRawText_Basic)
         
         #expect(sv.table == csvTable_Basic)
         #expect(sv.rawText == csvRawText_Basic)
     }
     
-    @Test func init_Table_Basic() {
+    @Test func init_Table_Basic() async {
         let sv = TextFile.CSV(table: csvTable_Basic)
         
         #expect(sv.table == csvTable_Basic)
@@ -62,14 +62,14 @@ private let csvTable_SingleColumn: StringTable = [
 ]
 
 extension CSV_Tests {
-    @Test func init_RawText_SingleColumn() {
+    @Test func init_RawText_SingleColumn() async {
         let sv = TextFile.CSV(rawText: csvRawText_SingleColumn)
         
         #expect(sv.rawText == csvRawText_SingleColumn)
         #expect(sv.table == csvTable_SingleColumn)
     }
     
-    @Test func init_Table_SingleColumn() {
+    @Test func init_Table_SingleColumn() async {
         let sv = TextFile.CSV(table: csvTable_SingleColumn)
         
         #expect(sv.table == csvTable_SingleColumn)
@@ -98,14 +98,14 @@ private let csvTable_QuotedFields: StringTable = [
 ]
 
 extension CSV_Tests {
-    @Test func init_RawText_QuotedFields() {
+    @Test func init_RawText_QuotedFields() async {
         let sv = TextFile.CSV(rawText: csvRawText_QuotedFields)
         
         #expect(sv.table == csvTable_QuotedFields)
         #expect(sv.rawText == csvRawText_QuotedFields)
     }
     
-    @Test func interFieldQuotes() {
+    @Test func interFieldQuotes() async {
         func parse(_ rawCSV: String) -> StringTable {
             TextFile.CSV.parseCSV(text: rawCSV)
         }
@@ -140,14 +140,14 @@ private let csvTable_CommaContainingFields: StringTable = [
 ]
 
 extension CSV_Tests {
-    @Test func init_RawText_CommaContainingFields() {
+    @Test func init_RawText_CommaContainingFields() async {
         let sv = TextFile.CSV(rawText: csvRawText_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.rawText == csvRawText_CommaContainingFields)
     }
     
-    @Test func init_stringTable_CommaContainingFields() {
+    @Test func init_stringTable_CommaContainingFields() async {
         let sv = TextFile.CSV(table: csvTable_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
@@ -164,7 +164,7 @@ extension CSV_Tests {
         ["Row2A", "Row2B"]
     ]
     
-    @Test func utf8BOM_initURL() throws {
+    @Test func utf8BOM_initURL() async throws {
         let url = try TestResource.TextFiles.utf8_BOM_Test_csv.url()
         
         let sv = try TextFile.CSV(file: url)
@@ -176,7 +176,7 @@ extension CSV_Tests {
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_CRLF_initURL() throws {
+    @Test func utf8BOM_CRLF_initURL() async throws {
         let url = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url()
         
         let sv = try TextFile.CSV(file: url)
@@ -188,7 +188,7 @@ extension CSV_Tests {
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_initRawData() throws {
+    @Test func utf8BOM_initRawData() async throws {
         let data = try TestResource.TextFiles.utf8_BOM_Test_csv.data()
         
         let sv = try TextFile.CSV(rawData: data)
@@ -200,7 +200,7 @@ extension CSV_Tests {
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_CRLF_initRawData() throws {
+    @Test func utf8BOM_CRLF_initRawData() async throws {
         let data = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data()
         
         let sv = try TextFile.CSV(rawData: data)

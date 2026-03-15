@@ -8,7 +8,7 @@ import Testing
 @testable import TextFileTools
 
 @Suite struct StringTableTests {
-    @Test func read() {
+    @Test func read() async {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -22,7 +22,7 @@ import Testing
         #expect(st[2][1] == "3B")
     }
     
-    @Test func write() {
+    @Test func write() async {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -45,7 +45,7 @@ import Testing
         #expect(st[3][1] == "4B")
     }
     
-    @Test func equatable() {
+    @Test func equatable() async {
         let st1: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -61,7 +61,7 @@ import Testing
         #expect(st1 == st2)
     }
     
-    @Test func numberOfRowsColumns() {
+    @Test func numberOfRowsColumns() async {
         var st: StringTable
         
         st = []
@@ -93,7 +93,7 @@ import Testing
         #expect(st.columnCount == 1)
     }
     
-    @Test func matrixSubscript() {
+    @Test func matrixSubscript() async {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -107,7 +107,7 @@ import Testing
         #expect(st[0, 1] == "1Bnew")
     }
     
-    @Test func safeSubscript() {
+    @Test func safeSubscript() async {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -134,19 +134,19 @@ import Testing
         #expect(st[safe: 3, 0] == nil)
     }
     
-    @Test func columnCharCountsA() {
+    @Test func columnCharCountsA() async {
         let table: StringTable = []
         let ranges = table.columnCharCounts
         #expect(ranges.count == 0)
     }
     
-    @Test func columnCharCountsB() {
+    @Test func columnCharCountsB() async {
         let table: StringTable = [[]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 0)
     }
     
-    @Test func columnCharCountsC() {
+    @Test func columnCharCountsC() async {
         let table: StringTable = [["H1"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 1)
@@ -154,7 +154,7 @@ import Testing
         #expect(ranges[0] == 2 ... 2)
     }
     
-    @Test func columnCharCountsD() {
+    @Test func columnCharCountsD() async {
         let table: StringTable = [["H1", "H2", "H3"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 3)
@@ -164,7 +164,7 @@ import Testing
         #expect(ranges[2] == 2 ... 2)
     }
     
-    @Test func columnCharCountsE() {
+    @Test func columnCharCountsE() async {
         let table: StringTable = [["H1", "", "H3_"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 3)
@@ -174,7 +174,7 @@ import Testing
         #expect(ranges[2] == 3 ... 3)
     }
     
-    @Test func columnCharCountsF() {
+    @Test func columnCharCountsF() async {
         let table: StringTable = [["H1"], [""], ["R2"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 1)
@@ -182,7 +182,7 @@ import Testing
         #expect(ranges[0] == 0 ... 2)
     }
     
-    @Test func columnCharCountsG() {
+    @Test func columnCharCountsG() async {
         let table: StringTable = [
             ["H1", "H2", "H3"],
             ["", "abc", "ab"]
