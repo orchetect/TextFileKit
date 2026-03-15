@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2610"
+   LastUpgradeVersion = "2630"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "TextFileTools"
-               BuildableName = "TextFileTools"
-               BlueprintName = "TextFileTools"
+               BlueprintIdentifier = "TextFile"
+               BuildableName = "TextFile"
+               BlueprintName = "TextFile"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,9 +34,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "TextFileToolsTests"
-               BuildableName = "TextFileToolsTests"
-               BlueprintName = "TextFileToolsTests"
+               BlueprintIdentifier = "TextFileTests"
+               BuildableName = "TextFileTests"
+               BlueprintName = "TextFileTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -62,9 +62,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "TextFileTools"
-            BuildableName = "TextFileTools"
-            BlueprintName = "TextFileTools"
+            BlueprintIdentifier = "TextFile"
+            BuildableName = "TextFile"
+            BlueprintName = "TextFile"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
