@@ -40,8 +40,13 @@ public protocol StringTableRepresentable where Self: Sendable {
 
 extension StringTableRepresentable {
     /// Initialize from text file.
-    public init(file: URL) throws {
-        let rawData = try Data(contentsOf: file)
+    public init(file: URL) throws(TextFile.ParserError) {
+        let rawData: Data
+        do {
+            rawData = try Data(contentsOf: file)
+        } catch {
+            throw .fileReadError(underlyingError: error)
+        }
         
         var (text, encoding) = try rawData.decodeString(file: file)
         _ = encoding // not using encoding after successful string decode
@@ -67,7 +72,7 @@ extension StringTableRepresentable {
     /// - Note: On non-Apple platforms, if reading from a text file on disk, it is more efficient
     ///   to call ``init(file:)`` rather than read the contents of the file and supply it to this method,
     ///   as this method relies on rewriting the data to a file on disk in order to decode.
-    public init(rawData: Data) throws {
+    public init(rawData: Data) throws(TextFile.ParserError) {
         var (text, encoding) = try rawData.decodeString()
         _ = encoding // not using encoding after successful string decode
         

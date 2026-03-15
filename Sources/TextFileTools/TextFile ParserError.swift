@@ -8,12 +8,22 @@ import protocol Foundation.LocalizedError
 
 extension TextFile {
     public enum ParserError: LocalizedError {
+        case fileReadError(underlyingError: Error?)
         case fileWriteError(underlyingError: Error?)
         case invalidTextEncoding
         case unrecognizedTextEncoding
         
         public var errorDescription: String? {
             switch self {
+            case let .fileReadError(underlyingError):
+                var string = "File write error"
+                if let underlyingError {
+                    string += ": \(underlyingError.localizedDescription)"
+                } else {
+                    string += "."
+                }
+                return string
+                
             case let .fileWriteError(underlyingError):
                 var string = "File write error"
                 if let underlyingError {
