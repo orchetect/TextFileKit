@@ -1,15 +1,15 @@
 //
-//  TextFile TSV Tests.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  TSV Tests.swift
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
-@testable import TextFileTools
+@testable import TextFile
 
 @Suite struct TSV_Tests {
     @Test func init_Default() {
-        let sv = TextFile.TSV()
+        let sv = TSV()
         
         #expect(sv.table == [])
     }
@@ -31,14 +31,14 @@ private let tsvTable_Basic: StringTable = [
 
 extension TSV_Tests {
     @Test func init_RawText_Basic() {
-        let sv = TextFile.TSV(rawText: tsvRawText_Basic)
+        let sv = TSV(rawText: tsvRawText_Basic)
         
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.rawText == tsvRawText_Basic)
     }
     
     @Test func init_Table_Basic() {
-        let sv = TextFile.TSV(table: tsvTable_Basic)
+        let sv = TSV(table: tsvTable_Basic)
         
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.rawText == tsvRawText_Basic)
@@ -61,14 +61,14 @@ private let tsvTable_SingleColumn: StringTable = [
 
 extension TSV_Tests {
     @Test func init_RawText_SingleColumn() {
-        let sv = TextFile.TSV(rawText: tsvRawText_SingleColumn)
+        let sv = TSV(rawText: tsvRawText_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.rawText == tsvRawText_SingleColumn)
     }
     
     @Test func init_Table_SingleColumn() {
-        let sv = TextFile.TSV(table: tsvTable_SingleColumn)
+        let sv = TSV(table: tsvTable_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.rawText == tsvRawText_SingleColumn)
@@ -95,7 +95,7 @@ private let tsvTable_QuotedFields: StringTable = [
 
 extension TSV_Tests {
     @Test func init_RawText_QuotedFields() {
-        let sv = TextFile.TSV(rawText: tsvRawText_QuotedFields)
+        let sv = TSV(rawText: tsvRawText_QuotedFields)
         
         #expect(sv.table == tsvTable_QuotedFields)
         #expect(sv.rawText == tsvRawText_QuotedFields)

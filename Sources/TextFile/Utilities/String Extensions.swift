@@ -1,6 +1,6 @@
 //
 //  String Extensions.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 

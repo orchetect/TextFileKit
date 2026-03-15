@@ -1,6 +1,6 @@
 //
 //  Data Extensions.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
@@ -30,7 +30,7 @@ extension Data {
     ///     Otherwise, a temporary file will be created in the system temporary folder.
     ///
     /// - Returns: The decoded string and string encoding if successful.
-    func decodeString(file: URL? = nil) throws(TextFile.ParserError) -> (string: String, encoding: String.Encoding) {
+    func decodeString(file: URL? = nil) throws(TextFileDecodeError) -> (string: String, encoding: String.Encoding) {
         var text: String
         var encoding: String.Encoding
         

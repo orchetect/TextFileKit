@@ -1,6 +1,6 @@
 //
-//  TextFile DelimitedFormat+UTType.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  DelimitedTextFormat+UTType.swift
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
@@ -9,7 +9,7 @@
 import UniformTypeIdentifiers
 
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-extension TextFile.DelimitedFormat {
+extension DelimitedTextFormat {
     /// Returns the UTI (Uniform Type Identifier) for the file format.
     public var utType: UTType {
         switch self {

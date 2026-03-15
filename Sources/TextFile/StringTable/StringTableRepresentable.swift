@@ -1,6 +1,6 @@
 //
 //  StringTableRepresentable.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
@@ -12,8 +12,7 @@ import struct FoundationEssentials.Data
 import struct FoundationEssentials.URL
 #endif
 
-/// Protocol describing file formats which can be encoded to/from a ``StringTable``
-/// (String Array table of rows and columns).
+/// Protocol describing file formats which can be encoded to/from a ``StringTable``.
 public protocol StringTableRepresentable where Self: Sendable {
     /// Raw data store as an Array table addressed as `self[row][column]`,
     /// `self[row, column]` or `self[safe: row, column]`.
@@ -40,7 +39,7 @@ public protocol StringTableRepresentable where Self: Sendable {
 
 extension StringTableRepresentable {
     /// Initialize from text file.
-    public init(file: URL) throws(TextFile.ParserError) {
+    public init(file: URL) throws(TextFileDecodeError) {
         let rawData: Data
         do {
             rawData = try Data(contentsOf: file)
@@ -57,7 +56,7 @@ extension StringTableRepresentable {
     }
     
     /// Initialize from raw data with the specified text encoding.
-    public init(rawData: Data, encoding: String.Encoding) throws(TextFile.ParserError) {
+    public init(rawData: Data, encoding: String.Encoding) throws(TextFileDecodeError) {
         guard var text = String(data: rawData, encoding: encoding) else {
             throw .invalidTextEncoding
         }
@@ -72,7 +71,7 @@ extension StringTableRepresentable {
     /// - Note: On non-Apple platforms, if reading from a text file on disk, it is more efficient
     ///   to call ``init(file:)`` rather than read the contents of the file and supply it to this method,
     ///   as this method relies on rewriting the data to a file on disk in order to decode.
-    public init(rawData: Data) throws(TextFile.ParserError) {
+    public init(rawData: Data) throws(TextFileDecodeError) {
         var (text, encoding) = try rawData.decodeString()
         _ = encoding // not using encoding after successful string decode
         

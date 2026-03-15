@@ -1,11 +1,11 @@
 //
 //  StringTable Tests.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
-@testable import TextFileTools
+@testable import TextFile
 
 @Suite struct StringTableTests {
     @Test func read() async {

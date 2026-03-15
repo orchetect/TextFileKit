@@ -3,22 +3,22 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-textfile-tools",
+    name: "swift-textfile",
     platforms: [
         .macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v2)
     ],
     products: [
-        .library(name: "TextFileTools", targets: ["TextFileTools"])
+        .library(name: "TextFile", targets: ["TextFile"])
     ],
     dependencies: [
         .package(url: "https://github.com/orchetect/swift-testing-extensions", from: "0.3.0"),
     ],
     targets: [
-        .target(name: "TextFileTools"),
+        .target(name: "TextFile"),
         .testTarget(
-            name: "TextFileToolsTests",
+            name: "TextFileTests",
             dependencies: [
-                "TextFileTools",
+                "TextFile",
                 .product(name: "TestingExtensions", package: "swift-testing-extensions")
             ],
             resources: [.copy("TestResource/Text Files")]

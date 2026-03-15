@@ -1,17 +1,27 @@
 //
-//  TextFile DelimitedFormat.swift
-//  swift-textfile-tools • https://github.com/orchetect/swift-textfile-tools
+//  DelimitedTextFormat.swift
+//  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-extension TextFile {
-    public enum DelimitedFormat: Equatable, Hashable, CaseIterable, Sendable {
-        case csv
-        case tsv
-    }
+/// Delimited text formats.
+public enum DelimitedTextFormat {
+    /// CSV (comma-separated values)
+    case csv
+    
+    /// TSV (tab-separated values)
+    case tsv
 }
 
-extension TextFile.DelimitedFormat {
+extension DelimitedTextFormat: Equatable { }
+
+extension DelimitedTextFormat: Hashable { }
+
+extension DelimitedTextFormat: CaseIterable { }
+
+extension DelimitedTextFormat: Sendable { }
+
+extension DelimitedTextFormat {
     /// Returns the file extension used for the file format.
     public var fileExtension: String {
         switch self {
