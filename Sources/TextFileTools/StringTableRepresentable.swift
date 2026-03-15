@@ -11,7 +11,7 @@ import struct Foundation.ObjCBool
 import struct Foundation.URL
 #else
 import struct FoundationEssentials.Data
-import class FoundationEssentials.NSString
+import class Foundation.NSString
 import struct Foundation.ObjCBool
 import struct FoundationEssentials.URL
 #endif
