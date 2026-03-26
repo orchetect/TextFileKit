@@ -62,21 +62,21 @@ extension StringTable {
     /// Access a cell of the table.
     /// Get: Cells which do not exist will return `nil`.
     /// Set: Cells which do not exist will not be set.
-    public subscript(safe row: Int, col: Int) -> Element.Element? {
+    public subscript(safeRow rowIndex: Int, col columnIndex: Int) -> Element.Element? {
         get {
-            guard indices.contains(row),
-                  self[row].indices.contains(col)
+            guard indices.contains(rowIndex),
+                  self[rowIndex].indices.contains(columnIndex)
             else { return nil }
             
-            return self[row][col]
+            return self[rowIndex][columnIndex]
         }
         set {
-            guard row < rowCount,
-                  col < self[row].count
+            guard rowIndex < rowCount,
+                  columnIndex < self[rowIndex].count
             else { return }
             
             if let newValue = newValue {
-                self[row][col] = newValue
+                self[rowIndex][columnIndex] = newValue
             }
         }
     }
