@@ -30,30 +30,15 @@ public struct CSV: StringTableRepresentable {
     public init(rawText: String) {
         table = Self.parse(text: rawText)
     }
-
-    // MARK: - rawText
-
-    public var rawText: String {
-        table.map { row in
-            row.map { textString in
-                var outString = textString
-
-                // escape double-quotes
-                outString = outString.replacingOccurrences(of: "\"", with: "\"\"")
-
-                // wrap string in double-quotes if it contains a comma, escaped double-quotes, or newline chars
-                if outString.contains(",")
-                    || outString.contains("\"")
-                    || outString.contains(Self.newLineChar)
-                { outString = outString.quoted }
-
-                return outString
-            }
-            .joined(separator: String(Self.sepChar))
-        }
-        .joined(separator: String(Self.newLineChar))
-    }
 }
+
+extension CSV: Equatable { }
+
+extension CSV: Hashable { }
+
+extension CSV: Sendable { }
+
+// MARK: - Encoding
 
 extension CSV {
     static func parse(text: String) -> StringTable {
@@ -141,5 +126,26 @@ extension CSV {
         // return
 
         return result
+    }
+    
+    public var rawText: String {
+        table.map { row in
+            row.map { textString in
+                var outString = textString
+                
+                // escape double-quotes
+                outString = outString.replacingOccurrences(of: "\"", with: "\"\"")
+                
+                // wrap string in double-quotes if it contains a comma, escaped double-quotes, or newline chars
+                if outString.contains(",")
+                    || outString.contains("\"")
+                    || outString.contains(Self.newLineChar)
+                { outString = outString.quoted }
+                
+                return outString
+            }
+            .joined(separator: String(Self.sepChar))
+        }
+        .joined(separator: String(Self.newLineChar))
     }
 }

@@ -28,40 +28,15 @@ public struct TSV: StringTableRepresentable {
     public init(rawText: String) {
         table = Self.parse(text: rawText)
     }
-
-    // MARK: - RawText
-
-    public var rawText: String {
-        table.map { row in
-            row.map { textString in
-                var outString = textString
-                var needsQuoteWrapping = false
-
-                // wrap string in double-quotes if it contains a tab or a newline
-                if outString.contains("\t")
-                    || outString.contains(Self.newLineChar)
-                { needsQuoteWrapping = true }
-
-                // escape double-quotes
-                // (only necessary if the string needs to be wrote-wrapped for another reason
-                // (ie: string contains a tab char))
-                if outString.contains("\""),
-                   needsQuoteWrapping
-                {
-                    outString = outString.replacingOccurrences(of: "\"", with: "\"\"")
-                }
-
-                if needsQuoteWrapping {
-                    outString = outString.quoted
-                }
-
-                return outString
-            }
-            .joined(separator: String(Self.sepChar))
-        }
-        .joined(separator: String(Self.newLineChar))
-    }
 }
+
+extension TSV: Equatable { }
+
+extension TSV: Hashable { }
+
+extension TSV: Sendable { }
+
+// MARK: - Encoding
 
 extension TSV {
     static func parse(text: String) -> StringTable {
@@ -159,5 +134,36 @@ extension TSV {
         // return
 
         return result
+    }
+    
+    public var rawText: String {
+        table.map { row in
+            row.map { textString in
+                var outString = textString
+                var needsQuoteWrapping = false
+                
+                // wrap string in double-quotes if it contains a tab or a newline
+                if outString.contains("\t")
+                    || outString.contains(Self.newLineChar)
+                { needsQuoteWrapping = true }
+                
+                // escape double-quotes
+                // (only necessary if the string needs to be wrote-wrapped for another reason
+                // (ie: string contains a tab char))
+                if outString.contains("\""),
+                   needsQuoteWrapping
+                {
+                    outString = outString.replacingOccurrences(of: "\"", with: "\"\"")
+                }
+                
+                if needsQuoteWrapping {
+                    outString = outString.quoted
+                }
+                
+                return outString
+            }
+            .joined(separator: String(Self.sepChar))
+        }
+        .joined(separator: String(Self.newLineChar))
     }
 }
