@@ -93,6 +93,102 @@ import Testing
         #expect(st.columnCount == 1)
     }
     
+    @Test func columnIndex_WithName() async {
+        let st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
+        
+        #expect(st.columnIndex(withName: "") == nil)
+        #expect(st.columnIndex(withName: " ") == nil)
+        #expect(st.columnIndex(withName: "Foo") == nil)
+        
+        #expect(st.columnIndex(withName: "1A") == 0)
+        #expect(st.columnIndex(withName: "1B") == 1)
+        
+        #expect(st.columnIndex(withName: "1a") == nil)
+        #expect(st.columnIndex(withName: "1b") == nil)
+        
+        #expect(st.columnIndex(withName: "1A ") == nil)
+        #expect(st.columnIndex(withName: " 1B") == nil)
+        
+        #expect(st.columnIndex(withName: "1a ") == nil)
+        #expect(st.columnIndex(withName: " 1b") == nil)
+    }
+    
+    @Test func columnIndex_WithName_caseInsensitive() async {
+        let st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
+        
+        #expect(st.columnIndex(withName: "", caseInsensitive: true) == nil)
+        #expect(st.columnIndex(withName: " ", caseInsensitive: true) == nil)
+        #expect(st.columnIndex(withName: "Foo", caseInsensitive: true) == nil)
+        
+        #expect(st.columnIndex(withName: "1A", caseInsensitive: true) == 0)
+        #expect(st.columnIndex(withName: "1B", caseInsensitive: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1a", caseInsensitive: true) == 0)
+        #expect(st.columnIndex(withName: "1b", caseInsensitive: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1A ", caseInsensitive: true) == nil)
+        #expect(st.columnIndex(withName: " 1B", caseInsensitive: true) == nil)
+        
+        #expect(st.columnIndex(withName: "1a ", caseInsensitive: true) == nil)
+        #expect(st.columnIndex(withName: " 1b", caseInsensitive: true) == nil)
+    }
+    
+    @Test func columnIndex_WithName_trimWhitespace() async {
+        let st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
+        
+        #expect(st.columnIndex(withName: "", trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: " ", trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: "Foo", trimWhitespace: true) == nil)
+        
+        #expect(st.columnIndex(withName: "1A", trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: "1B", trimWhitespace: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1a", trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: "1b", trimWhitespace: true) == nil)
+        
+        #expect(st.columnIndex(withName: "1A ", trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: " 1B", trimWhitespace: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1a ", trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: " 1b", trimWhitespace: true) == nil)
+    }
+    
+    @Test func columnIndex_WithName_caseInsensitive_trimWhitespace() async {
+        let st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A", "3B"]
+        ]
+        
+        #expect(st.columnIndex(withName: "", caseInsensitive: true, trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: " ", caseInsensitive: true, trimWhitespace: true) == nil)
+        #expect(st.columnIndex(withName: "Foo", caseInsensitive: true, trimWhitespace: true) == nil)
+        
+        #expect(st.columnIndex(withName: "1A", caseInsensitive: true, trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: "1B", caseInsensitive: true, trimWhitespace: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1a", caseInsensitive: true, trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: "1b", caseInsensitive: true, trimWhitespace: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1A ", caseInsensitive: true, trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: " 1B", caseInsensitive: true, trimWhitespace: true) == 1)
+        
+        #expect(st.columnIndex(withName: "1a ", caseInsensitive: true, trimWhitespace: true) == 0)
+        #expect(st.columnIndex(withName: " 1b", caseInsensitive: true, trimWhitespace: true) == 1)
+    }
+    
     @Test func matrixSubscript() async {
         var st: StringTable = [
             ["1A", "1B"],
