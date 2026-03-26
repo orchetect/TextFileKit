@@ -203,7 +203,7 @@ import Testing
         #expect(st[0, 1] == "1Bnew")
     }
     
-    @Test func safeSubscript() async {
+    @Test func safeRowColSubscript() async {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -212,22 +212,22 @@ import Testing
         
         // existing
         
-        #expect(st[safe: 0, 0] == "1A")
-        #expect(st[safe: 0, 1] == "1B")
+        #expect(st[safeRow: 0, col: 0] == "1A")
+        #expect(st[safeRow: 0, col: 1] == "1B")
         
-        st[safe: 0, 1] = "1Bnew"
+        st[safeRow: 0, col: 1] = "1Bnew"
         
-        #expect(st[safe: 0, 1] == "1Bnew")
+        #expect(st[safeRow: 0, col: 1] == "1Bnew")
         
         // non-existing
         
-        #expect(st[safe: 2, 1] == nil)
+        #expect(st[safeRow: 2, col: 1] == nil)
         
-        st[safe: 0, 2] = "1C"
-        #expect(st[safe: 0, 2] == nil)
+        st[safeRow: 0, col: 2] = "1C"
+        #expect(st[safeRow: 0, col: 2] == nil)
         
-        st[safe: 3, 0] = "4A"
-        #expect(st[safe: 3, 0] == nil)
+        st[safeRow: 3, col: 0] = "4A"
+        #expect(st[safeRow: 3, col: 0] == nil)
     }
     
     @Test func columnCharCountsA() async {
