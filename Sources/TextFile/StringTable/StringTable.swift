@@ -51,6 +51,9 @@ extension StringTable {
         get {
             self[row][col]
         }
+        _modify {
+            yield &self[row][col]
+        }
         set {
             self[row][col] = newValue
         }
