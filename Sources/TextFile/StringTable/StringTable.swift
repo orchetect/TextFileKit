@@ -19,6 +19,31 @@ extension StringTable {
         first?.count ?? 0
     }
     
+    /// Returns the column index with the matching column name.
+    public func columnIndex(
+        withName columnName: String,
+        caseInsensitive: Bool = false,
+        trimWhitespace: Bool = false
+    ) -> Element.Index? {
+        guard !isEmpty else { return nil }
+        
+        var columnName = columnName
+        var columns = self[startIndex]
+        
+        if trimWhitespace {
+            columnName = columnName.trimmingCharacters(in: .whitespaces)
+            columns = columns.map { $0.trimmingCharacters(in: .whitespaces) }
+        }
+        
+        if caseInsensitive {
+            return self[startIndex].firstIndex(where: {
+                $0.localizedCaseInsensitiveCompare(columnName) == .orderedSame
+            })
+        } else {
+            return self[startIndex].firstIndex(of: columnName)
+        }
+    }
+    
     /// Access a cell of the table.
     /// Ensure the cell exists before accessing it or an exception will be thrown,
     /// the same as standard array subscript behavior.
