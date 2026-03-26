@@ -7,7 +7,7 @@ Read and write common delimited text file formats in Swift on Apple platforms an
 - CSV (comma-separated values)
 - TSV (tab-separated values)
 
-This library implements the full CSV and TSV specifications, including proper escape sequences to assure the widest compatibility.
+This library implements the full CSV and TSV specifications, including proper escape sequences and handling of BOM's (byte order marks) to assure the widest compatibility.
 
 ## Installation
 
