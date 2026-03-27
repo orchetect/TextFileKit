@@ -46,18 +46,8 @@ extension StringTableRepresentable {
     ///   - encoding: If the text encoding is known, it may be specified. Otherwise pass `nil` to attempt
     ///     automatic detection of text encoding.
     public init(file: URL, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
-        let rawData: Data
-        do {
-            rawData = try Data(contentsOf: file)
-        } catch {
-            throw .fileReadError(underlyingError: error)
-        }
-        
-        var (rawText, encoding) = try rawData.decodeString(encoding: encoding, file: file)
-        _ = encoding // not using encoding after successful string decode
-        
-        rawText = rawText.fixedLineBreaks
-        self.init(rawText: rawText)
+        let decoded = try DecodedTextFile(url: file, strategy: .default(), preferring: encoding)
+        self.init(rawText: decoded.content)
     }
     
     /// Initialize from raw data with the specified text encoding.
@@ -71,10 +61,7 @@ extension StringTableRepresentable {
     ///   to call ``init(file:encoding:)`` rather than read the contents of the file and supply it
     ///   to this method, as this method relies on rewriting the data to a file on disk in order to decode.
     public init(rawData: Data, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
-        var (rawText, encoding) = try rawData.decodeString(encoding: encoding)
-        _ = encoding // not using encoding after successful string decode
-        
-        rawText = rawText.fixedLineBreaks
-        self.init(rawText: rawText)
+        let decoded = try DecodedTextFile(data: rawData, strategy: .default(), preferring: encoding)
+        self.init(rawText: decoded.content)
     }
 }
