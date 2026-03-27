@@ -85,7 +85,7 @@ extension ByteOrderMark {
 
 extension ByteOrderMark {
     /// The order with which to parse a text stream when matching byte order mark bytes.
-    public static var parseOrder: [Self] = [
+    public static let parseOrder: [Self] = [
         .utf8, .utf32BigEndian, .utf32LittleEndian, .utf16BigEndian, .utf16LittleEndian
     ]
 }
