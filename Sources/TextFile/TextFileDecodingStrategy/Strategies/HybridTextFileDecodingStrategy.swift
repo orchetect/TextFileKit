@@ -158,13 +158,8 @@ extension HybridTextFileDecodingStrategy {
 
         let dataWithoutBOM = data[data.startIndex.advanced(by: bom.bytes.count)...]
 
-        #if canImport(Darwin)
-        let lossyDecoding: TextFileDecodingStrategy = .nsString(allowLossy: true)
+        let lossyDecoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: true)
         var decoded: DecodedTextFile = try lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
-        #else
-        let decoding: TextFileDecodingStrategy = .bestForCurrentPlatform()
-        var decoded: DecodedTextFile = try decoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
-        #endif
         
         decoded.url = fileURL
         return decoded
@@ -180,7 +175,7 @@ extension TextFileDecodingStrategy where Self == AnyTextFileDecodingStrategy {
         #if canImport(Darwin)
         return AnyTextFileDecodingStrategy(.nsString(allowLossy: allowLossy))
         #else
-        return AnyTextFileDecodingStrategy(.string)
+        return AnyTextFileDecodingStrategy(.string())
         #endif
     }
 }
