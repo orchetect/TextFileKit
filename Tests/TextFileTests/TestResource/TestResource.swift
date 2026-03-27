@@ -72,5 +72,11 @@ extension TestResource {
         static let windows1252_AccentedCharacters_csv = TestResource.File(
             name: "windows1252-accented-characters", ext: "csv", subFolder: "Text Files"
         )
+        
+        // MARK: - Accented Characters: Edge Cases & Malformed Files
+        
+        static let windows1252_AccentedCharacters_WithUTF8BOM_csv = TestResource.File(
+            name: "windows1252-accented-characters-with-utf8-bom", ext: "csv", subFolder: "Text Files"
+        )
     }
 }
