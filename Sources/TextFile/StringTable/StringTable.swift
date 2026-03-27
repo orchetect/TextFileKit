@@ -71,9 +71,77 @@ extension StringTable {
             return self[rowIndex][columnIndex]
         }
         set {
-            guard rowIndex < rowCount,
-                  columnIndex < self[rowIndex].count
+            guard indices.contains(rowIndex),
+                  self[rowIndex].indices.contains(columnIndex)
             else { return }
+            
+            if let newValue = newValue {
+                self[rowIndex][columnIndex] = newValue
+            }
+        }
+    }
+    
+    /// Access a cell of the table.
+    /// Ensure the cell exists before accessing it or an exception will be thrown,
+    /// the same as standard array subscript behavior.
+    @_disfavoredOverload
+    public subscript(row rowIndex: Int, col columnName: String) -> Element.Element {
+        get {
+            guard let columnIndex = columnIndex(withName: columnName) else {
+                fatalError("Cell does not exist.")
+            }
+            return self[rowIndex][columnIndex]
+        }
+        _modify {
+            guard let columnIndex = columnIndex(withName: columnName) else {
+                fatalError("Cell does not exist.")
+            }
+            yield &self[rowIndex][columnIndex]
+        }
+        set {
+            guard let columnIndex = columnIndex(withName: columnName) else {
+                fatalError("Cell does not exist.")
+            }
+            self[rowIndex][columnIndex] = newValue
+        }
+    }
+    
+    /// Access a cell of the table.
+    /// Get: Cells which do not exist will return `nil`.
+    /// Set: Cells which do not exist will not be set.
+    @_disfavoredOverload
+    public subscript(safeRow rowIndex: Int, col columnName: String) -> Element.Element? {
+        get {
+            guard let columnIndex = columnIndex(withName: columnName),
+                  indices.contains(rowIndex),
+                  self[rowIndex].indices.contains(columnIndex)
+            else {
+                return nil
+            }
+            
+            return self[rowIndex][columnIndex]
+        }
+        _modify {
+            guard let columnIndex = columnIndex(withName: columnName),
+                  indices.contains(rowIndex),
+                  self[rowIndex].indices.contains(columnIndex)
+            else {
+                var empty: Element.Element? = nil
+                yield &empty
+                return
+            }
+            
+            var value: Element.Element? = self[rowIndex][columnIndex]
+            yield &value
+            self[rowIndex][columnIndex] = value ?? ""
+        }
+        set {
+            guard let columnIndex = columnIndex(withName: columnName),
+                  indices.contains(rowIndex),
+                  self[rowIndex].indices.contains(columnIndex)
+            else {
+                return
+            }
             
             if let newValue = newValue {
                 self[rowIndex][columnIndex] = newValue
