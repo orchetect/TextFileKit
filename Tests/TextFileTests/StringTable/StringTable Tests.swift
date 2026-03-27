@@ -230,6 +230,95 @@ import Testing
         #expect(st[safeRow: 3, col: 0] == nil)
     }
     
+    @Test func row_ColName_Subscript() async {
+        var st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A"]
+        ]
+        
+        // existing
+        
+        #expect(st[row: 1, col: "1A"] == "2A")
+        #expect(st[row: 1, col: "1B"] == "2B")
+        
+        st[row: 1, col: "1B"] = "1Bnew"
+        
+        #expect(st[row: 1, col: "1B"] == "1Bnew")
+    }
+    
+    @Test func row_ColName_Subscript_outOfBoundsSet() async {
+        #if os(macOS)
+        await #expect(processExitsWith: .failure) {
+            var st: StringTable = [
+                ["1A", "1B"],
+                ["2A", "2B"],
+                ["3A"]
+            ]
+            
+            // set { }
+            st[row: 1, col: "1C"] = "2C"
+        }
+        #endif
+    }
+    
+    @Test func row_ColName_Subscript_outOfBoundsGet() async {
+        #if os(macOS)
+        await #expect(processExitsWith: .failure) {
+            let st: StringTable = [
+                ["1A", "1B"],
+                ["2A", "2B"],
+                ["3A"]
+            ]
+            
+            // get { }
+            _ = st[row: 1, col: "1C"]
+        }
+        #endif
+    }
+    
+    @Test func row_ColName_Subscript_outOfBoundsModify() async {
+        #if os(macOS)
+        await #expect(processExitsWith: .failure) {
+            var st: StringTable = [
+                ["1A", "1B"],
+                ["2A", "2B"],
+                ["3A"]
+            ]
+            
+            // _modify { }
+            st[row: 1, col: "1C"].append("-")
+        }
+        #endif
+    }
+    
+    @Test func safeRow_ColName_Subscript() {
+        var st: StringTable = [
+            ["1A", "1B"],
+            ["2A", "2B"],
+            ["3A"]
+        ]
+        
+        // existing
+        
+        #expect(st[safeRow: 1, col: "1A"] == "2A")
+        #expect(st[safeRow: 1, col: "1B"] == "2B")
+        
+        st[safeRow: 1, col: "1B"] = "1Bnew"
+        
+        #expect(st[safeRow: 1, col: "1B"] == "1Bnew")
+        
+        // non-existing
+        
+        #expect(st[safeRow: 2, col: "1B"] == nil)
+        
+        st[safeRow: 1, col: "1C"] = "2C"
+        #expect(st[safeRow: 1, col: "1C"] == nil)
+        
+        st[safeRow: 3, col: "1A"] = "4A"
+        #expect(st[safeRow: 3, col: "1A"] == nil)
+    }
+    
     @Test func columnCharCountsA() async {
         let table: StringTable = []
         let ranges = table.columnCharCounts
