@@ -19,19 +19,20 @@ import TestingExtensions
 
 // MARK: - Basic
 
-private let csvRawText_Basic = """
-    header1,header2,header3
-    1,2,3
-    a,b,c
-    """
-
-private let csvTable_Basic: StringTable = [
-    ["header1", "header2", "header3"],
-    ["1", "2", "3"],
-    ["a", "b", "c"]
-]
-
-extension CSV_Tests {
+@Suite struct CSV_Basic_Tests {
+    private let csvRawText_Basic = """
+        header1,header2,header3
+        1,2,3
+        a,b,c
+        """
+    
+    private let csvTable_Basic: StringTable = [
+        ["header1", "header2", "header3"],
+        ["1", "2", "3"],
+        ["a", "b", "c"]
+    ]
+    
+    
     @Test func init_RawText_Basic() async {
         let sv = CSV(rawText: csvRawText_Basic)
         
@@ -49,19 +50,19 @@ extension CSV_Tests {
 
 // MARK: - Single column
 
-private let csvRawText_SingleColumn = """
-    header1
-    1
-    a
-    """
-
-private let csvTable_SingleColumn: StringTable = [
-    ["header1"],
-    ["1"],
-    ["a"]
-]
-
-extension CSV_Tests {
+@Suite struct CSV_SingleColumn_Tests {
+    private let csvRawText_SingleColumn = """
+        header1
+        1
+        a
+        """
+    
+    private let csvTable_SingleColumn: StringTable = [
+        ["header1"],
+        ["1"],
+        ["a"]
+    ]
+    
     @Test func init_RawText_SingleColumn() async {
         let sv = CSV(rawText: csvRawText_SingleColumn)
         
@@ -79,25 +80,25 @@ extension CSV_Tests {
 
 // MARK: - Quoted fields
 
-private let csvRawText_QuotedFields = #"""
-header1,"header, 2",header3
-1,2,"3 ""quoted"" here"
-"one line
-another line",b,c
-q,w,"e
-""quoted"", stuff"
-"""",a,""""""
-"""#
-
-private let csvTable_QuotedFields: StringTable = [
-    ["header1", "header, 2", "header3"],
-    ["1", "2", "3 \"quoted\" here"],
-    ["one line\nanother line", "b", "c"],
-    ["q", "w", "e\n\"quoted\", stuff"],
-    ["\"", "a", "\"\""]
-]
-
-extension CSV_Tests {
+@Suite struct CSV_QuotedFields_Tests {
+    private let csvRawText_QuotedFields = #"""
+        header1,"header, 2",header3
+        1,2,"3 ""quoted"" here"
+        "one line
+        another line",b,c
+        q,w,"e
+        ""quoted"", stuff"
+        """",a,""""""
+        """#
+    
+    private let csvTable_QuotedFields: StringTable = [
+        ["header1", "header, 2", "header3"],
+        ["1", "2", "3 \"quoted\" here"],
+        ["one line\nanother line", "b", "c"],
+        ["q", "w", "e\n\"quoted\", stuff"],
+        ["\"", "a", "\"\""]
+    ]
+    
     @Test func init_RawText_QuotedFields() async {
         let sv = CSV(rawText: csvRawText_QuotedFields)
         
@@ -117,29 +118,29 @@ extension CSV_Tests {
 
 // MARK: - Comma-Containing fields
 
-private let csvRawText_CommaContainingFields = #"""
-header1,header2,header3
-data one,"""data, two""",data three
-some one,"""some, two A"", ""some, two B""",some three
-other one,"""other,, two""",other three
-item1,$4.50,description1
-item2,"$1,720.00",description2
-item3,-$4.50,description3
-item4,"-$1,720.00",description4
-"""#
-
-private let csvTable_CommaContainingFields: StringTable = [
-    ["header1", "header2", "header3"],
-    ["data one", "\"data, two\"", "data three"],
-    ["some one", "\"some, two A\", \"some, two B\"", "some three"],
-    ["other one", "\"other,, two\"", "other three"],
-    ["item1", "$4.50", "description1"],
-    ["item2", "$1,720.00", "description2"],
-    ["item3", "-$4.50", "description3"],
-    ["item4", "-$1,720.00", "description4"]
-]
-
-extension CSV_Tests {
+@Suite struct CSV_CommaContainingFields_Tests {
+    private let csvRawText_CommaContainingFields = #"""
+        header1,header2,header3
+        data one,"""data, two""",data three
+        some one,"""some, two A"", ""some, two B""",some three
+        other one,"""other,, two""",other three
+        item1,$4.50,description1
+        item2,"$1,720.00",description2
+        item3,-$4.50,description3
+        item4,"-$1,720.00",description4
+        """#
+    
+    private let csvTable_CommaContainingFields: StringTable = [
+        ["header1", "header2", "header3"],
+        ["data one", "\"data, two\"", "data three"],
+        ["some one", "\"some, two A\", \"some, two B\"", "some three"],
+        ["other one", "\"other,, two\"", "other three"],
+        ["item1", "$4.50", "description1"],
+        ["item2", "$1,720.00", "description2"],
+        ["item3", "-$4.50", "description3"],
+        ["item4", "-$1,720.00", "description4"]
+    ]
+    
     @Test func init_RawText_CommaContainingFields() async {
         let sv = CSV(rawText: csvRawText_CommaContainingFields)
         
@@ -157,8 +158,8 @@ extension CSV_Tests {
 
 // MARK: - BOM (Byte Order Mark) Tests
 
-extension CSV_Tests {
-    static let utf8_BOM_Test_Table: StringTable = [
+@Suite struct CSV_UTF8_BOM_Tests {
+    private static let utf8_BOM_Test_Table: StringTable = [
         ["Field1", "Field2"],
         ["Row1A", "Row1B"],
         ["Row2A", "Row2B"]
