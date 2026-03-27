@@ -2,12 +2,20 @@
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-textfile%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/orchetect/swift-textfile) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Forchetect%2Fswift-textfile%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/orchetect/swift-textfile) [![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/orchetect/swift-textfile/blob/main/LICENSE)
 
-Read and write common delimited text file formats in Swift on Apple platforms and Linux, including:
+Read and write text files in Swift on Apple platforms and Linux.
 
-- CSV (comma-separated values)
-- TSV (tab-separated values)
+- Support for text encoding detection
 
-This library implements the full CSV and TSV specifications, including proper escape sequences, handling of BOMs (byte order marks)m and text encoding auto-detection to assure the widest compatibility.
+- Abstractions to read/write common delimited text file formats, including:
+
+  - CSV (comma-separated values)
+
+  - TSV (tab-separated values)
+
+
+> [!NOTE]
+>
+> This library implements the full CSV and TSV specifications including proper escape sequences, handling of BOMs (byte order marks) and text encoding auto-detection to assure the widest compatibility. Limited support for reading malformed text encoding is implemented.
 
 ## Installation
 
@@ -22,7 +30,7 @@ To add this package to a Swift package, add the dependency to your package and t
 ```swift
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/orchetect/swift-textfile", from: "0.4.0")
+        .package(url: "https://github.com/orchetect/swift-textfile", from: "0.5.0")
     ],
     targets: [
         .target(
