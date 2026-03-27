@@ -4,7 +4,9 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
-/// String table addressed as `self[row][column]`, `self[row, column]` or `self[safe: row, column]`.
+/// String table addressed as `self[row][column]`.
+/// Subscripts are also available (`self[row, column]` or `self[safe: row, column]`) which allow
+/// the column to be specified either as an index (integer) or column name (string).
 public typealias StringTable = [[String]]
 
 extension StringTable {
