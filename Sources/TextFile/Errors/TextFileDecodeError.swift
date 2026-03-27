@@ -15,7 +15,7 @@ public enum TextFileDecodeError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case let .fileReadError(underlyingError):
-            var string = "File write error"
+            var string = "File read error"
             if let underlyingError {
                 string += ": \(underlyingError.localizedDescription)"
             } else {
