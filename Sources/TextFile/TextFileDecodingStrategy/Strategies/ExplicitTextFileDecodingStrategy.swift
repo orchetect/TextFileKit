@@ -28,12 +28,26 @@ public struct ExplicitTextFileDecodingStrategy {
 
 extension ExplicitTextFileDecodingStrategy: TextFileDecodingStrategy {
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> DecodedTextFile {
-        guard var text = String(data: data, encoding: encoding)
-        else { throw .invalidTextEncoding }
+        // first try String API
+        if var text = String(data: data, encoding: encoding) {
+            if convertLineEndings { text = text.fixedLineBreaks }
+            return DecodedTextFile(content: text, encoding: encoding, url: nil)
+        }
         
-        if convertLineEndings { text = text.fixedLineBreaks }
+        // then try NSString API, if available
+        #if canImport(Darwin)
+        if let decoded = try? NSStringTextFileDecodingStrategy(
+            allowLossy: false,
+            suggestedEncodings: [encoding],
+            convertLineEndings: convertLineEndings
+        )
+        .decodeText(in: data) {
+            return decoded
+        }
+        #endif
         
-        return DecodedTextFile(content: text, encoding: encoding, url: nil)
+        // otherwise, throw error
+        throw .invalidTextEncoding
     }
     
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
