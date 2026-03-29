@@ -78,13 +78,6 @@ extension HybridTextFileDecodingStrategy {
             return decoded
         }
         
-        // Step 3:
-        // once in a rare while, a BOM is inserted at the start of a file that it doesn't
-        // belong in. we can try decoding the file once more after stripping out the BOM.
-        if let decoded = try decodeTextAutomaticallyAfterRemovingBOM(in: data, fileURL: fileURL) {
-            return decoded
-        }
-        
         // Step 4: try ISO-8859-1 (ISO Latin-1)
         if let decoded = try decodeISOLatin1(in: data, fileURL: fileURL) {
             return decoded
@@ -104,7 +97,14 @@ extension HybridTextFileDecodingStrategy {
             heldError = error
         }
         
-        // Step 7: all options have been exhausted, so throw an error
+        // Step 7:
+        // once in a rare while, a BOM is inserted at the start of a file that it doesn't
+        // belong in. we can try decoding the file once more after stripping out the BOM.
+        if let decoded = try decodeTextAutomaticallyAfterRemovingBOM(in: data, fileURL: fileURL) {
+            return decoded
+        }
+        
+        // Step 8: all options have been exhausted, so throw an error
         throw heldError ?? .unrecognizedTextEncoding
     }
 
@@ -180,8 +180,11 @@ extension HybridTextFileDecodingStrategy {
 
         let dataWithoutBOM = data[data.startIndex.advanced(by: bom.bytes.count)...]
 
-        let lossyDecoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: false)
-        var decoded: DecodedTextFile = try lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
+        // We are recursively calling the hybrid decoder, but passing in data without the BOM so it won't infinitely recurse
+        let lossyDecoding: TextFileDecodingStrategy = .hybrid()
+        
+        guard var decoded: DecodedTextFile = try? lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
+        else { return nil }
         
         decoded.url = fileURL
         return decoded
