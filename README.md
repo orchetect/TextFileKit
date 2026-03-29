@@ -15,7 +15,27 @@ Read and write text files in Swift on Apple platforms and Linux.
 
 > [!NOTE]
 >
-> This library implements the full CSV and TSV specifications including proper escape sequences, handling of BOMs (byte order marks) and text encoding auto-detection to assure the widest compatibility. Limited support for reading malformed text encoding is implemented.
+> This library implements the full CSV and TSV specifications including proper escape sequences and text encoding auto-detection including handling of BOMs (byte order marks) to assure the widest compatibility. Limited support for reading malformed text encoding is implemented.
+
+## Overview
+
+The main types provided are:
+
+- `PlainTextFile`
+
+  Read text file content from disk or from data in memory, with modestly robust text encoding auto-detection.
+
+- `CSV`
+
+  Read and write CSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`.
+
+- `TSV`
+
+  Read and write TSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`.
+
+- `StringTable`
+
+  A basic abstraction for manipulating a matrix of strings (row and columns).
 
 ## Installation
 
