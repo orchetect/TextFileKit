@@ -19,16 +19,14 @@ Read and write text files in Swift on Apple platforms and Linux.
 
 ## Overview
 
-The main types provided are:
+The main types provided:
 
-- `PlainTextFile`
-  Read text file content from disk or from data in memory, with modestly robust text encoding auto-detection.
-- `CSV`
-  Read and write CSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`.
-- `TSV`
-  Read and write TSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`.
-- `StringTable`
-  A basic abstraction for manipulating a matrix of strings (row and columns).
+| Type            | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `PlainTextFile` | Read text file content from disk or from data in memory, with modestly robust text encoding auto-detection. |
+| `CSV`           | Read and write CSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`. |
+| `TSV`           | Read and write TSV files. Reading implements the same text encoding auto-detection schema as `PlainTextFile`. |
+| `StringTable`   | A basic abstraction for manipulating a matrix of strings (row and columns). |
 
 ## Installation
 
