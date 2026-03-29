@@ -34,7 +34,9 @@ extension DelimitedTextFormat {
     
     /// Initialize from file extension.
     public init?(fileExtension: String) {
-        guard let match = Self.allCases.first(where: { $0.fileExtension == fileExtension })
+        guard let match = Self.allCases.first(where: {
+            $0.fileExtension.caseInsensitiveCompare(fileExtension) == .orderedSame
+        })
         else { return nil }
         
         self = match
