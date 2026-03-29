@@ -1,7 +1,7 @@
 //
 //  CSV String Decode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -9,10 +9,11 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-@Suite struct CSV_StringDecode_Tests {
+struct CSV_StringDecode_Tests {
     // MARK: - MacRoman
 
-    @Test func accentedCharacters_MacRoman_content() throws {
+    @Test
+    func accentedCharacters_MacRoman_content() throws {
         let resource = TestResource.TextFiles.macRoman_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -25,13 +26,16 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 0] == "Frères")
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
         #else
-        withKnownIssue("MacRoman text decoding does not seem to work on Linux, even though the encoding is successfully detected as MacRoman.") {
+        withKnownIssue(
+            "MacRoman text decoding does not seem to work on Linux, even though the encoding is successfully detected as MacRoman."
+        ) {
             #expect(csv.table[safeRow: 1, col: 0] == "Cliché")
         }
         #endif
     }
 
-    @Test func accentedCharacters_MacRoman_rawText() throws {
+    @Test
+    func accentedCharacters_MacRoman_rawText() throws {
         let resource = TestResource.TextFiles.macRoman_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -44,7 +48,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_MacRoman_encoding_string() throws {
+    @Test
+    func accentedCharacters_MacRoman_encoding_string() throws {
         let resource = TestResource.TextFiles.macRoman_AccentedCharacters_csv
         let url = try resource.url()
         
@@ -58,7 +63,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_MacRoman_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_MacRoman_encoding_nsString() throws {
         let resource = TestResource.TextFiles.macRoman_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -74,7 +80,8 @@ import TestingExtensions
 
     // MARK: - UTF-8
 
-    @Test func accentedCharacters_utf8_content() throws {
+    @Test
+    func accentedCharacters_utf8_content() throws {
         let resource = TestResource.TextFiles.utf8_AccentedCharacters_csv
 
         // parse CSV
@@ -86,7 +93,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf8_rawText() throws {
+    @Test
+    func accentedCharacters_utf8_rawText() throws {
         let resource = TestResource.TextFiles.utf8_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -99,7 +107,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf8_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf8_encoding_string() throws {
         let resource = TestResource.TextFiles.utf8_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -109,7 +118,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf8_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf8_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf8_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -121,7 +131,8 @@ import TestingExtensions
 
     // MARK: - UTF-8 with BOM
 
-    @Test func accentedCharacters_utf8_BOM_content() throws {
+    @Test
+    func accentedCharacters_utf8_BOM_content() throws {
         let resource = TestResource.TextFiles.utf8_BOM_AccentedCharacters_csv
 
         // parse CSV
@@ -133,7 +144,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf8_BOM_rawText() throws {
+    @Test
+    func accentedCharacters_utf8_BOM_rawText() throws {
         let resource = TestResource.TextFiles.utf8_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -150,7 +162,8 @@ import TestingExtensions
         #expect(csvData == resourceData[resourceDataPostBOMByteRange])
     }
 
-    @Test func accentedCharacters_utf8_BOM_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf8_BOM_encoding_string() throws {
         let resource = TestResource.TextFiles.utf8_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -160,7 +173,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf8_BOM_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf8_BOM_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf8_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -172,7 +186,8 @@ import TestingExtensions
 
     // MARK: - UTF-16 Big-Endian
 
-    @Test func accentedCharacters_utf16BE_content() throws {
+    @Test
+    func accentedCharacters_utf16BE_content() throws {
         let resource = TestResource.TextFiles.utf16BE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -184,7 +199,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf16BE_rawText() throws {
+    @Test
+    func accentedCharacters_utf16BE_rawText() throws {
         let resource = TestResource.TextFiles.utf16BE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -197,7 +213,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf16BE_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf16BE_encoding_string() throws {
         let resource = TestResource.TextFiles.utf16BE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -210,14 +227,15 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf16BE_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf16BE_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf16BE_AccentedCharacters_csv
         let url = try resource.url()
 
         // check detected encoding
         withKnownIssue("NSString decoding API cannot auto-detect UTF-16 without a BOM.") {
             let decoded = try PlainTextFile(url: url, strategy: .nsString())
-             _ = decoded
+            _ = decoded
             // #expect(decoded.encoding == .utf16BigEndian)
         }
     }
@@ -225,7 +243,8 @@ import TestingExtensions
 
     // MARK: - UTF-16 Big-Endian with BOM
 
-    @Test func accentedCharacters_utf16BE_BOM_content() throws {
+    @Test
+    func accentedCharacters_utf16BE_BOM_content() throws {
         let resource = TestResource.TextFiles.utf16BE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -237,7 +256,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf16BE_BOM_rawText() throws {
+    @Test
+    func accentedCharacters_utf16BE_BOM_rawText() throws {
         let resource = TestResource.TextFiles.utf16BE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -250,7 +270,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf16BE_BOM_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf16BE_BOM_encoding_string() throws {
         let resource = TestResource.TextFiles.utf16BE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -260,7 +281,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf16BE_BOM_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf16BE_BOM_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf16BE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -272,7 +294,8 @@ import TestingExtensions
 
     // MARK: - UTF-16 Little-Endian
 
-    @Test func accentedCharacters_utf16LE_content() throws {
+    @Test
+    func accentedCharacters_utf16LE_content() throws {
         let resource = TestResource.TextFiles.utf16LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -284,7 +307,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf16LE_rawText() throws {
+    @Test
+    func accentedCharacters_utf16LE_rawText() throws {
         let resource = TestResource.TextFiles.utf16LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -297,7 +321,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf16LE_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf16LE_encoding_string() throws {
         let resource = TestResource.TextFiles.utf16LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -310,7 +335,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf16LE_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf16LE_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf16LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -325,7 +351,8 @@ import TestingExtensions
 
     // MARK: - UTF-16 Little-Endian with BOM
 
-    @Test func accentedCharacters_utf16LE_BOM_content() throws {
+    @Test
+    func accentedCharacters_utf16LE_BOM_content() throws {
         let resource = TestResource.TextFiles.utf16LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -337,7 +364,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf16LE_BOM_rawText() throws {
+    @Test
+    func accentedCharacters_utf16LE_BOM_rawText() throws {
         let resource = TestResource.TextFiles.utf16LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -350,7 +378,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf16LE_BOM_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf16LE_BOM_encoding_string() throws {
         let resource = TestResource.TextFiles.utf16LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -360,7 +389,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf16LE_BOM_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf16LE_BOM_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf16LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -372,7 +402,8 @@ import TestingExtensions
 
     // MARK: - UTF-32 Little-Endian
 
-    @Test func accentedCharacters_utf32LE_content() throws {
+    @Test
+    func accentedCharacters_utf32LE_content() throws {
         let resource = TestResource.TextFiles.utf32LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -384,7 +415,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf32LE_rawText() throws {
+    @Test
+    func accentedCharacters_utf32LE_rawText() throws {
         let resource = TestResource.TextFiles.utf32LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -397,7 +429,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf32LE_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf32LE_encoding_string() throws {
         let resource = TestResource.TextFiles.utf32LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -410,7 +443,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf32LE_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf32LE_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf32LE_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -425,7 +459,8 @@ import TestingExtensions
 
     // MARK: - UTF-32 Little-Endian with BOM
 
-    @Test func accentedCharacters_utf32LE_BOM_content() throws {
+    @Test
+    func accentedCharacters_utf32LE_BOM_content() throws {
         let resource = TestResource.TextFiles.utf32LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -437,7 +472,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_utf32LE_BOM_rawText() throws {
+    @Test
+    func accentedCharacters_utf32LE_BOM_rawText() throws {
         let resource = TestResource.TextFiles.utf32LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -450,7 +486,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_utf32LE_BOM_encoding_string() throws {
+    @Test
+    func accentedCharacters_utf32LE_BOM_encoding_string() throws {
         let resource = TestResource.TextFiles.utf32LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -460,7 +497,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_utf32LE_BOM_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_utf32LE_BOM_encoding_nsString() throws {
         let resource = TestResource.TextFiles.utf32LE_BOM_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -472,7 +510,8 @@ import TestingExtensions
 
     // MARK: - Windows 1252
 
-    @Test func accentedCharacters_windows1252_content() throws {
+    @Test
+    func accentedCharacters_windows1252_content() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -484,7 +523,8 @@ import TestingExtensions
         #expect(csv.table[safeRow: 2, col: 1] == "Piñata")
     }
 
-    @Test func accentedCharacters_windows1252_rawText() throws {
+    @Test
+    func accentedCharacters_windows1252_rawText() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -497,7 +537,8 @@ import TestingExtensions
         #expect(csvData == resourceData)
     }
 
-    @Test func accentedCharacters_windows1252_encoding_string() throws {
+    @Test
+    func accentedCharacters_windows1252_encoding_string() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -511,7 +552,8 @@ import TestingExtensions
     }
 
     #if canImport(Darwin)
-    @Test func accentedCharacters_windows1252_encoding_nsString() throws {
+    @Test
+    func accentedCharacters_windows1252_encoding_nsString() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_csv
         let url = try resource.url()
 
@@ -525,7 +567,8 @@ import TestingExtensions
     
     /// This tests a scenario of a CSV file found in the wild that was malformed.
     /// The file was Windows 1252 encoded, but had a UTF-8 BOM errantly inserted at the start.
-    @Test func accentedCharacters_windows1252_utf8BOM_content() throws {
+    @Test
+    func accentedCharacters_windows1252_utf8BOM_content() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_WithUTF8BOM_csv
         let url = try resource.url()
         

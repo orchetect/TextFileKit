@@ -1,7 +1,7 @@
 //
 //  StringTableRepresentable.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -76,8 +76,7 @@ extension StringTableRepresentable {
     ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
     public func data(encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) -> Data {
         let textFile = PlainTextFile(content: text, encoding: encoding)
-        let data = try textFile.data(includeBOM: includeBOM)
-        return data
+        return try textFile.data(includeBOM: includeBOM)
     }
     
     /// Write the text to a file on disk using the specified text encoding.

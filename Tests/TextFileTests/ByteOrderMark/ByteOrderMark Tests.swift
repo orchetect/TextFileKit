@@ -1,7 +1,7 @@
 //
 //  ByteOrderMark Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -11,12 +11,14 @@ import TestingExtensions
 
 struct ByteOrderMark_Tests {
     /// Ensure `parseOrder` contains all cases.
-    @Test func parseOrderMembers() async throws {
+    @Test
+    func parseOrderMembers() {
         #expect(Set(ByteOrderMark.allCases) == Set(ByteOrderMark.parseOrder))
     }
     
     /// Does not test any functionality; simply reports the endianness of the current platform for diagnostics.
-    @Test func currentPlatform_UTF16() async throws {
+    @Test
+    func currentPlatform_UTF16() throws {
         let string = "Test"
         let data = try #require(string.data(using: .utf16, allowLossyConversion: false))
         print([UInt8](data).map { String($0, radix: 16).uppercased() }.joined(separator: " "))
@@ -26,7 +28,8 @@ struct ByteOrderMark_Tests {
     }
     
     /// Does not test any functionality; simply reports the endianness of the current platform for diagnostics.
-    @Test func currentPlatform_UTF32() async throws {
+    @Test
+    func currentPlatform_UTF32() throws {
         let string = "Test"
         let data = try #require(string.data(using: .utf32, allowLossyConversion: false))
         print([UInt8](data).map { String($0, radix: 16).uppercased() }.joined(separator: " "))

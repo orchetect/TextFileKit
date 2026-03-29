@@ -1,7 +1,7 @@
 //
 //  NSStringTextFileDecodingStrategy.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -13,8 +13,8 @@ import class Foundation.FileManager
 import class Foundation.NSArray
 import class Foundation.NSNumber
 import class Foundation.NSString
-import struct Foundation.StringEncodingDetectionOptionsKey
 import struct Foundation.ObjCBool
+import struct Foundation.StringEncodingDetectionOptionsKey
 import struct Foundation.URL
 import struct Foundation.UUID
 
@@ -63,8 +63,8 @@ extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
             convertedString: &nsString,
             usedLossyConversion: &usedLossyConversion
         ),
-              rawValue != 0,
-              let text = nsString as? String
+            rawValue != 0,
+            let text = nsString as? String
         else {
             throw .unrecognizedTextEncoding
         }
@@ -112,7 +112,7 @@ extension NSStringTextFileDecodingStrategy {
 extension Collection<String.Encoding> {
     /// Returns the collection as an NSArray of NSString encodings.
     var asStringEncodingDetectionOptionsKeysNSArray: NSArray {
-        let keys: [UInt] = self.map(\.nsStringEncoding)
+        let keys: [UInt] = map(\.nsStringEncoding)
         return keys as NSArray
     }
 }
@@ -124,29 +124,29 @@ extension String.Encoding {
         // AFAIK, we can just return rawValue and don't need the switch case
         
         switch self {
-        case .ascii: return NSASCIIStringEncoding
-        case .iso2022JP: return NSISO2022JPStringEncoding
-        case .isoLatin1: return NSISOLatin1StringEncoding
-        case .isoLatin2: return NSISOLatin2StringEncoding
-        case .japaneseEUC: return NSJapaneseEUCStringEncoding
-        case .macOSRoman: return NSMacOSRomanStringEncoding
-        case .nextstep: return NSNEXTSTEPStringEncoding
-        case .nonLossyASCII: return NSNonLossyASCIIStringEncoding
-        case .shiftJIS: return NSShiftJISStringEncoding
-        case .symbol: return NSSymbolStringEncoding
-        case .unicode: return NSUnicodeStringEncoding
-        case .utf8: return NSUTF8StringEncoding
-        case .utf16: return NSUTF16StringEncoding
-        case .utf16BigEndian: return NSUTF16BigEndianStringEncoding
-        case .utf16LittleEndian: return NSUTF16LittleEndianStringEncoding
-        case .utf32BigEndian: return NSUTF32BigEndianStringEncoding
-        case .utf32LittleEndian: return NSUTF32LittleEndianStringEncoding
-        case .windowsCP1250: return NSWindowsCP1250StringEncoding
-        case .windowsCP1251: return NSWindowsCP1251StringEncoding
-        case .windowsCP1252: return NSWindowsCP1252StringEncoding
-        case .windowsCP1253: return NSWindowsCP1253StringEncoding
-        case .windowsCP1254: return NSWindowsCP1254StringEncoding
-        default: return rawValue
+        case .ascii: NSASCIIStringEncoding
+        case .iso2022JP: NSISO2022JPStringEncoding
+        case .isoLatin1: NSISOLatin1StringEncoding
+        case .isoLatin2: NSISOLatin2StringEncoding
+        case .japaneseEUC: NSJapaneseEUCStringEncoding
+        case .macOSRoman: NSMacOSRomanStringEncoding
+        case .nextstep: NSNEXTSTEPStringEncoding
+        case .nonLossyASCII: NSNonLossyASCIIStringEncoding
+        case .shiftJIS: NSShiftJISStringEncoding
+        case .symbol: NSSymbolStringEncoding
+        case .unicode: NSUnicodeStringEncoding
+        case .utf8: NSUTF8StringEncoding
+        case .utf16: NSUTF16StringEncoding
+        case .utf16BigEndian: NSUTF16BigEndianStringEncoding
+        case .utf16LittleEndian: NSUTF16LittleEndianStringEncoding
+        case .utf32BigEndian: NSUTF32BigEndianStringEncoding
+        case .utf32LittleEndian: NSUTF32LittleEndianStringEncoding
+        case .windowsCP1250: NSWindowsCP1250StringEncoding
+        case .windowsCP1251: NSWindowsCP1251StringEncoding
+        case .windowsCP1252: NSWindowsCP1252StringEncoding
+        case .windowsCP1253: NSWindowsCP1253StringEncoding
+        case .windowsCP1254: NSWindowsCP1254StringEncoding
+        default: rawValue
         }
     }
 }

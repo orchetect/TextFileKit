@@ -1,7 +1,7 @@
 //
 //  StringTable.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 /// String table addressed as `self[row][column]`.
@@ -79,7 +79,7 @@ extension StringTable {
                   self[rowIndex].indices.contains(columnIndex)
             else { return }
             
-            if let newValue = newValue {
+            if let newValue {
                 self[rowIndex][columnIndex] = newValue
             }
         }
@@ -147,7 +147,7 @@ extension StringTable {
                 return
             }
             
-            if let newValue = newValue {
+            if let newValue {
                 self[rowIndex][columnIndex] = newValue
             }
         }

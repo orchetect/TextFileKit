@@ -1,7 +1,7 @@
 //
 //  HybridTextFileDecodingStrategy.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -112,8 +112,7 @@ extension HybridTextFileDecodingStrategy {
         // Step 7: attempt to detect encoding using Standard Lib / Foundation API
         var heldError: TextFileDecodeError? = nil
         do throws(TextFileDecodeError) {
-            let decoded = try decodeTextAutomatically(allowLossy: allowLossy, in: data, fileURL: fileURL)
-            return decoded
+            return try decodeTextAutomatically(allowLossy: allowLossy, in: data, fileURL: fileURL)
         } catch {
             heldError = error
         }
@@ -132,12 +131,11 @@ extension HybridTextFileDecodingStrategy {
         guard !ignoredBOMs.contains(bom)
         else { return nil }
         
-        let sourceData: Data
-        if bom == .utf8, data.count >= ByteOrderMark.utf8.bytes.count {
+        let sourceData: Data = if bom == .utf8, data.count >= ByteOrderMark.utf8.bytes.count {
             // strip UTF-8 BOM because String decoding API doesn't like it
-            sourceData = data[data.startIndex.advanced(by: ByteOrderMark.utf8.bytes.count)...]
+            data[data.startIndex.advanced(by: ByteOrderMark.utf8.bytes.count)...]
         } else {
-            sourceData = data
+            data
         }
         
         guard let text = String(data: sourceData, encoding: bom.encoding)
@@ -180,15 +178,15 @@ extension HybridTextFileDecodingStrategy {
         return PlainTextFile(content: text, encoding: .utf8)
     }
     
-    // ISO-8859-1 (isoLatin1 case of String.Encoding)
-    //
-    // The ASCII table, when defined according to the ISO-8859-1 character encoding (also known
-    // as iso-ir-100, csISOLatin1, latin1, l1, IBM819, CP819), includes ASCII control characters
-    // and ASCII printable characters. Moreover, it also includes the extended ASCII character
-    // set unique to ISO-8859-1. This character set is particularly designed to support
-    // Latin1/Western European languages.
-    //
-    // See https://stackoverflow.com/a/64276978/2805570
+    /// ISO-8859-1 (isoLatin1 case of String.Encoding)
+    ///
+    /// The ASCII table, when defined according to the ISO-8859-1 character encoding (also known
+    /// as iso-ir-100, csISOLatin1, latin1, l1, IBM819, CP819), includes ASCII control characters
+    /// and ASCII printable characters. Moreover, it also includes the extended ASCII character
+    /// set unique to ISO-8859-1. This character set is particularly designed to support
+    /// Latin1/Western European languages.
+    ///
+    /// See https://stackoverflow.com/a/64276978/2805570
     func decodeISOLatin1(
         in data: Data
     ) throws(TextFileDecodeError) -> PlainTextFile? {

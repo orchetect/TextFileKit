@@ -1,7 +1,7 @@
 //
 //  CSV Parse Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -9,8 +9,9 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-@Suite struct CSV_Parse_Tests {
-    @Test func init_Default() async {
+struct CSV_Parse_Tests {
+    @Test
+    func init_Default() {
         let sv = CSV()
         
         #expect(sv.table == [])
@@ -19,7 +20,7 @@ import TestingExtensions
 
 // MARK: - Basic
 
-@Suite struct CSV_Parse_Basic_Tests {
+struct CSV_Parse_Basic_Tests {
     private let csvRawText_Basic = """
         header1,header2,header3
         1,2,3
@@ -32,14 +33,16 @@ import TestingExtensions
         ["a", "b", "c"]
     ]
     
-    @Test func init_RawText_Basic() async {
+    @Test
+    func init_RawText_Basic() {
         let sv = CSV(text: csvRawText_Basic)
         
         #expect(sv.table == csvTable_Basic)
         #expect(sv.text == csvRawText_Basic)
     }
     
-    @Test func init_Table_Basic() async {
+    @Test
+    func init_Table_Basic() {
         let sv = CSV(table: csvTable_Basic)
         
         #expect(sv.table == csvTable_Basic)
@@ -49,7 +52,7 @@ import TestingExtensions
 
 // MARK: - Single column
 
-@Suite struct CSV_Parse_SingleColumn_Tests {
+struct CSV_Parse_SingleColumn_Tests {
     private let csvRawText_SingleColumn = """
         header1
         1
@@ -62,14 +65,16 @@ import TestingExtensions
         ["a"]
     ]
     
-    @Test func init_RawText_SingleColumn() async {
+    @Test
+    func init_RawText_SingleColumn() {
         let sv = CSV(text: csvRawText_SingleColumn)
         
         #expect(sv.table == csvTable_SingleColumn)
         #expect(sv.text == csvRawText_SingleColumn)
     }
     
-    @Test func init_Table_SingleColumn() async {
+    @Test
+    func init_Table_SingleColumn() {
         let sv = CSV(table: csvTable_SingleColumn)
         
         #expect(sv.table == csvTable_SingleColumn)
@@ -79,7 +84,7 @@ import TestingExtensions
 
 // MARK: - Quoted fields
 
-@Suite struct CSV_Parse_QuotedFields_Tests {
+struct CSV_Parse_QuotedFields_Tests {
     private let csvRawText_QuotedFields = #"""
         header1,"header, 2",header3
         1,2,"3 ""quoted"" here"
@@ -98,14 +103,16 @@ import TestingExtensions
         ["\"", "a", "\"\""]
     ]
     
-    @Test func init_RawText_QuotedFields() async {
+    @Test
+    func init_RawText_QuotedFields() {
         let sv = CSV(text: csvRawText_QuotedFields)
         
         #expect(sv.table == csvTable_QuotedFields)
         #expect(sv.text == csvRawText_QuotedFields)
     }
     
-    @Test func interFieldQuotes() async {
+    @Test
+    func interFieldQuotes() {
         func parse(_ rawCSV: String) -> StringTable {
             CSV.parse(text: rawCSV)
         }
@@ -117,7 +124,7 @@ import TestingExtensions
 
 // MARK: - Comma-Containing fields
 
-@Suite struct CSV_Parse_CommaContainingFields_Tests {
+struct CSV_Parse_CommaContainingFields_Tests {
     private let csvRawText_CommaContainingFields = #"""
         header1,header2,header3
         data one,"""data, two""",data three
@@ -140,14 +147,16 @@ import TestingExtensions
         ["item4", "-$1,720.00", "description4"]
     ]
     
-    @Test func init_RawText_CommaContainingFields() async {
+    @Test
+    func init_RawText_CommaContainingFields() {
         let sv = CSV(text: csvRawText_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.text == csvRawText_CommaContainingFields)
     }
     
-    @Test func init_stringTable_CommaContainingFields() async {
+    @Test
+    func init_stringTable_CommaContainingFields() {
         let sv = CSV(table: csvTable_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
@@ -157,14 +166,15 @@ import TestingExtensions
 
 // MARK: - BOM (Byte Order Mark) Tests
 
-@Suite struct CSV_Parse_UTF8_BOM_Tests {
+struct CSV_Parse_UTF8_BOM_Tests {
     private static let utf8_BOM_Test_Table: StringTable = [
         ["Field1", "Field2"],
         ["Row1A", "Row1B"],
         ["Row2A", "Row2B"]
     ]
     
-    @Test func utf8BOM_initURL() async throws {
+    @Test
+    func utf8BOM_initURL() throws {
         let url = try TestResource.TextFiles.utf8_BOM_Test_csv.url()
         
         let sv = try CSV(file: url)
@@ -176,7 +186,8 @@ import TestingExtensions
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_CRLF_initURL() async throws {
+    @Test
+    func utf8BOM_CRLF_initURL() throws {
         let url = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url()
         
         let sv = try CSV(file: url)
@@ -188,7 +199,8 @@ import TestingExtensions
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_initdata() async throws {
+    @Test
+    func utf8BOM_initdata() throws {
         let data = try TestResource.TextFiles.utf8_BOM_Test_csv.data()
         
         let sv = try CSV(data: data)
@@ -200,7 +212,8 @@ import TestingExtensions
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_CRLF_initdata() async throws {
+    @Test
+    func utf8BOM_CRLF_initdata() throws {
         let data = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data()
         
         let sv = try CSV(data: data)

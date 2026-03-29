@@ -1,14 +1,15 @@
 //
 //  StringTable Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
 @testable import TextFile
 
-@Suite struct StringTableTests {
-    @Test func read() async {
+struct StringTableTests {
+    @Test
+    func read() {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -22,7 +23,8 @@ import Testing
         #expect(st[2][1] == "3B")
     }
     
-    @Test func write() async {
+    @Test
+    func write() {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -45,7 +47,8 @@ import Testing
         #expect(st[3][1] == "4B")
     }
     
-    @Test func equatable() async {
+    @Test
+    func equatable() {
         let st1: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -61,7 +64,8 @@ import Testing
         #expect(st1 == st2)
     }
     
-    @Test func numberOfRowsColumns() async {
+    @Test
+    func numberOfRowsColumns() {
         var st: StringTable
         
         st = []
@@ -93,7 +97,8 @@ import Testing
         #expect(st.columnCount == 1)
     }
     
-    @Test func columnIndex_WithName() async {
+    @Test
+    func columnIndex_WithName() {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -117,7 +122,8 @@ import Testing
         #expect(st.columnIndex(withName: " 1b") == nil)
     }
     
-    @Test func columnIndex_WithName_caseInsensitive() async {
+    @Test
+    func columnIndex_WithName_caseInsensitive() {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -141,7 +147,8 @@ import Testing
         #expect(st.columnIndex(withName: " 1b", caseInsensitive: true) == nil)
     }
     
-    @Test func columnIndex_WithName_trimWhitespace() async {
+    @Test
+    func columnIndex_WithName_trimWhitespace() {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -165,7 +172,8 @@ import Testing
         #expect(st.columnIndex(withName: " 1b", trimWhitespace: true) == nil)
     }
     
-    @Test func columnIndex_WithName_caseInsensitive_trimWhitespace() async {
+    @Test
+    func columnIndex_WithName_caseInsensitive_trimWhitespace() {
         let st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -189,7 +197,8 @@ import Testing
         #expect(st.columnIndex(withName: " 1b", caseInsensitive: true, trimWhitespace: true) == 1)
     }
     
-    @Test func matrixSubscript() async {
+    @Test
+    func matrixSubscript() {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -203,7 +212,8 @@ import Testing
         #expect(st[0, 1] == "1Bnew")
     }
     
-    @Test func safeRowColSubscript() async {
+    @Test
+    func safeRowColSubscript() {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -230,7 +240,8 @@ import Testing
         #expect(st[safeRow: 3, col: 0] == nil)
     }
     
-    @Test func row_ColName_Subscript() async {
+    @Test
+    func row_ColName_Subscript() {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -247,7 +258,8 @@ import Testing
         #expect(st[row: 1, col: "1B"] == "1Bnew")
     }
     
-    @Test func row_ColName_Subscript_outOfBoundsSet() async {
+    @Test
+    func row_ColName_Subscript_outOfBoundsSet() async {
         #if os(macOS)
         await #expect(processExitsWith: .failure) {
             var st: StringTable = [
@@ -262,7 +274,8 @@ import Testing
         #endif
     }
     
-    @Test func row_ColName_Subscript_outOfBoundsGet() async {
+    @Test
+    func row_ColName_Subscript_outOfBoundsGet() async {
         #if os(macOS)
         await #expect(processExitsWith: .failure) {
             let st: StringTable = [
@@ -277,7 +290,8 @@ import Testing
         #endif
     }
     
-    @Test func row_ColName_Subscript_outOfBoundsModify() async {
+    @Test
+    func row_ColName_Subscript_outOfBoundsModify() async {
         #if os(macOS)
         await #expect(processExitsWith: .failure) {
             var st: StringTable = [
@@ -292,7 +306,8 @@ import Testing
         #endif
     }
     
-    @Test func safeRow_ColName_Subscript() {
+    @Test
+    func safeRow_ColName_Subscript() {
         var st: StringTable = [
             ["1A", "1B"],
             ["2A", "2B"],
@@ -319,19 +334,22 @@ import Testing
         #expect(st[safeRow: 3, col: "1A"] == nil)
     }
     
-    @Test func columnCharCountsA() async {
+    @Test
+    func columnCharCountsA() {
         let table: StringTable = []
         let ranges = table.columnCharCounts
-        #expect(ranges.count == 0)
+        #expect(ranges.isEmpty)
     }
     
-    @Test func columnCharCountsB() async {
+    @Test
+    func columnCharCountsB() {
         let table: StringTable = [[]]
         let ranges = table.columnCharCounts
-        #expect(ranges.count == 0)
+        #expect(ranges.isEmpty)
     }
     
-    @Test func columnCharCountsC() async {
+    @Test
+    func columnCharCountsC() {
         let table: StringTable = [["H1"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 1)
@@ -339,7 +357,8 @@ import Testing
         #expect(ranges[0] == 2 ... 2)
     }
     
-    @Test func columnCharCountsD() async {
+    @Test
+    func columnCharCountsD() {
         let table: StringTable = [["H1", "H2", "H3"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 3)
@@ -349,7 +368,8 @@ import Testing
         #expect(ranges[2] == 2 ... 2)
     }
     
-    @Test func columnCharCountsE() async {
+    @Test
+    func columnCharCountsE() {
         let table: StringTable = [["H1", "", "H3_"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 3)
@@ -359,7 +379,8 @@ import Testing
         #expect(ranges[2] == 3 ... 3)
     }
     
-    @Test func columnCharCountsF() async {
+    @Test
+    func columnCharCountsF() {
         let table: StringTable = [["H1"], [""], ["R2"]]
         let ranges = table.columnCharCounts
         #expect(ranges.count == 1)
@@ -367,7 +388,8 @@ import Testing
         #expect(ranges[0] == 0 ... 2)
     }
     
-    @Test func columnCharCountsG() async {
+    @Test
+    func columnCharCountsG() {
         let table: StringTable = [
             ["H1", "H2", "H3"],
             ["", "abc", "ab"]

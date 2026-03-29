@@ -1,11 +1,15 @@
 //
 //  API-0.4.0.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 // @_documentation(visibility: internal)
-// @available(*, deprecated, message: "The `TextFile` namespace has been removed and the package has been renamed to `TextFile`. Use namespaced types directly as top-level types.")
+// @available(
+//     *,
+//      deprecated,
+//      message: "The `TextFile` namespace has been removed as the package has been renamed to `TextFile`. Use types as top-level types."
+// )
 // enum TextFile { }
 
 @_documentation(visibility: internal)

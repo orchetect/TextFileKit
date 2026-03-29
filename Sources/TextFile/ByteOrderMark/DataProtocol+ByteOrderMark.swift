@@ -1,7 +1,7 @@
 //
 //  DataProtocol+ByteOrderMark.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -14,7 +14,7 @@ extension DataProtocol {
     /// Returns the text encoding Byte Order Mark (BOM) found at the start of the data, if present.
     public var byteOrderMarkPrefix: ByteOrderMark? {
         for bom in ByteOrderMark.parseOrder {
-            if self.starts(with: bom.bytes) { return bom }
+            if starts(with: bom.bytes) { return bom }
         }
         return nil
     }

@@ -1,7 +1,7 @@
 //
 //  Data Extensions.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -27,7 +27,7 @@ extension Data {
     /// Basic naïve heuristic to attempt to detect byte order (endianness) in multi-byte UTF (UTF-16, UTF-32) encoded data.
     /// This method assumes there is no BOM present at the start of the data.
     func guessMultiByteUTFEncoding() -> String.Encoding? {
-        let sampleBytes = self.prefix(100)
+        let sampleBytes = prefix(100)
         guard sampleBytes.count >= 2 else { return nil }
         
         func splitBytes(byteWidth: Int) -> (left: [Data.Element], right: [Data.Element])? {
@@ -58,10 +58,10 @@ extension Data {
         func probableEndianness(highBytes: some DataProtocol, lowBytes: some DataProtocol) -> Bool {
             // UTF-16/32 typically have a 0x00 byte as the high byte of each 2 or 4-byte cluster
             
-            let zeroHighByteCount = highBytes.filter { $0 == 0x00 }.count
+            let zeroHighByteCount = highBytes.count(where: { $0 == 0x00 })
             let percentageOfHighBytesThatAreZero = Double(zeroHighByteCount) / Double(highBytes.count)
             
-            let nonZeroLowByteCount = lowBytes.filter { $0 != 0x00 }.count
+            let nonZeroLowByteCount = lowBytes.count(where: { $0 != 0x00 })
             let percentageOfLowBytesThatAreNonZero = Double(nonZeroLowByteCount) / Double(lowBytes.count)
             
             let thresholdPercentage: Double = 0.8 // arbitrary: 80% or more

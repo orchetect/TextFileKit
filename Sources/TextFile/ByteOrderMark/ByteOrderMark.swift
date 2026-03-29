@@ -1,7 +1,7 @@
 //
 //  ByteOrderMark.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -49,11 +49,11 @@ extension ByteOrderMark: Sendable { }
 extension ByteOrderMark: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .utf8: return "UTF-8"
-        case .utf16BigEndian: return "UTF-16 (BE)"
-        case .utf16LittleEndian: return "UTF-16 (LE)"
-        case .utf32BigEndian: return "UTF-32 (BE)"
-        case .utf32LittleEndian: return "UTF-32 (LE)"
+        case .utf8: "UTF-8"
+        case .utf16BigEndian: "UTF-16 (BE)"
+        case .utf16LittleEndian: "UTF-16 (LE)"
+        case .utf32BigEndian: "UTF-32 (BE)"
+        case .utf32LittleEndian: "UTF-32 (LE)"
         }
     }
 }
@@ -61,11 +61,11 @@ extension ByteOrderMark: CustomStringConvertible {
 extension ByteOrderMark: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .utf8: return "utf8"
-        case .utf16BigEndian: return "utf16BigEndian"
-        case .utf16LittleEndian: return "utf16LittleEndian"
-        case .utf32BigEndian: return "utf32BigEndian"
-        case .utf32LittleEndian: return "utf32LittleEndian"
+        case .utf8: "utf8"
+        case .utf16BigEndian: "utf16BigEndian"
+        case .utf16LittleEndian: "utf16LittleEndian"
+        case .utf32BigEndian: "utf32BigEndian"
+        case .utf32LittleEndian: "utf32LittleEndian"
         }
     }
 }
@@ -76,22 +76,22 @@ extension ByteOrderMark {
     /// String containing the raw code points that correspond to the byte order mark.
     public var string: String {
         switch self {
-        case .utf8: return "\u{EF}\u{BB}\u{BF}"
-        case .utf16BigEndian: return "\u{FE}\u{FF}"
-        case .utf16LittleEndian: return "\u{FF}\u{FE}"
-        case .utf32BigEndian: return "\u{00}\u{00}\u{FE}\u{FF}"
-        case .utf32LittleEndian: return "\u{FF}\u{FE}\u{00}\u{00}"
+        case .utf8: "\u{EF}\u{BB}\u{BF}"
+        case .utf16BigEndian: "\u{FE}\u{FF}"
+        case .utf16LittleEndian: "\u{FF}\u{FE}"
+        case .utf32BigEndian: "\u{00}\u{00}\u{FE}\u{FF}"
+        case .utf32LittleEndian: "\u{FF}\u{FE}\u{00}\u{00}"
         }
     }
     
     /// Byte array containing the raw code points that correspond to the byte order mark.
     public var bytes: [UInt8] {
         switch self {
-        case .utf8: return [0xEF, 0xBB, 0xBF]
-        case .utf16BigEndian: return [0xFE, 0xFF]
-        case .utf16LittleEndian: return [0xFF, 0xFE]
-        case .utf32BigEndian: return [0x00, 0x00, 0xFE, 0xFF]
-        case .utf32LittleEndian: return [0xFF, 0xFE, 0x00, 0x00]
+        case .utf8: [0xEF, 0xBB, 0xBF]
+        case .utf16BigEndian: [0xFE, 0xFF]
+        case .utf16LittleEndian: [0xFF, 0xFE]
+        case .utf32BigEndian: [0x00, 0x00, 0xFE, 0xFF]
+        case .utf32LittleEndian: [0xFF, 0xFE, 0x00, 0x00]
         }
     }
     

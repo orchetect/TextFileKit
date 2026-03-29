@@ -1,14 +1,15 @@
 //
 //  TSV Parse Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
 @testable import TextFile
 
-@Suite struct TSV_Parse_Tests {
-    @Test func init_Default() {
+struct TSV_Parse_Tests {
+    @Test
+    func init_Default() {
         let sv = TSV()
         
         #expect(sv.table == [])
@@ -17,7 +18,7 @@ import Testing
 
 // MARK: - Basic
 
-@Suite struct TSV_Parse_Basic_Tests {
+struct TSV_Parse_Basic_Tests {
     private let tsvRawText_Basic = """
         header1	header2	header3
         1	2	3
@@ -30,14 +31,16 @@ import Testing
         ["a", "b", "c"]
     ]
     
-    @Test func init_RawText_Basic() {
+    @Test
+    func init_RawText_Basic() {
         let sv = TSV(text: tsvRawText_Basic)
         
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.text == tsvRawText_Basic)
     }
     
-    @Test func init_Table_Basic() {
+    @Test
+    func init_Table_Basic() {
         let sv = TSV(table: tsvTable_Basic)
         
         #expect(sv.table == tsvTable_Basic)
@@ -47,7 +50,7 @@ import Testing
 
 // MARK: - Single column
 
-@Suite struct TSV_Parse_SingleColumn_Tests {
+struct TSV_Parse_SingleColumn_Tests {
     private let tsvRawText_SingleColumn = """
         header1
         1
@@ -60,14 +63,16 @@ import Testing
         ["a"]
     ]
     
-    @Test func init_RawText_SingleColumn() {
+    @Test
+    func init_RawText_SingleColumn() {
         let sv = TSV(text: tsvRawText_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.text == tsvRawText_SingleColumn)
     }
     
-    @Test func init_Table_SingleColumn() {
+    @Test
+    func init_Table_SingleColumn() {
         let sv = TSV(table: tsvTable_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
@@ -77,7 +82,7 @@ import Testing
 
 // MARK: - Quoted fields
 
-@Suite struct TSV_Parse_QuotedFields_Tests {
+struct TSV_Parse_QuotedFields_Tests {
     private let tsvRawText_QuotedFields = #"""
         header1	"header	2"	header3
         1	2	3 "quoted" here
@@ -94,7 +99,8 @@ import Testing
         ["q", "w", "e\n\"quoted\"\tstuff"]
     ]
     
-    @Test func init_RawText_QuotedFields() {
+    @Test
+    func init_RawText_QuotedFields() {
         let sv = TSV(text: tsvRawText_QuotedFields)
         
         #expect(sv.table == tsvTable_QuotedFields)

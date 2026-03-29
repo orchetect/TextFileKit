@@ -1,7 +1,7 @@
 //
 //  DelimitedTextFormat.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 /// Delimited text formats.
@@ -27,8 +27,8 @@ extension DelimitedTextFormat {
     /// Returns the file extension used for the file format.
     public var fileExtension: String {
         switch self {
-        case .csv: return "csv"
-        case .tsv: return "tsv"
+        case .csv: "csv"
+        case .tsv: "tsv"
         }
     }
     

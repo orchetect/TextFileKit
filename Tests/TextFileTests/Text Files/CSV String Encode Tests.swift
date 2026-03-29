@@ -1,7 +1,7 @@
 //
 //  CSV String Encode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -10,13 +10,14 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-@Suite struct CSV_StringEncode_Tests {
+struct CSV_StringEncode_Tests {
     private let csvTable_Basic: StringTable = [
         ["1", "2", "3"],
         ["á", "ç", "é"]
     ]
     
-    @Test func data_utf8_withBOM() async throws {
+    @Test
+    func data_utf8_withBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf8, includeBOM: true)
@@ -34,7 +35,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf8_withoutBOM() async throws {
+    @Test
+    func data_utf8_withoutBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf8, includeBOM: false)
@@ -51,7 +53,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf16BE_withBOM() async throws {
+    @Test
+    func data_utf16BE_withBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf16BigEndian, includeBOM: true)
@@ -74,7 +77,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf16BE_withoutBOM() async throws {
+    @Test
+    func data_utf16BE_withoutBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf16BigEndian, includeBOM: false)
@@ -96,7 +100,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf16LE_withBOM() async throws {
+    @Test
+    func data_utf16LE_withBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf16LittleEndian, includeBOM: true)
@@ -119,7 +124,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf16LE_withoutBOM() async throws {
+    @Test
+    func data_utf16LE_withoutBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf16LittleEndian, includeBOM: false)
@@ -141,7 +147,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf32BE_withBOM() async throws {
+    @Test
+    func data_utf32BE_withBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf32BigEndian, includeBOM: true)
@@ -164,7 +171,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf32BE_withoutBOM() async throws {
+    @Test
+    func data_utf32BE_withoutBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf32BigEndian, includeBOM: false)
@@ -186,7 +194,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf32LE_withBOM() async throws {
+    @Test
+    func data_utf32LE_withBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf32LittleEndian, includeBOM: true)
@@ -209,7 +218,8 @@ import TestingExtensions
         #expect([UInt8](data) == expectedBytes)
     }
     
-    @Test func data_utf32LE_withoutBOM() async throws {
+    @Test
+    func data_utf32LE_withoutBOM() throws {
         let sv = CSV(table: csvTable_Basic)
         
         let data = try sv.data(encoding: .utf32LittleEndian, includeBOM: false)
@@ -232,7 +242,7 @@ import TestingExtensions
     }
     
     @Test(arguments: [true, false])
-    func data_windows1252_withBOM(includeBOM: Bool) async throws {
+    func data_windows1252_withBOM(includeBOM: Bool) throws {
         let sv = CSV(table: csvTable_Basic)
         
         // CP1252 has no BOM, so passing `true` has no effect
@@ -251,7 +261,7 @@ import TestingExtensions
     }
     
     @Test(arguments: [true, false])
-    func data_macRoman_withBOM(includeBOM: Bool) async throws {
+    func data_macRoman_withBOM(includeBOM: Bool) throws {
         let sv = CSV(table: csvTable_Basic)
         
         // MacRoman has no BOM, so passing `true` has no effect

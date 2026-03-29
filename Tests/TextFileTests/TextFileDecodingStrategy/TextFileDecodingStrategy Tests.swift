@@ -1,14 +1,15 @@
 //
 //  TextFileDecodingStrategy Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2025 Steffan Andrews • Licensed under MIT License
+//  © 2018-2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
 import TextFile
 
-@Suite struct TextFileDecodingStrategy_Tests {
-    @Test func equatable() async {
+struct TextFileDecodingStrategy_Tests {
+    @Test
+    func equatable() {
         #expect(
             ExplicitTextFileDecodingStrategy(encoding: .utf8)
                 == ExplicitTextFileDecodingStrategy(encoding: .utf8)
@@ -50,7 +51,8 @@ import TextFile
         )
     }
     
-    @Test func equatable_any() async {
+    @Test
+    func equatable_any() {
         let lhs: any TextFileDecodingStrategy = .hybrid(allowLossy: true)
         let rhs: any TextFileDecodingStrategy = .hybrid(allowLossy: true)
         
@@ -61,7 +63,8 @@ import TextFile
         #expect(HybridTextFileDecodingStrategy(allowLossy: false) != rhs)
     }
     
-    @Test func isEqualTo() async {
+    @Test
+    func isEqualTo() {
         #expect(
             ExplicitTextFileDecodingStrategy(encoding: .utf8)
                 .isEqual(to: ExplicitTextFileDecodingStrategy(encoding: .utf8))
@@ -71,7 +74,6 @@ import TextFile
             !ExplicitTextFileDecodingStrategy(encoding: .utf8)
                 .isEqual(to: ExplicitTextFileDecodingStrategy(encoding: .utf16))
         )
-        
         
         #expect(
             HybridTextFileDecodingStrategy(allowLossy: true, convertLineEndings: true)
@@ -104,7 +106,8 @@ import TextFile
         )
     }
     
-    @Test func isEqualTo_any() async {
+    @Test
+    func isEqualTo_any() {
         let lhs: any TextFileDecodingStrategy = .hybrid(allowLossy: true)
         let rhs: any TextFileDecodingStrategy = .hybrid(allowLossy: true)
         
