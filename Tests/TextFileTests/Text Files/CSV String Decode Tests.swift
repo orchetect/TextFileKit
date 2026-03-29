@@ -1,5 +1,5 @@
 //
-//  CSV Encodings Tests.swift
+//  CSV String Decode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
@@ -9,7 +9,7 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-struct CSV_Encodings_Tests {
+@Suite struct CSV_StringDecode_Tests {
     // MARK: - MacRoman
 
     @Test func accentedCharacters_MacRoman_content() throws {

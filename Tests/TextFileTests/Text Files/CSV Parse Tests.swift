@@ -1,5 +1,5 @@
 //
-//  CSV Decode Tests.swift
+//  CSV Parse Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
@@ -9,7 +9,7 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-@Suite struct CSV_Decode_Tests {
+@Suite struct CSV_Parse_Tests {
     @Test func init_Default() async {
         let sv = CSV()
         
@@ -19,7 +19,7 @@ import TestingExtensions
 
 // MARK: - Basic
 
-@Suite struct CSV_Decode_Basic_Tests {
+@Suite struct CSV_Parse_Basic_Tests {
     private let csvRawText_Basic = """
         header1,header2,header3
         1,2,3
@@ -49,7 +49,7 @@ import TestingExtensions
 
 // MARK: - Single column
 
-@Suite struct CSV_Decode_SingleColumn_Tests {
+@Suite struct CSV_Parse_SingleColumn_Tests {
     private let csvRawText_SingleColumn = """
         header1
         1
@@ -79,7 +79,7 @@ import TestingExtensions
 
 // MARK: - Quoted fields
 
-@Suite struct CSV_Decode_QuotedFields_Tests {
+@Suite struct CSV_Parse_QuotedFields_Tests {
     private let csvRawText_QuotedFields = #"""
         header1,"header, 2",header3
         1,2,"3 ""quoted"" here"
@@ -117,7 +117,7 @@ import TestingExtensions
 
 // MARK: - Comma-Containing fields
 
-@Suite struct CSV_Decode_CommaContainingFields_Tests {
+@Suite struct CSV_Parse_CommaContainingFields_Tests {
     private let csvRawText_CommaContainingFields = #"""
         header1,header2,header3
         data one,"""data, two""",data three
@@ -157,7 +157,7 @@ import TestingExtensions
 
 // MARK: - BOM (Byte Order Mark) Tests
 
-@Suite struct CSV_Decode_UTF8_BOM_Tests {
+@Suite struct CSV_Parse_UTF8_BOM_Tests {
     private static let utf8_BOM_Test_Table: StringTable = [
         ["Field1", "Field2"],
         ["Row1A", "Row1B"],

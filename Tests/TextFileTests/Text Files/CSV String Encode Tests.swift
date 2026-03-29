@@ -1,5 +1,5 @@
 //
-//  CSV Encode Tests.swift
+//  CSV String Encode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
@@ -10,7 +10,7 @@ import Testing
 import TestingExtensions
 @testable import TextFile
 
-@Suite struct CSV_Encode_Tests {
+@Suite struct CSV_StringEncode_Tests {
     private let csvTable_Basic: StringTable = [
         ["1", "2", "3"],
         ["á", "ç", "é"]
@@ -266,6 +266,12 @@ import TestingExtensions
             0x8E  // é
         ]
         
+        #if canImport(Darwin)
         #expect([UInt8](data) == expectedBytes)
+        #else
+        withKnownIssue("MacRoman text decoding seems to not work correctly on Linux.") {
+            #expect([UInt8](data) == expectedBytes)
+        }
+        #endif
     }
 }
