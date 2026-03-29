@@ -25,9 +25,16 @@ import struct FoundationEssentials.UUID
 
 /// Hybrid text file decoding strategy.
 public struct HybridTextFileDecodingStrategy {
+    /// If `true`, allow lossy text decoding if decoding can't be detected automatically.
+    public var allowLossy: Bool
+    
     public var convertLineEndings: Bool
     
-    public init(convertLineEndings: Bool = true) {
+    public init(
+        allowLossy: Bool = true,
+        convertLineEndings: Bool = true
+    ) {
+        self.allowLossy = allowLossy
         self.convertLineEndings = convertLineEndings
     }
 }
@@ -101,7 +108,7 @@ extension HybridTextFileDecodingStrategy {
         // Step 7: attempt to detect encoding using Standard Lib / Foundation API
         var heldError: TextFileDecodeError? = nil
         do throws(TextFileDecodeError) {
-            let decoded = try decodeTextAutomatically(allowLossy: false, in: data, fileURL: fileURL)
+            let decoded = try decodeTextAutomatically(allowLossy: allowLossy, in: data, fileURL: fileURL)
             return decoded
         } catch {
             heldError = error
@@ -291,9 +298,14 @@ extension HybridTextFileDecodingStrategy {
     }
 }
 
-// MARK: - Utilities
-
 // MARK: - Static Constructors
+
+extension TextFileDecodingStrategy where Self == HybridTextFileDecodingStrategy {
+    /// Returns the best text file decoding method for the current platform.
+    public static func hybrid(allowLossy: Bool = true) -> HybridTextFileDecodingStrategy {
+        HybridTextFileDecodingStrategy(allowLossy: allowLossy)
+    }
+}
 
 extension TextFileDecodingStrategy where Self == AnyTextFileDecodingStrategy {
     fileprivate static func bestNonHybridForCurrentPlatform(allowLossy: Bool) -> AnyTextFileDecodingStrategy {
@@ -302,15 +314,5 @@ extension TextFileDecodingStrategy where Self == AnyTextFileDecodingStrategy {
         #else
         return AnyTextFileDecodingStrategy(.string())
         #endif
-    }
-}
-
-
-// MARK: - Static Constructors
-
-extension TextFileDecodingStrategy where Self == HybridTextFileDecodingStrategy {
-    /// Returns the best text file decoding method for the current platform.
-    public static func hybrid() -> HybridTextFileDecodingStrategy {
-        HybridTextFileDecodingStrategy()
     }
 }
