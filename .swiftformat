@@ -23,14 +23,14 @@
 --funcattributes prev-line
 --groupedextension "MARK: %c"
 --guardelse auto
---header "\n {file}\n swift-textfile • https://github.com/orchetect/swift-textfile\n © 2021-{year} Steffan Andrews • Licensed under MIT License\n"
+--header "\n {file}\n swift-textfile • https://github.com/orchetect/swift-textfile\n © 2018-{year} Steffan Andrews • Licensed under MIT License\n"
 --hexgrouping 4,8
 --hexliteralcase uppercase
 --ifdef no-indent
 --importgrouping alpha
 --indent 4
---indentcase false
---indentstrings true
+--indent-case false
+--indent-strings true
 --lifecycle 
 --lineaftermarks true
 --linebreaks lf
