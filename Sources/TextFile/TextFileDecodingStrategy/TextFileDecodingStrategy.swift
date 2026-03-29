@@ -13,7 +13,7 @@ import struct FoundationEssentials.URL
 #endif
 
 /// Text file decode strategy.
-public protocol TextFileDecodingStrategy: Sendable { // TODO: make Equatable and Hashable
+public protocol TextFileDecodingStrategy: Equatable, Hashable, Sendable {
     /// Option flag determining whether line endings should be converted to line endings appropriate
     /// for the current platform if necessary.
     var convertLineEndings: Bool { get set }
@@ -26,4 +26,23 @@ public protocol TextFileDecodingStrategy: Sendable { // TODO: make Equatable and
     
     /// Attempt to decode the contents of a text file on disk.
     func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile
+}
+
+// MARK: - Equatable Default Implementation
+
+extension TextFileDecodingStrategy {
+    /// Returns `true` if the two text file decoding strategy instances are equal.
+    public func isEqual(to other: any TextFileDecodingStrategy) -> Bool {
+        AnyHashable(self) == AnyHashable(other)
+    }
+}
+
+@_disfavoredOverload
+public func == (lhs: any TextFileDecodingStrategy, rhs: any TextFileDecodingStrategy) -> Bool {
+    lhs.isEqual(to: rhs)
+}
+
+@_disfavoredOverload
+public func != (lhs: any TextFileDecodingStrategy, rhs: any TextFileDecodingStrategy) -> Bool {
+    !lhs.isEqual(to: rhs)
 }

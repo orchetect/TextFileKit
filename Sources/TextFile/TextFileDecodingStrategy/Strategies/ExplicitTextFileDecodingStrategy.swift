@@ -25,6 +25,12 @@ public struct ExplicitTextFileDecodingStrategy {
     }
 }
 
+extension ExplicitTextFileDecodingStrategy: Equatable { }
+
+extension ExplicitTextFileDecodingStrategy: Hashable { }
+
+extension ExplicitTextFileDecodingStrategy: Sendable { }
+
 extension ExplicitTextFileDecodingStrategy: TextFileDecodingStrategy {
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         // first try String API

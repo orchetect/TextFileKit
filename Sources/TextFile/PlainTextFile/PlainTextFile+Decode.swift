@@ -26,7 +26,7 @@ extension PlainTextFile {
             return
         }
         
-        let strategy: TextFileDecodingStrategy = .default()
+        let strategy: any TextFileDecodingStrategy = .default()
         self = try strategy.decodeText(fileURL: url)
     }
     
@@ -70,7 +70,7 @@ extension PlainTextFile {
             return
         }
         
-        let strategy: TextFileDecodingStrategy = .default()
+        let strategy: any TextFileDecodingStrategy = .default()
         self = try strategy.decodeText(in: data)
     }
     

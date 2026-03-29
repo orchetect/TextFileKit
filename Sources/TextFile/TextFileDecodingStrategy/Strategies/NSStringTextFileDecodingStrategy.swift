@@ -47,6 +47,12 @@ public struct NSStringTextFileDecodingStrategy {
     }
 }
 
+extension NSStringTextFileDecodingStrategy: Equatable { }
+
+extension NSStringTextFileDecodingStrategy: Hashable { }
+
+extension NSStringTextFileDecodingStrategy: Sendable { }
+
 extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         var usedLossyConversion: ObjCBool = false // TODO: not used

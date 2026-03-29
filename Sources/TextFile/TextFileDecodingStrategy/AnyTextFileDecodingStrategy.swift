@@ -22,6 +22,18 @@ public struct AnyTextFileDecodingStrategy {
     }
 }
 
+extension AnyTextFileDecodingStrategy: Equatable {
+    public static func == (lhs: AnyTextFileDecodingStrategy, rhs: AnyTextFileDecodingStrategy) -> Bool {
+        AnyHashable(lhs.wrapped) == AnyHashable(rhs.wrapped)
+    }
+}
+
+extension AnyTextFileDecodingStrategy: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(wrapped)
+    }
+}
+
 extension AnyTextFileDecodingStrategy: Sendable { }
 
 extension AnyTextFileDecodingStrategy: TextFileDecodingStrategy {

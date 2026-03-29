@@ -32,6 +32,12 @@ public struct StringTextFileDecodingStrategy {
     }
 }
 
+extension StringTextFileDecodingStrategy: Equatable { }
+
+extension StringTextFileDecodingStrategy: Hashable { }
+
+extension StringTextFileDecodingStrategy: Sendable { }
+
 extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         let (textFileURL, isTemporaryFile) = try writeTemporaryFileIfNecessary(data: data, fileURL: nil)

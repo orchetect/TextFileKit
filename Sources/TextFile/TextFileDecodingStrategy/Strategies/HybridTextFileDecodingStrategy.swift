@@ -39,6 +39,10 @@ public struct HybridTextFileDecodingStrategy {
     }
 }
 
+extension HybridTextFileDecodingStrategy: Equatable { }
+
+extension HybridTextFileDecodingStrategy: Hashable { }
+
 extension HybridTextFileDecodingStrategy: Sendable { }
 
 extension HybridTextFileDecodingStrategy: TextFileDecodingStrategy {
@@ -148,7 +152,7 @@ extension HybridTextFileDecodingStrategy {
         fileURL: URL?
     ) throws(TextFileDecodeError) -> PlainTextFile {
         let decoded: PlainTextFile
-        let decoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: allowLossy)
+        let decoding: any TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: allowLossy)
         if let fileURL {
             decoded = try decoding.decodeText(in: data, fileURL: fileURL)
         } else {
