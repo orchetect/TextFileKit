@@ -36,14 +36,14 @@ import TestingExtensions
         let sv = CSV(text: csvRawText_Basic)
         
         #expect(sv.table == csvTable_Basic)
-        #expect(sv.rawText == csvRawText_Basic)
+        #expect(sv.text == csvRawText_Basic)
     }
     
     @Test func init_Table_Basic() async {
         let sv = CSV(table: csvTable_Basic)
         
         #expect(sv.table == csvTable_Basic)
-        #expect(sv.rawText == csvRawText_Basic)
+        #expect(sv.text == csvRawText_Basic)
     }
 }
 
@@ -65,15 +65,15 @@ import TestingExtensions
     @Test func init_RawText_SingleColumn() async {
         let sv = CSV(text: csvRawText_SingleColumn)
         
-        #expect(sv.rawText == csvRawText_SingleColumn)
         #expect(sv.table == csvTable_SingleColumn)
+        #expect(sv.text == csvRawText_SingleColumn)
     }
     
     @Test func init_Table_SingleColumn() async {
         let sv = CSV(table: csvTable_SingleColumn)
         
         #expect(sv.table == csvTable_SingleColumn)
-        #expect(sv.rawText == csvRawText_SingleColumn)
+        #expect(sv.text == csvRawText_SingleColumn)
     }
 }
 
@@ -102,7 +102,7 @@ import TestingExtensions
         let sv = CSV(text: csvRawText_QuotedFields)
         
         #expect(sv.table == csvTable_QuotedFields)
-        #expect(sv.rawText == csvRawText_QuotedFields)
+        #expect(sv.text == csvRawText_QuotedFields)
     }
     
     @Test func interFieldQuotes() async {
@@ -144,14 +144,14 @@ import TestingExtensions
         let sv = CSV(text: csvRawText_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
-        #expect(sv.rawText == csvRawText_CommaContainingFields)
+        #expect(sv.text == csvRawText_CommaContainingFields)
     }
     
     @Test func init_stringTable_CommaContainingFields() async {
         let sv = CSV(table: csvTable_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
-        #expect(sv.rawText == csvRawText_CommaContainingFields)
+        #expect(sv.text == csvRawText_CommaContainingFields)
     }
 }
 

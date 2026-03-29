@@ -40,7 +40,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .macOSRoman)
+        let csvData = csv.text.data(using: .macOSRoman)
         #expect(csvData == resourceData)
     }
 
@@ -95,7 +95,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf8)
+        let csvData = csv.text.data(using: .utf8)
         #expect(csvData == resourceData)
     }
 
@@ -142,7 +142,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = try #require(csv.rawText.data(using: .utf8))
+        let csvData = try #require(csv.text.data(using: .utf8))
         // BOM is not written to generated UTF-8 data
         #expect(csvData != resourceData)
         // data after BOM should still be identical
@@ -193,7 +193,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf16BigEndian)
+        let csvData = csv.text.data(using: .utf16BigEndian)
         #expect(csvData == resourceData)
     }
 
@@ -246,7 +246,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf16BigEndian)
+        let csvData = csv.text.data(using: .utf16BigEndian)
         #expect(csvData == resourceData)
     }
 
@@ -293,7 +293,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf16LittleEndian)
+        let csvData = csv.text.data(using: .utf16LittleEndian)
         #expect(csvData == resourceData)
     }
 
@@ -346,7 +346,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf16LittleEndian)
+        let csvData = csv.text.data(using: .utf16LittleEndian)
         #expect(csvData == resourceData)
     }
 
@@ -393,7 +393,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf32LittleEndian)
+        let csvData = csv.text.data(using: .utf32LittleEndian)
         #expect(csvData == resourceData)
     }
 
@@ -446,7 +446,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .utf32LittleEndian)
+        let csvData = csv.text.data(using: .utf32LittleEndian)
         #expect(csvData == resourceData)
     }
 
@@ -493,7 +493,7 @@ struct CSV_Encodings_Tests {
 
         // generate raw text
         let resourceData = try resource.data()
-        let csvData = csv.rawText.data(using: .windowsCP1252)
+        let csvData = csv.text.data(using: .windowsCP1252)
         #expect(csvData == resourceData)
     }
 

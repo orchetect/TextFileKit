@@ -22,4 +22,10 @@ extension StringTableRepresentable {
     public init(rawData: Data, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
         try self.init(data: rawData, encoding: encoding)
     }
+    
+    @_documentation(visibility: internal)
+    @available(*, deprecated, renamed: "text")
+    public var rawText: String {
+        text
+    }
 }
