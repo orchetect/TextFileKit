@@ -35,7 +35,7 @@ public protocol StringTableRepresentable where Self: Sendable {
     /// > When reading a text file that may contain a BOM (byte order mark) header it is recommended to use
     /// > the ``init(file:encoding:)`` or ``init(data:encoding:)`` initializers instead, which attempt
     /// > to detect text encoding.
-    init(rawText: String)
+    init(text: String)
 }
 
 extension StringTableRepresentable {
@@ -47,7 +47,7 @@ extension StringTableRepresentable {
     ///     automatic detection of text encoding.
     public init(file: URL, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
         let decoded = try PlainTextFile(url: file, strategy: .default(), preferring: encoding)
-        self.init(rawText: decoded.content)
+        self.init(text: decoded.content)
     }
     
     /// Initialize from raw data with the specified text encoding.
@@ -62,7 +62,7 @@ extension StringTableRepresentable {
     ///   to this method, as this method relies on rewriting the data to a file on disk in order to decode.
     public init(data: Data, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
         let decoded = try PlainTextFile(data: data, strategy: .default(), preferring: encoding)
-        self.init(rawText: decoded.content)
+        self.init(text: decoded.content)
     }
 }
 

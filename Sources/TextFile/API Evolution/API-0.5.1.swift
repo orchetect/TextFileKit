@@ -12,6 +12,12 @@ import struct FoundationEssentials.Data
 
 extension StringTableRepresentable {
     @_documentation(visibility: internal)
+    @available(*, deprecated, renamed: "init(text:)")
+    public init(rawText: String) {
+        self.init(text: rawText)
+    }
+    
+    @_documentation(visibility: internal)
     @available(*, deprecated, renamed: "init(data:encoding:)")
     public init(rawData: Data, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
         try self.init(data: rawData, encoding: encoding)

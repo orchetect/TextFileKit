@@ -31,7 +31,7 @@ import Testing
     ]
     
     @Test func init_RawText_Basic() {
-        let sv = TSV(rawText: tsvRawText_Basic)
+        let sv = TSV(text: tsvRawText_Basic)
         
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.rawText == tsvRawText_Basic)
@@ -61,7 +61,7 @@ import Testing
     ]
     
     @Test func init_RawText_SingleColumn() {
-        let sv = TSV(rawText: tsvRawText_SingleColumn)
+        let sv = TSV(text: tsvRawText_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.rawText == tsvRawText_SingleColumn)
@@ -94,9 +94,8 @@ import Testing
         ["q", "w", "e\n\"quoted\"\tstuff"]
     ]
     
-    
     @Test func init_RawText_QuotedFields() {
-        let sv = TSV(rawText: tsvRawText_QuotedFields)
+        let sv = TSV(text: tsvRawText_QuotedFields)
         
         #expect(sv.table == tsvTable_QuotedFields)
         #expect(sv.rawText == tsvRawText_QuotedFields)

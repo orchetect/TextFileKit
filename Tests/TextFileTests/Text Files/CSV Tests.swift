@@ -32,9 +32,8 @@ import TestingExtensions
         ["a", "b", "c"]
     ]
     
-    
     @Test func init_RawText_Basic() async {
-        let sv = CSV(rawText: csvRawText_Basic)
+        let sv = CSV(text: csvRawText_Basic)
         
         #expect(sv.table == csvTable_Basic)
         #expect(sv.rawText == csvRawText_Basic)
@@ -64,7 +63,7 @@ import TestingExtensions
     ]
     
     @Test func init_RawText_SingleColumn() async {
-        let sv = CSV(rawText: csvRawText_SingleColumn)
+        let sv = CSV(text: csvRawText_SingleColumn)
         
         #expect(sv.rawText == csvRawText_SingleColumn)
         #expect(sv.table == csvTable_SingleColumn)
@@ -100,7 +99,7 @@ import TestingExtensions
     ]
     
     @Test func init_RawText_QuotedFields() async {
-        let sv = CSV(rawText: csvRawText_QuotedFields)
+        let sv = CSV(text: csvRawText_QuotedFields)
         
         #expect(sv.table == csvTable_QuotedFields)
         #expect(sv.rawText == csvRawText_QuotedFields)
@@ -142,7 +141,7 @@ import TestingExtensions
     ]
     
     @Test func init_RawText_CommaContainingFields() async {
-        let sv = CSV(rawText: csvRawText_CommaContainingFields)
+        let sv = CSV(text: csvRawText_CommaContainingFields)
         
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.rawText == csvRawText_CommaContainingFields)
