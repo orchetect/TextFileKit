@@ -65,3 +65,31 @@ extension StringTableRepresentable {
         self.init(rawText: decoded.content)
     }
 }
+
+extension StringTableRepresentable {
+    /// Returns the text encoded into data using the assigned ``encoding``.
+    ///
+    /// - Parameters:
+    ///   - encoding: Text encoding. UTF-8 (default) is the most common.
+    ///   - includeBOM: When `true`, if the text encoding carries a byte order mark (BOM), it will be inserted at
+    ///     the head of the file. For UTF-8 it is not always necessary, but some applications such as Excel will
+    ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
+    public func data(encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) -> Data {
+        let textFile = PlainTextFile(content: rawText, encoding: encoding)
+        let data = try textFile.data(includeBOM: includeBOM)
+        return data
+    }
+    
+    /// Write the text to a file on disk using the assigned ``encoding``.
+    ///
+    /// - Parameters:
+    ///   - file: Output file URL.
+    ///   - encoding: Text encoding. UTF-8 (default) is the most common.
+    ///   - includeBOM: When `true`, if the text encoding carries a byte order mark (BOM), it will be inserted at
+    ///     the head of the file. For UTF-8 it is not always necessary, but some applications such as Excel will
+    ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
+    public func write(to file: URL, encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) {
+        let textFile = PlainTextFile(content: rawText, encoding: encoding, url: file)
+        try textFile.write(to: file, includeBOM: includeBOM)
+    }
+}
