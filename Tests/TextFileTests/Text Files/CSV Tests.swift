@@ -189,10 +189,10 @@ import TestingExtensions
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_initRawData() async throws {
+    @Test func utf8BOM_initdata() async throws {
         let data = try TestResource.TextFiles.utf8_BOM_Test_csv.data()
         
-        let sv = try CSV(rawData: data)
+        let sv = try CSV(data: data)
         
         let table = sv.table
         try #require(table.count == 3)
@@ -201,10 +201,10 @@ import TestingExtensions
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
     
-    @Test func utf8BOM_CRLF_initRawData() async throws {
+    @Test func utf8BOM_CRLF_initdata() async throws {
         let data = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data()
         
-        let sv = try CSV(rawData: data)
+        let sv = try CSV(data: data)
         
         let table = sv.table
         try #require(table.count == 3)
