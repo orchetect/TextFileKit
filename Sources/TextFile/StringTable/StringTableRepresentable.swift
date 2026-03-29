@@ -23,7 +23,7 @@ public protocol StringTableRepresentable where Self: Sendable {
     ///
     /// This property is typically computed and is not guaranteed to be identical to raw file content that
     /// may have been used to initialize the instance.
-    var rawText: String { get }
+    var text: String { get }
     
     /// Initialize from an Array table.
     init(table: StringTable)
@@ -75,7 +75,7 @@ extension StringTableRepresentable {
     ///     the head of the file. For UTF-8 it is not always necessary, but some applications such as Excel will
     ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
     public func data(encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) -> Data {
-        let textFile = PlainTextFile(content: rawText, encoding: encoding)
+        let textFile = PlainTextFile(content: text, encoding: encoding)
         let data = try textFile.data(includeBOM: includeBOM)
         return data
     }
@@ -89,7 +89,7 @@ extension StringTableRepresentable {
     ///     the head of the file. For UTF-8 it is not always necessary, but some applications such as Excel will
     ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
     public func write(to file: URL, encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) {
-        let textFile = PlainTextFile(content: rawText, encoding: encoding, url: file)
+        let textFile = PlainTextFile(content: text, encoding: encoding, url: file)
         try textFile.write(to: file, includeBOM: includeBOM)
     }
 }

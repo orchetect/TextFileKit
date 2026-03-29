@@ -34,14 +34,14 @@ import Testing
         let sv = TSV(text: tsvRawText_Basic)
         
         #expect(sv.table == tsvTable_Basic)
-        #expect(sv.rawText == tsvRawText_Basic)
+        #expect(sv.text == tsvRawText_Basic)
     }
     
     @Test func init_Table_Basic() {
         let sv = TSV(table: tsvTable_Basic)
         
         #expect(sv.table == tsvTable_Basic)
-        #expect(sv.rawText == tsvRawText_Basic)
+        #expect(sv.text == tsvRawText_Basic)
     }
 }
 
@@ -64,14 +64,14 @@ import Testing
         let sv = TSV(text: tsvRawText_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
-        #expect(sv.rawText == tsvRawText_SingleColumn)
+        #expect(sv.text == tsvRawText_SingleColumn)
     }
     
     @Test func init_Table_SingleColumn() {
         let sv = TSV(table: tsvTable_SingleColumn)
         
         #expect(sv.table == tsvTable_SingleColumn)
-        #expect(sv.rawText == tsvRawText_SingleColumn)
+        #expect(sv.text == tsvRawText_SingleColumn)
     }
 }
 
@@ -98,6 +98,6 @@ import Testing
         let sv = TSV(text: tsvRawText_QuotedFields)
         
         #expect(sv.table == tsvTable_QuotedFields)
-        #expect(sv.rawText == tsvRawText_QuotedFields)
+        #expect(sv.text == tsvRawText_QuotedFields)
     }
 }

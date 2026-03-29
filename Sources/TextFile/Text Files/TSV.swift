@@ -136,7 +136,7 @@ extension TSV {
         return result
     }
     
-    public var rawText: String {
+    public var text: String {
         table.map { row in
             row.map { textString in
                 var outString = textString
