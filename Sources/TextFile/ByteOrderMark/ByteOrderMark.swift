@@ -83,12 +83,32 @@ extension ByteOrderMark {
     }
 }
 
+// MARK: - Static
+
 extension ByteOrderMark {
     /// The order with which to parse a text stream when matching byte order mark bytes.
     public static let parseOrder: [Self] = [
         .utf8, .utf32BigEndian, .utf32LittleEndian, .utf16BigEndian, .utf16LittleEndian
     ]
 }
+
+// MARK: - String.Encoding Extensions
+
+extension String.Encoding {
+    /// Returns the encoding's byte order mark, if applicable.
+    public var byteOrderMark: ByteOrderMark? {
+        switch self {
+        case .utf8: .utf8
+        case .utf16BigEndian: .utf16BigEndian
+        case .utf16LittleEndian: .utf16LittleEndian
+        case .utf32BigEndian: .utf32BigEndian
+        case .utf32LittleEndian: .utf32LittleEndian
+        default: nil
+        }
+    }
+}
+
+// MARK: - Data Extensions
 
 extension DataProtocol {
     /// Returns the text encoding Byte Order Mark (BOM) found at the start of the data, if present.
