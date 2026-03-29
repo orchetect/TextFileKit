@@ -25,8 +25,8 @@ public struct TSV: StringTableRepresentable {
         self.table = table
     }
 
-    public init(rawText: String) {
-        table = Self.parse(text: rawText)
+    public init(text: String) {
+        table = Self.parse(text: text)
     }
 }
 
