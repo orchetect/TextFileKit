@@ -89,7 +89,7 @@ extension StringTableRepresentable {
     ///     the head of the file. For UTF-8 it is not always necessary, but some applications such as Excel will
     ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
     public func write(to file: URL, encoding: String.Encoding = .utf8, includeBOM: Bool = true) throws(TextFileEncodeError) {
-        let textFile = PlainTextFile(content: text, encoding: encoding, url: file)
+        let textFile = PlainTextFile(content: text, encoding: encoding)
         try textFile.write(to: file, includeBOM: includeBOM)
     }
 }

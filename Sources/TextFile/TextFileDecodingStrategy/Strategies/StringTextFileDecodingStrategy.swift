@@ -49,7 +49,7 @@ extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
             var usedEncoding: String.Encoding = .utf8
             let text = try String(contentsOfFile: fileURL.path, usedEncoding: &usedEncoding)
             let encoding = usedEncoding
-            var decoded = PlainTextFile(content: text, encoding: encoding, url: nil)
+            var decoded = PlainTextFile(content: text, encoding: encoding)
             if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
             return decoded
         } catch {

@@ -17,16 +17,10 @@ public struct PlainTextFile {
     /// The source text file encoding.
     public var encoding: String.Encoding
     
-    /// The file URL, if the text file was read from disk.
-    /// If the file was read from memory (`Data`), this property will be `nil`.
-    public internal(set) var url: URL?
-    
-    /// Initialize by directly populating properties.
-    /// No decoding occurs when using this initializer.
-    public init(content: String, encoding: String.Encoding, url: URL? = nil) {
+    /// Initialize by directly populating properties without decoding or modification.
+    public init(content: String, encoding: String.Encoding = .utf8) {
         self.content = content
         self.encoding = encoding
-        self.url = url
     }
 }
 

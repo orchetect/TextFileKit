@@ -30,7 +30,7 @@ extension ExplicitTextFileDecodingStrategy: TextFileDecodingStrategy {
         // first try String API
         if var text = String(data: data, encoding: encoding) {
             if convertLineEndings { text = text.fixedLineBreaks }
-            return PlainTextFile(content: text, encoding: encoding, url: nil)
+            return PlainTextFile(content: text, encoding: encoding)
         }
         
         // then try NSString API, if available
@@ -50,9 +50,7 @@ extension ExplicitTextFileDecodingStrategy: TextFileDecodingStrategy {
     }
     
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
-        var decoded = try decodeText(in: data)
-        decoded.url = fileURL
-        return decoded
+        try decodeText(in: data)
     }
     
     public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {

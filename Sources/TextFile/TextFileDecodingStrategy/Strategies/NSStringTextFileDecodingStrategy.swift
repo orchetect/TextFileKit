@@ -63,15 +63,13 @@ extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
             throw .unrecognizedTextEncoding
         }
         let encoding = String.Encoding(rawValue: rawValue)
-        var decoded = PlainTextFile(content: text, encoding: encoding, url: nil)
+        var decoded = PlainTextFile(content: text, encoding: encoding)
         if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
         return decoded
     }
     
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
-        var decodedTextFile = try decodeText(in: data)
-        decodedTextFile.url = fileURL
-        return decodedTextFile
+        try decodeText(in: data)
     }
     
     public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
