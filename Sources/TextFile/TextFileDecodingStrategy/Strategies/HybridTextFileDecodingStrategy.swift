@@ -95,7 +95,7 @@ extension HybridTextFileDecodingStrategy {
             return decoded
         }
         
-        // Step 6: attempt to detect encoding if BOM is not present
+        // Step 6: attempt to detect encoding using Standard Lib / Foundation API
         var heldError: TextFileDecodeError? = nil
         do throws(TextFileDecodeError) {
             let decoded = try decodeTextAutomatically(allowLossy: false, in: data, fileURL: fileURL)
@@ -180,7 +180,7 @@ extension HybridTextFileDecodingStrategy {
 
         let dataWithoutBOM = data[data.startIndex.advanced(by: bom.bytes.count)...]
 
-        let lossyDecoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: true)
+        let lossyDecoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: false)
         var decoded: DecodedTextFile = try lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
         
         decoded.url = fileURL
