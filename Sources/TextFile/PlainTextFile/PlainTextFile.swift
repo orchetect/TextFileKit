@@ -12,10 +12,10 @@ import FoundationEssentials
 
 public struct PlainTextFile {
     /// Decoded text file content.
-    public internal(set) var content: String
+    public var content: String
     
     /// The source text file encoding.
-    public internal(set) var encoding: String.Encoding
+    public var encoding: String.Encoding
     
     /// The file URL, if the text file was read from disk.
     /// If the file was read from memory (`Data`), this property will be `nil`.
