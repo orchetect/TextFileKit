@@ -1,5 +1,5 @@
 //
-//  TSV Tests.swift
+//  TSV Decode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
@@ -7,7 +7,7 @@
 import Testing
 @testable import TextFile
 
-@Suite struct TSV_Tests {
+@Suite struct TSV_Decode_Tests {
     @Test func init_Default() {
         let sv = TSV()
         
@@ -17,7 +17,7 @@ import Testing
 
 // MARK: - Basic
 
-@Suite struct TSV_Basic_Tests {
+@Suite struct TSV_Decode_Basic_Tests {
     private let tsvRawText_Basic = """
         header1	header2	header3
         1	2	3
@@ -47,7 +47,7 @@ import Testing
 
 // MARK: - Single column
 
-@Suite struct TSV_SingleColumn_Tests {
+@Suite struct TSV_Decode_SingleColumn_Tests {
     private let tsvRawText_SingleColumn = """
         header1
         1
@@ -77,7 +77,7 @@ import Testing
 
 // MARK: - Quoted fields
 
-@Suite struct TSV_QuotedFields_Tests {
+@Suite struct TSV_Decode_QuotedFields_Tests {
     private let tsvRawText_QuotedFields = #"""
         header1	"header	2"	header3
         1	2	3 "quoted" here
