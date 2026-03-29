@@ -9,6 +9,8 @@
 /// the column to be specified either as an index (integer) or column name (string).
 public typealias StringTable = [[String]]
 
+// MARK: - Indexing Properties, Methods and Subscripts
+
 extension StringTable {
     /// Number of rows in the string table.
     public var rowCount: Int {
@@ -154,9 +156,9 @@ extension StringTable {
 
 extension StringTable {
     /// Returns the min and max character count for each column.
-    /// The `upperBound` can be useful for resizing columns to fit the column's data.
+    /// The `upperBound` can be useful for auto-sizing columns in a UI to fit the column's data.
     ///
-    /// - Returns: `[Column Index: Min Char Count ... Max Char Count]`
+    /// - Returns: `[<column-index>: <min-char-count...max-char-count>]`
     public var columnCharCounts: [Int: ClosedRange<Int>] {
         reduce(into: [:]) { dict, rowValues in
             // iterate columns for current row

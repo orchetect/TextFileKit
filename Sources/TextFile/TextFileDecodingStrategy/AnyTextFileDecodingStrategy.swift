@@ -14,6 +14,7 @@ import struct FoundationEssentials.URL
 
 /// Type-erased box containing a specialized ``TextFileDecodingStrategy`` instance.
 public struct AnyTextFileDecodingStrategy {
+    /// Type-erased ``TextFileDecodingStrategy`` instance.
     public var wrapped: any TextFileDecodingStrategy
     
     public init(_ wrapped: any TextFileDecodingStrategy) {

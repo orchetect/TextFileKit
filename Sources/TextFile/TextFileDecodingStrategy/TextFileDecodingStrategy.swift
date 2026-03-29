@@ -13,7 +13,7 @@ import struct FoundationEssentials.URL
 #endif
 
 /// Text file decode strategy.
-public protocol TextFileDecodingStrategy: Sendable {
+public protocol TextFileDecodingStrategy: Sendable { // TODO: make Equatable and Hashable
     /// Option flag determining whether line endings should be converted to line endings appropriate
     /// for the current platform if necessary.
     var convertLineEndings: Bool { get set }

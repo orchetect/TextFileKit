@@ -67,7 +67,7 @@ extension StringTableRepresentable {
 }
 
 extension StringTableRepresentable {
-    /// Returns the text encoded into data using the assigned ``encoding``.
+    /// Returns the text encoded into data using the specified text encoding.
     ///
     /// - Parameters:
     ///   - encoding: Text encoding. UTF-8 (default) is the most common.
@@ -80,7 +80,7 @@ extension StringTableRepresentable {
         return data
     }
     
-    /// Write the text to a file on disk using the assigned ``encoding``.
+    /// Write the text to a file on disk using the specified text encoding.
     ///
     /// - Parameters:
     ///   - file: Output file URL.

@@ -4,8 +4,11 @@
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
 
+#if canImport(Darwin)
 import struct Foundation.Data
-import protocol Foundation.DataProtocol
+#else
+import struct FoundationEssentials.Data
+#endif
 
 // In UTF-16, a BOM (U+FEFF) may be placed as the first bytes of a file or character stream to indicate the
 // endianness (byte order) of all the 16-bit code units of the file or stream. If an attempt is made to read this
@@ -42,6 +45,32 @@ extension ByteOrderMark: Hashable { }
 extension ByteOrderMark: CaseIterable { }
 
 extension ByteOrderMark: Sendable { }
+
+extension ByteOrderMark: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .utf8: return "UTF-8"
+        case .utf16BigEndian: return "UTF-16 (BE)"
+        case .utf16LittleEndian: return "UTF-16 (LE)"
+        case .utf32BigEndian: return "UTF-32 (BE)"
+        case .utf32LittleEndian: return "UTF-32 (LE)"
+        }
+    }
+}
+
+extension ByteOrderMark: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        switch self {
+        case .utf8: return "utf8"
+        case .utf16BigEndian: return "utf16BigEndian"
+        case .utf16LittleEndian: return "utf16LittleEndian"
+        case .utf32BigEndian: return "utf32BigEndian"
+        case .utf32LittleEndian: return "utf32LittleEndian"
+        }
+    }
+}
+
+// MARK: - Properties
 
 extension ByteOrderMark {
     /// String containing the raw code points that correspond to the byte order mark.
@@ -90,32 +119,4 @@ extension ByteOrderMark {
     public static let parseOrder: [Self] = [
         .utf8, .utf32BigEndian, .utf32LittleEndian, .utf16BigEndian, .utf16LittleEndian
     ]
-}
-
-// MARK: - String.Encoding Extensions
-
-extension String.Encoding {
-    /// Returns the encoding's byte order mark, if applicable.
-    public var byteOrderMark: ByteOrderMark? {
-        switch self {
-        case .utf8: .utf8
-        case .utf16BigEndian: .utf16BigEndian
-        case .utf16LittleEndian: .utf16LittleEndian
-        case .utf32BigEndian: .utf32BigEndian
-        case .utf32LittleEndian: .utf32LittleEndian
-        default: nil
-        }
-    }
-}
-
-// MARK: - Data Extensions
-
-extension DataProtocol {
-    /// Returns the text encoding Byte Order Mark (BOM) found at the start of the data, if present.
-    public var byteOrderMarkPrefix: ByteOrderMark? {
-        for bom in ByteOrderMark.parseOrder {
-            if self.starts(with: bom.bytes) { return bom }
-        }
-        return nil
-    }
 }

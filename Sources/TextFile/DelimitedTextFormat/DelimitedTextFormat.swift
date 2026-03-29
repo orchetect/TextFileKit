@@ -21,6 +21,8 @@ extension DelimitedTextFormat: CaseIterable { }
 
 extension DelimitedTextFormat: Sendable { }
 
+// MARK: - File Extension
+
 extension DelimitedTextFormat {
     /// Returns the file extension used for the file format.
     public var fileExtension: String {

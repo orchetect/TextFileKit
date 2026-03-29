@@ -32,9 +32,18 @@ extension Data {
         
         func splitBytes(byteWidth: Int) -> (left: [Data.Element], right: [Data.Element])? {
             let leftBytes = sampleBytes.enumerated()
-                .compactMap { $0.offset.isMultiple(of: byteWidth) ? $0.element : nil }
+                .compactMap {
+                    $0.offset.isMultiple(of: byteWidth)
+                        ? $0.element
+                        : nil
+                }
+            
             let rightBytes = sampleBytes.enumerated()
-                .compactMap { ($0.offset - (byteWidth - 1)).isMultiple(of: byteWidth) ? $0.element : nil }
+                .compactMap {
+                    ($0.offset - (byteWidth - 1)).isMultiple(of: byteWidth)
+                        ? $0.element
+                        : nil
+                }
             
             guard !leftBytes.isEmpty, !rightBytes.isEmpty else { return nil }
             
