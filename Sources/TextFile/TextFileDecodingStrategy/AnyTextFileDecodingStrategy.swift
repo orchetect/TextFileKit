@@ -29,15 +29,15 @@ extension AnyTextFileDecodingStrategy: TextFileDecodingStrategy {
         set { wrapped.convertLineEndings = newValue }
     }
     
-    public func decodeText(in data: Data) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(in: data)
     }
     
-    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(in: data, fileURL: fileURL)
     }
     
-    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(fileURL: fileURL)
     }
 }

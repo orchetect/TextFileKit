@@ -49,7 +49,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
         
         // check detected encoding
-        let decoded = try DecodedTextFile(
+        let decoded = try PlainTextFile(
             url: url,
             strategy: .string(),
             preferring: .macOSRoman // String API can't auto-detect MacRoman, must specify it
@@ -63,7 +63,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(
+        let decoded = try PlainTextFile(
             url: url,
             strategy: .nsString(),
             preferring: .macOSRoman // NSString API can't auto-detect MacRoman, must specify it
@@ -104,7 +104,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .string())
+        let decoded = try PlainTextFile(url: url, strategy: .string())
         #expect(decoded.encoding == .utf8)
     }
 
@@ -114,7 +114,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect(decoded.encoding == .utf8)
     }
     #endif
@@ -155,7 +155,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .string())
+        let decoded = try PlainTextFile(url: url, strategy: .string())
         #expect(decoded.encoding == .utf8)
     }
 
@@ -165,7 +165,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect(decoded.encoding == .utf8)
     }
     #endif
@@ -203,7 +203,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("String decoding API cannot auto-detect UTF-16 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .string())
+            let decoded = try PlainTextFile(url: url, strategy: .string())
             _ = decoded
             // #expect(decoded.encoding == .utf16BigEndian)
         }
@@ -216,7 +216,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("NSString decoding API cannot auto-detect UTF-16 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+            let decoded = try PlainTextFile(url: url, strategy: .nsString())
              _ = decoded
             // #expect(decoded.encoding == .utf16BigEndian)
         }
@@ -255,7 +255,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .string())
+        let decoded = try PlainTextFile(url: url, strategy: .string())
         #expect((decoded.encoding == .utf16BigEndian) || (decoded.encoding == .utf16))
     }
 
@@ -265,7 +265,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect((decoded.encoding == .utf16BigEndian) || (decoded.encoding == .utf16))
     }
     #endif
@@ -303,7 +303,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("String decoding API cannot auto-detect UTF-16 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .string())
+            let decoded = try PlainTextFile(url: url, strategy: .string())
             _ = decoded
             // #expect(decoded.encoding == .utf16LittleEndian)
         }
@@ -316,7 +316,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("NSString decoding API cannot auto-detect UTF-16 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+            let decoded = try PlainTextFile(url: url, strategy: .nsString())
             _ = decoded
             // #expect(decoded.encoding == .utf16LittleEndian)
         }
@@ -355,7 +355,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .string())
+        let decoded = try PlainTextFile(url: url, strategy: .string())
         #expect((decoded.encoding == .utf16LittleEndian) || (decoded.encoding == .utf16))
     }
 
@@ -365,7 +365,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect((decoded.encoding == .utf16LittleEndian) || (decoded.encoding == .utf16))
     }
     #endif
@@ -403,7 +403,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("String decoding API cannot auto-detect UTF-32 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .string())
+            let decoded = try PlainTextFile(url: url, strategy: .string())
             _ = decoded
             // #expect(decoded.encoding == .utf32LittleEndian)
         }
@@ -416,7 +416,7 @@ struct CSV_Encodings_Tests {
 
         // check detected encoding
         withKnownIssue("NSString decoding API cannot auto-detect UTF-32 without a BOM.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+            let decoded = try PlainTextFile(url: url, strategy: .nsString())
             _ = decoded
             // #expect(decoded.encoding == .utf32LittleEndian)
         }
@@ -455,7 +455,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .string())
+        let decoded = try PlainTextFile(url: url, strategy: .string())
         #expect((decoded.encoding == .utf32LittleEndian) || (decoded.encoding == .utf32))
     }
 
@@ -465,7 +465,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect((decoded.encoding == .utf32LittleEndian) || (decoded.encoding == .utf32))
     }
     #endif
@@ -504,7 +504,7 @@ struct CSV_Encodings_Tests {
         // check detected encoding
         // TODO: add support for Windows 1252 decoding on Linux
         withKnownIssue("String decoding API doesn't recognize Windows 1252 encoding.") {
-            let decoded = try DecodedTextFile(url: url, strategy: .string())
+            let decoded = try PlainTextFile(url: url, strategy: .string())
             _ = decoded
             // #expect(decoded.encoding == .windowsCP1252)
         }
@@ -516,7 +516,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // check detected encoding
-        let decoded = try DecodedTextFile(url: url, strategy: .nsString())
+        let decoded = try PlainTextFile(url: url, strategy: .nsString())
         #expect(decoded.encoding == .windowsCP1252)
     }
     #endif

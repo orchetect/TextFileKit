@@ -1,5 +1,5 @@
 //
-//  DecodedTextFile.swift
+//  PlainTextFile.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
 //  © 2018-2025 Steffan Andrews • Licensed under MIT License
 //
@@ -10,7 +10,7 @@ import Foundation
 import FoundationEssentials
 #endif
 
-public struct DecodedTextFile {
+public struct PlainTextFile {
     /// Decoded text file content.
     public internal(set) var content: String
     
@@ -30,15 +30,15 @@ public struct DecodedTextFile {
     }
 }
 
-extension DecodedTextFile: Equatable { }
+extension PlainTextFile: Equatable { }
 
-extension DecodedTextFile: Hashable { }
+extension PlainTextFile: Hashable { }
 
-extension DecodedTextFile: Sendable { }
+extension PlainTextFile: Sendable { }
 
 // MARK: - URL Init
 
-extension DecodedTextFile {
+extension PlainTextFile {
     /// Attempt to decode a text file on disk at the specified file URL.
     public init(
         url: URL,
@@ -76,7 +76,7 @@ extension DecodedTextFile {
 
 // MARK: - Data Init
 
-extension DecodedTextFile {
+extension PlainTextFile {
     /// Attempt to decode raw text file contents.
     public init(
         data: Data,

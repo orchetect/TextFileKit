@@ -48,7 +48,7 @@ public struct NSStringTextFileDecodingStrategy {
 }
 
 extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
-    public func decodeText(in data: Data) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         var usedLossyConversion: ObjCBool = false // TODO: not used
         var nsString: NSString?
         guard case let rawValue = NSString.stringEncoding(
@@ -63,18 +63,18 @@ extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
             throw .unrecognizedTextEncoding
         }
         let encoding = String.Encoding(rawValue: rawValue)
-        var decoded = DecodedTextFile(content: text, encoding: encoding, url: nil)
+        var decoded = PlainTextFile(content: text, encoding: encoding, url: nil)
         if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
         return decoded
     }
     
-    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         var decodedTextFile = try decodeText(in: data)
         decodedTextFile.url = fileURL
         return decodedTextFile
     }
     
-    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         let data: Data
         do {
             data = try Data(contentsOf: fileURL)

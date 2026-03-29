@@ -35,19 +35,19 @@ public struct HybridTextFileDecodingStrategy {
 extension HybridTextFileDecodingStrategy: Sendable { }
 
 extension HybridTextFileDecodingStrategy: TextFileDecodingStrategy {
-    public func decodeText(in data: Data) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         var decoded = try decodeTextHybrid(in: data, fileURL: nil)
         if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
         return decoded
     }
     
-    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         var decoded = try decodeTextHybrid(in: data, fileURL: fileURL)
         if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
         return decoded
     }
     
-    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         let data: Data
         do {
             data = try Data(contentsOf: fileURL)
@@ -62,7 +62,7 @@ extension HybridTextFileDecodingStrategy: TextFileDecodingStrategy {
 
 extension HybridTextFileDecodingStrategy {
     /// Main hybrid decoding trunk method.
-    func decodeTextHybrid(in data: Data, fileURL: URL?) throws(TextFileDecodeError) -> DecodedTextFile {
+    func decodeTextHybrid(in data: Data, fileURL: URL?) throws(TextFileDecodeError) -> PlainTextFile {
         // Step 1: try detecting a BOM, if present
         if let decoded = try decodeTextUsingBOM(in: data, fileURL: fileURL) {
             return decoded
@@ -112,19 +112,19 @@ extension HybridTextFileDecodingStrategy {
         encoding: String.Encoding?,
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         guard let encoding,
               let text = String(data: data, encoding: encoding)
         else { return nil }
         
-        return DecodedTextFile(content: text, encoding: encoding, url: fileURL)
+        return PlainTextFile(content: text, encoding: encoding, url: fileURL)
     }
     
     func decodeTextUsingBOM(
         ignoring ignoredBOMs: Set<ByteOrderMark> = [],
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         guard let bom = data.byteOrderMarkPrefix
         else { return nil }
         
@@ -142,15 +142,15 @@ extension HybridTextFileDecodingStrategy {
         guard let text = String(data: sourceData, encoding: bom.encoding)
         else { return nil }
         
-        return DecodedTextFile(content: text, encoding: bom.encoding, url: fileURL)
+        return PlainTextFile(content: text, encoding: bom.encoding, url: fileURL)
     }
     
     func decodeTextAutomatically(
         allowLossy: Bool,
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile {
-        let decoded: DecodedTextFile
+    ) throws(TextFileDecodeError) -> PlainTextFile {
+        let decoded: PlainTextFile
         let decoding: TextFileDecodingStrategy = .bestNonHybridForCurrentPlatform(allowLossy: allowLossy)
         if let fileURL {
             decoded = try decoding.decodeText(in: data, fileURL: fileURL)
@@ -163,18 +163,18 @@ extension HybridTextFileDecodingStrategy {
     func decodeTextGuessingMultiByteUTFEncoding(
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         guard let possibleEncoding = data.guessMultiByteUTFEncoding(),
               let text = String(data: data, encoding: possibleEncoding)
         else { return nil }
         
-        return DecodedTextFile(content: text, encoding: possibleEncoding, url: fileURL)
+        return PlainTextFile(content: text, encoding: possibleEncoding, url: fileURL)
     }
     
     func decodeTextAutomaticallyAfterRemovingBOM(
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         guard let bom = data.byteOrderMarkPrefix
         else { return nil }
 
@@ -183,7 +183,7 @@ extension HybridTextFileDecodingStrategy {
         // We are recursively calling the hybrid decoder, but passing in data without the BOM so it won't infinitely recurse
         let lossyDecoding: TextFileDecodingStrategy = .hybrid()
         
-        guard var decoded: DecodedTextFile = try? lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
+        guard var decoded: PlainTextFile = try? lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
         else { return nil }
         
         decoded.url = fileURL
@@ -193,11 +193,11 @@ extension HybridTextFileDecodingStrategy {
     func decodeUTF8(
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         guard let text = String(data: data, encoding: .utf8) else {
             return nil
         }
-        return DecodedTextFile(content: text, encoding: .utf8, url: fileURL)
+        return PlainTextFile(content: text, encoding: .utf8, url: fileURL)
     }
     
     // ISO-8859-1 (isoLatin1 case of String.Encoding)
@@ -212,7 +212,7 @@ extension HybridTextFileDecodingStrategy {
     func decodeISOLatin1(
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         // It's not trivial to do binary regex in Swift, so since we're only looking for byte ranges
         // we can use a non-regex solution to detect or count bytes in certain ranges.
         
@@ -231,7 +231,7 @@ extension HybridTextFileDecodingStrategy {
             return nil
         }
         
-        return DecodedTextFile(content: text, encoding: .isoLatin1, url: fileURL)
+        return PlainTextFile(content: text, encoding: .isoLatin1, url: fileURL)
     }
     
     /// # How do you distinguish MacRoman from CP1252?
@@ -263,7 +263,7 @@ extension HybridTextFileDecodingStrategy {
     func decodeWindows1252OrMacRoman(
         in data: Data,
         fileURL: URL?
-    ) throws(TextFileDecodeError) -> DecodedTextFile? {
+    ) throws(TextFileDecodeError) -> PlainTextFile? {
         // It's not trivial to do binary regex in Swift, so since we're only looking for byte ranges
         // we can use a non-regex solution to detect or count bytes in certain ranges.
         
@@ -296,13 +296,13 @@ extension HybridTextFileDecodingStrategy {
             guard let text = String(data: data, encoding: .windowsCP1252) else {
                 return nil
             }
-            return DecodedTextFile(content: text, encoding: .windowsCP1252, url: fileURL)
+            return PlainTextFile(content: text, encoding: .windowsCP1252, url: fileURL)
         } else {
             // MacRoman
             guard let text = String(data: data, encoding: .macOSRoman) else {
                 return nil
             }
-            return DecodedTextFile(content: text, encoding: .macOSRoman, url: fileURL)
+            return PlainTextFile(content: text, encoding: .macOSRoman, url: fileURL)
         }
     }
 }

@@ -33,7 +33,7 @@ public struct StringTextFileDecodingStrategy {
 }
 
 extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
-    public func decodeText(in data: Data) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         let (textFileURL, isTemporaryFile) = try writeTemporaryFileIfNecessary(data: data, fileURL: nil)
         
         defer {
@@ -44,12 +44,12 @@ extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
         return try decodeText(in: data, fileURL: textFileURL)
     }
     
-    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         do {
             var usedEncoding: String.Encoding = .utf8
             let text = try String(contentsOfFile: fileURL.path, usedEncoding: &usedEncoding)
             let encoding = usedEncoding
-            var decoded = DecodedTextFile(content: text, encoding: encoding, url: nil)
+            var decoded = PlainTextFile(content: text, encoding: encoding, url: nil)
             if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
             return decoded
         } catch {
@@ -57,7 +57,7 @@ extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
         }
     }
     
-    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> DecodedTextFile {
+    public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         let data: Data
         do {
             data = try Data(contentsOf: fileURL)
