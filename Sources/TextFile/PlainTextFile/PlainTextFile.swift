@@ -18,7 +18,7 @@ public struct PlainTextFile {
     public internal(set) var encoding: String.Encoding
     
     /// The file URL, if the text file was read from disk.
-    /// If the file was read from memory (`Data`), this property may be `nil`.
+    /// If the file was read from memory (`Data`), this property will be `nil`.
     public internal(set) var url: URL?
     
     /// Initialize by directly populating properties.
@@ -78,6 +78,12 @@ extension PlainTextFile {
 
 extension PlainTextFile {
     /// Attempt to decode raw text file contents.
+    ///
+    /// - Parameters:
+    ///   - data: Raw (encoded) text file content.
+    ///   - encoding: Optionally supply a text encoding if it is known.
+    ///     If decoding fails or this parameter is `nil`, a hybrid auto-detection strategy will be used to attempt
+    ///     to auto-detect the text encoding.
     public init(
         data: Data,
         preferring encoding: String.Encoding? = nil
@@ -95,6 +101,14 @@ extension PlainTextFile {
     }
     
     /// Attempt to decode raw text file contents.
+    ///
+    /// - Parameters:
+    ///   - data: Raw (encoded) text file content.
+    ///   - strategy: Text encoding auto-detection heuristic (strategy). Hyrbid (default) is recommended and will
+    ///     produce the best results.
+    ///   - encoding: Optionally supply a text encoding if it is known.
+    ///     If decoding fails or this parameter is `nil`, the auto-detection strategy will be used to attempt to
+    ///     auto-detect the text encoding.
     public init(
         data: Data,
         strategy: some TextFileDecodingStrategy,
