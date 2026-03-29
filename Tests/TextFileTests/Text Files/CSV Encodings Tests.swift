@@ -17,7 +17,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // parse CSV
-        let csv = try CSV(file: url, encoding: .macOSRoman) // TODO: can't auto-detect MacRoman, must specify it
+        let csv = try CSV(file: url)
         #expect(csv.table[safeRow: 1, col: 0] == "Cliché")
         #expect(csv.table[safeRow: 1, col: 1] == "Français")
         #expect(csv.table[safeRow: 2, col: 0] == "Frères")
@@ -29,7 +29,7 @@ struct CSV_Encodings_Tests {
         let url = try resource.url()
 
         // parse CSV
-        let csv = try CSV(file: url, encoding: .macOSRoman) // TODO: can't auto-detect MacRoman, must specify it
+        let csv = try CSV(file: url)
 
         // generate raw text
         let resourceData = try resource.data()
@@ -45,7 +45,7 @@ struct CSV_Encodings_Tests {
         let decoded = try DecodedTextFile(
             url: url,
             strategy: .string(),
-            preferring: .macOSRoman // TODO: can't auto-detect MacRoman, must specify it
+            preferring: .macOSRoman // String API can't auto-detect MacRoman, must specify it
         )
         #expect(decoded.encoding == .macOSRoman)
     }
@@ -59,7 +59,7 @@ struct CSV_Encodings_Tests {
         let decoded = try DecodedTextFile(
             url: url,
             strategy: .nsString(),
-            preferring: .macOSRoman // TODO: can't auto-detect MacRoman, must specify it
+            preferring: .macOSRoman // NSString API can't auto-detect MacRoman, must specify it
         )
         #expect(decoded.encoding == .macOSRoman)
     }
