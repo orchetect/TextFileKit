@@ -63,45 +63,48 @@ extension HybridTextFileDecodingStrategy: TextFileDecodingStrategy {
 extension HybridTextFileDecodingStrategy {
     /// Main hybrid decoding trunk method.
     func decodeTextHybrid(in data: Data, fileURL: URL?) throws(TextFileDecodeError) -> PlainTextFile {
+        var data = data
+        
         // Step 1: try detecting a BOM, if present
         if let decoded = try decodeTextUsingBOM(in: data, fileURL: fileURL) {
             return decoded
         }
         
-        // Step 2: try UTF-8 without BOM
+        // Step 2:
+        // if UTF-8 BOM is present, but text failed to decode, remove the BOM from the parsable data.
+        // once in a rare while, a BOM is inserted at the start of a file that it doesn't
+        // belong in. we can try decoding the file once more after stripping out the BOM.
+        if let bom = data.byteOrderMarkPrefix, bom == .utf8 {
+            data = data[data.startIndex.advanced(by: bom.bytes.count)...]
+        }
+        
+        // Step 3: try UTF-8 without BOM
         if let decoded = try decodeUTF8(in: data, fileURL: fileURL) {
             return decoded
         }
         
-        // Step 3: attempt to detect UTF-16 / UTF-32 that may be missing a BOM
+        // Step 4: attempt to detect UTF-16 / UTF-32 that may be missing a BOM
         if let decoded = try decodeTextGuessingMultiByteUTFEncoding(in: data, fileURL: fileURL) {
             return decoded
         }
         
-        // Step 4: try ISO-8859-1 (ISO Latin-1)
+        // Step 5: try ISO-8859-1 (ISO Latin-1)
         if let decoded = try decodeISOLatin1(in: data, fileURL: fileURL) {
             return decoded
         }
         
-        // Step 5: try Windows-12520 or MacRoman
+        // Step 6: try Windows-12520 or MacRoman
         if let decoded = try decodeWindows1252OrMacRoman(in: data, fileURL: fileURL) {
             return decoded
         }
         
-        // Step 6: attempt to detect encoding using Standard Lib / Foundation API
+        // Step 7: attempt to detect encoding using Standard Lib / Foundation API
         var heldError: TextFileDecodeError? = nil
         do throws(TextFileDecodeError) {
             let decoded = try decodeTextAutomatically(allowLossy: false, in: data, fileURL: fileURL)
             return decoded
         } catch {
             heldError = error
-        }
-        
-        // Step 7:
-        // once in a rare while, a BOM is inserted at the start of a file that it doesn't
-        // belong in. we can try decoding the file once more after stripping out the BOM.
-        if let decoded = try decodeTextAutomaticallyAfterRemovingBOM(in: data, fileURL: fileURL) {
-            return decoded
         }
         
         // Step 8: all options have been exhausted, so throw an error
@@ -169,25 +172,6 @@ extension HybridTextFileDecodingStrategy {
         else { return nil }
         
         return PlainTextFile(content: text, encoding: possibleEncoding, url: fileURL)
-    }
-    
-    func decodeTextAutomaticallyAfterRemovingBOM(
-        in data: Data,
-        fileURL: URL?
-    ) throws(TextFileDecodeError) -> PlainTextFile? {
-        guard let bom = data.byteOrderMarkPrefix
-        else { return nil }
-
-        let dataWithoutBOM = data[data.startIndex.advanced(by: bom.bytes.count)...]
-
-        // We are recursively calling the hybrid decoder, but passing in data without the BOM so it won't infinitely recurse
-        let lossyDecoding: TextFileDecodingStrategy = .hybrid()
-        
-        guard var decoded: PlainTextFile = try? lossyDecoding.decodeText(in: dataWithoutBOM) // DON'T pass file URL in
-        else { return nil }
-        
-        decoded.url = fileURL
-        return decoded
     }
     
     func decodeUTF8(
