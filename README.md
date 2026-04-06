@@ -5,13 +5,9 @@
 Read and write text files in Swift on Apple platforms and Linux.
 
 - Support for text encoding detection
-
 - Abstractions to read/write common delimited text file formats, including:
-
   - CSV (comma-separated values)
-
   - TSV (tab-separated values)
-
 
 > [!NOTE]
 >
@@ -41,7 +37,7 @@ To add this package to a Swift package, add the dependency to your package and t
 ```swift
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/orchetect/swift-textfile", from: "0.5.0")
+        .package(url: "https://github.com/orchetect/swift-textfile", from: "0.5.2")
     ],
     targets: [
         .target(
