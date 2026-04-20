@@ -1,7 +1,7 @@
 //
 //  API-0.5.1.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -16,13 +16,13 @@ extension StringTableRepresentable {
     public init(rawText: String) {
         self.init(text: rawText)
     }
-    
+
     @_documentation(visibility: internal)
     @available(*, deprecated, renamed: "init(data:encoding:)")
     public init(rawData: Data, encoding: String.Encoding? = nil) throws(TextFileDecodeError) {
         try self.init(data: rawData, encoding: encoding)
     }
-    
+
     @_documentation(visibility: internal)
     @available(*, deprecated, renamed: "text")
     public var rawText: String {

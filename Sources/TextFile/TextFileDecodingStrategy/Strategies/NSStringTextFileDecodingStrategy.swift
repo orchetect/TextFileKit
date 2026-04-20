@@ -1,7 +1,7 @@
 //
 //  NSStringTextFileDecodingStrategy.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -24,16 +24,16 @@ import struct Foundation.UUID
 /// (`NSString.stringEncoding()` is not available on non-Apple platforms.)
 public struct NSStringTextFileDecodingStrategy {
     public var convertLineEndings: Bool
-    
+
     /// If `true`, allow lossy text decoding if decoding can't be detected automatically.
     public var allowLossy: Bool
-    
+
     /// Preferred text encodings.
     public var suggestedEncodings: [String.Encoding]
-    
+
     /// Disallowed text encodings.
     public var disallowedEncodings: [String.Encoding]
-    
+
     public init(
         allowLossy: Bool = false,
         suggestedEncodings: [String.Encoding] = [],
@@ -73,11 +73,11 @@ extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
         if convertLineEndings { decoded.content = decoded.content.fixedLineBreaks }
         return decoded
     }
-    
+
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         try decodeText(in: data)
     }
-    
+
     public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         let data: Data
         do {
@@ -94,17 +94,17 @@ extension NSStringTextFileDecodingStrategy: TextFileDecodingStrategy {
 extension NSStringTextFileDecodingStrategy {
     var encodingOptions: [StringEncodingDetectionOptionsKey: Any]? {
         var options: [StringEncodingDetectionOptionsKey: Any] = [:]
-        
+
         options[.allowLossyKey] = NSNumber(value: allowLossy)
-        
+
         if !suggestedEncodings.isEmpty {
             options[.suggestedEncodingsKey] = suggestedEncodings.asStringEncodingDetectionOptionsKeysNSArray
         }
-        
+
         if !disallowedEncodings.isEmpty {
             options[.disallowedEncodingsKey] = disallowedEncodings.asStringEncodingDetectionOptionsKeysNSArray
         }
-        
+
         return options
     }
 }
@@ -122,7 +122,7 @@ extension String.Encoding {
     @_disfavoredOverload
     public var nsStringEncoding: UInt /* a.k.a. NSStringEncoding */ {
         // AFAIK, we can just return rawValue and don't need the switch case
-        
+
         switch self {
         case .ascii: NSASCIIStringEncoding
         case .iso2022JP: NSISO2022JPStringEncoding

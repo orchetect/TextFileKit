@@ -1,7 +1,7 @@
 //
 //  CSV Parse Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -13,7 +13,7 @@ struct CSV_Parse_Tests {
     @Test
     func init_Default() {
         let sv = CSV()
-        
+
         #expect(sv.table == [])
     }
 }
@@ -26,25 +26,25 @@ struct CSV_Parse_Basic_Tests {
         1,2,3
         a,b,c
         """
-    
+
     private let csvTable_Basic: StringTable = [
         ["header1", "header2", "header3"],
         ["1", "2", "3"],
         ["a", "b", "c"]
     ]
-    
+
     @Test
     func init_RawText_Basic() {
         let sv = CSV(text: csvRawText_Basic)
-        
+
         #expect(sv.table == csvTable_Basic)
         #expect(sv.text == csvRawText_Basic)
     }
-    
+
     @Test
     func init_Table_Basic() {
         let sv = CSV(table: csvTable_Basic)
-        
+
         #expect(sv.table == csvTable_Basic)
         #expect(sv.text == csvRawText_Basic)
     }
@@ -58,25 +58,25 @@ struct CSV_Parse_SingleColumn_Tests {
         1
         a
         """
-    
+
     private let csvTable_SingleColumn: StringTable = [
         ["header1"],
         ["1"],
         ["a"]
     ]
-    
+
     @Test
     func init_RawText_SingleColumn() {
         let sv = CSV(text: csvRawText_SingleColumn)
-        
+
         #expect(sv.table == csvTable_SingleColumn)
         #expect(sv.text == csvRawText_SingleColumn)
     }
-    
+
     @Test
     func init_Table_SingleColumn() {
         let sv = CSV(table: csvTable_SingleColumn)
-        
+
         #expect(sv.table == csvTable_SingleColumn)
         #expect(sv.text == csvRawText_SingleColumn)
     }
@@ -94,7 +94,7 @@ struct CSV_Parse_QuotedFields_Tests {
         ""quoted"", stuff"
         """",a,""""""
         """#
-    
+
     private let csvTable_QuotedFields: StringTable = [
         ["header1", "header, 2", "header3"],
         ["1", "2", "3 \"quoted\" here"],
@@ -102,15 +102,15 @@ struct CSV_Parse_QuotedFields_Tests {
         ["q", "w", "e\n\"quoted\", stuff"],
         ["\"", "a", "\"\""]
     ]
-    
+
     @Test
     func init_RawText_QuotedFields() {
         let sv = CSV(text: csvRawText_QuotedFields)
-        
+
         #expect(sv.table == csvTable_QuotedFields)
         #expect(sv.text == csvRawText_QuotedFields)
     }
-    
+
     @Test
     func interFieldQuotes() {
         func parse(_ rawCSV: String) -> StringTable {
@@ -135,7 +135,7 @@ struct CSV_Parse_CommaContainingFields_Tests {
         item3,-$4.50,description3
         item4,"-$1,720.00",description4
         """#
-    
+
     private let csvTable_CommaContainingFields: StringTable = [
         ["header1", "header2", "header3"],
         ["data one", "\"data, two\"", "data three"],
@@ -146,19 +146,19 @@ struct CSV_Parse_CommaContainingFields_Tests {
         ["item3", "-$4.50", "description3"],
         ["item4", "-$1,720.00", "description4"]
     ]
-    
+
     @Test
     func init_RawText_CommaContainingFields() {
         let sv = CSV(text: csvRawText_CommaContainingFields)
-        
+
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.text == csvRawText_CommaContainingFields)
     }
-    
+
     @Test
     func init_stringTable_CommaContainingFields() {
         let sv = CSV(table: csvTable_CommaContainingFields)
-        
+
         #expect(sv.table == csvTable_CommaContainingFields)
         #expect(sv.text == csvRawText_CommaContainingFields)
     }
@@ -172,52 +172,52 @@ struct CSV_Parse_UTF8_BOM_Tests {
         ["Row1A", "Row1B"],
         ["Row2A", "Row2B"]
     ]
-    
+
     @Test
     func utf8BOM_initURL() throws {
         let url = try TestResource.TextFiles.utf8_BOM_Test_csv.url()
-        
+
         let sv = try CSV(file: url)
-        
+
         let table = sv.table
         try #require(table.count == 3)
         #expect(table[0] == Self.utf8_BOM_Test_Table[0])
         #expect(table[1] == Self.utf8_BOM_Test_Table[1])
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
-    
+
     @Test
     func utf8BOM_CRLF_initURL() throws {
         let url = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.url()
-        
+
         let sv = try CSV(file: url)
-        
+
         let table = sv.table
         try #require(table.count == 3)
         #expect(table[0] == Self.utf8_BOM_Test_Table[0])
         #expect(table[1] == Self.utf8_BOM_Test_Table[1])
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
-    
+
     @Test
     func utf8BOM_initdata() throws {
         let data = try TestResource.TextFiles.utf8_BOM_Test_csv.data()
-        
+
         let sv = try CSV(data: data)
-        
+
         let table = sv.table
         try #require(table.count == 3)
         #expect(table[0] == Self.utf8_BOM_Test_Table[0])
         #expect(table[1] == Self.utf8_BOM_Test_Table[1])
         #expect(table[2] == Self.utf8_BOM_Test_Table[2])
     }
-    
+
     @Test
     func utf8BOM_CRLF_initdata() throws {
         let data = try TestResource.TextFiles.utf8_BOM_CRLF_Test_csv.data()
-        
+
         let sv = try CSV(data: data)
-        
+
         let table = sv.table
         try #require(table.count == 3)
         #expect(table[0] == Self.utf8_BOM_Test_Table[0])

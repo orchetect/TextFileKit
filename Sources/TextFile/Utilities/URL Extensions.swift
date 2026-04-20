@@ -1,7 +1,7 @@
 //
 //  URL Extensions.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -23,12 +23,12 @@ extension URL {
             FileManager.default.temporaryDirectory
         }
     }
-    
+
     /// Returns file existence and directory information if the URL is a file URL.
     /// If the URL is not a file URL, `nil` is returned
     var fileURLStatus: (isExists: Bool, isDirectory: Bool)? {
         guard isFileURL else { return nil }
-        
+
         var isDirectory = ObjCBool(false)
         let isExists = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
         return (isExists: isExists, isDirectory: isDirectory.boolValue)

@@ -1,7 +1,7 @@
 //
 //  Data Extensions.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -29,7 +29,7 @@ extension Data {
     func guessMultiByteUTFEncoding() -> String.Encoding? {
         let sampleBytes = prefix(100)
         guard sampleBytes.count >= 2 else { return nil }
-        
+
         func splitBytes(byteWidth: Int) -> (left: [Data.Element], right: [Data.Element])? {
             let leftBytes = sampleBytes.enumerated()
                 .compactMap {
@@ -37,43 +37,43 @@ extension Data {
                         ? $0.element
                         : nil
                 }
-            
+
             let rightBytes = sampleBytes.enumerated()
                 .compactMap {
                     ($0.offset - (byteWidth - 1)).isMultiple(of: byteWidth)
                         ? $0.element
                         : nil
                 }
-            
+
             guard !leftBytes.isEmpty, !rightBytes.isEmpty else { return nil }
-            
+
             return (left: leftBytes, right: rightBytes)
         }
-        
+
         enum Endianness {
             case bigEndian
             case littleEndian
         }
-        
+
         func probableEndianness(highBytes: some DataProtocol, lowBytes: some DataProtocol) -> Bool {
             // UTF-16/32 typically have a 0x00 byte as the high byte of each 2 or 4-byte cluster
-            
+
             let zeroHighByteCount = highBytes.count(where: { $0 == 0x00 })
             let percentageOfHighBytesThatAreZero = Double(zeroHighByteCount) / Double(highBytes.count)
-            
+
             let nonZeroLowByteCount = lowBytes.count(where: { $0 != 0x00 })
             let percentageOfLowBytesThatAreNonZero = Double(nonZeroLowByteCount) / Double(lowBytes.count)
-            
+
             let thresholdPercentage: Double = 0.8 // arbitrary: 80% or more
-            
+
             return (percentageOfHighBytesThatAreZero > thresholdPercentage)
                 && (percentageOfLowBytesThatAreNonZero > thresholdPercentage)
         }
-        
+
         func isProbablyUTF(byteWidth: Int) -> Endianness? {
             guard let (leftBytes, rightBytes) = splitBytes(byteWidth: byteWidth)
             else { return nil }
-            
+
             if probableEndianness(highBytes: leftBytes, lowBytes: rightBytes) {
                 return .bigEndian
             } else if probableEndianness(highBytes: rightBytes, lowBytes: leftBytes) {
@@ -82,15 +82,15 @@ extension Data {
                 return nil
             }
         }
-        
+
         func isProbablyUTF16() -> Endianness? {
             isProbablyUTF(byteWidth: 2)
         }
-        
+
         func isProbablyUTF32() -> Endianness? {
             isProbablyUTF(byteWidth: 4)
         }
-        
+
         if let endianness = isProbablyUTF16() {
             switch endianness {
             case .bigEndian: return .utf16BigEndian

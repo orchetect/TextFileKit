@@ -1,7 +1,7 @@
 //
 //  DelimitedTextFormat+UTType.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(UniformTypeIdentifiers)
@@ -19,12 +19,12 @@ extension DelimitedTextFormat {
             .tabSeparatedText
         }
     }
-    
+
     /// Initialize from a UTI (Uniform Type Identifier).
     public init?(utType: UTType) {
         guard let match = Self.allCases.first(where: { $0.utType == utType })
         else { return nil }
-        
+
         self = match
     }
 }

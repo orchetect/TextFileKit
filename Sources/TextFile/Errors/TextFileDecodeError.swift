@@ -1,7 +1,7 @@
 //
 //  TextFileDecodeError.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import protocol Foundation.LocalizedError
@@ -11,7 +11,7 @@ public enum TextFileDecodeError: LocalizedError {
     case fileWriteError(underlyingError: Error?)
     case invalidTextEncoding
     case unrecognizedTextEncoding
-    
+
     public var errorDescription: String? {
         switch self {
         case let .fileReadError(underlyingError):
@@ -22,7 +22,7 @@ public enum TextFileDecodeError: LocalizedError {
                 string += "."
             }
             return string
-            
+
         case let .fileWriteError(underlyingError):
             var string = "File write error"
             if let underlyingError {
@@ -31,10 +31,10 @@ public enum TextFileDecodeError: LocalizedError {
                 string += "."
             }
             return string
-            
+
         case .invalidTextEncoding:
             return "Invalid text encoding."
-            
+
         case .unrecognizedTextEncoding:
             return "Unrecognized text encoding."
         }

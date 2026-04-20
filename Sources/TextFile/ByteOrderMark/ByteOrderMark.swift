@@ -1,7 +1,7 @@
 //
 //  ByteOrderMark.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -24,16 +24,16 @@ public enum ByteOrderMark {
     /// In UTF-8, there is no endianness (byte ordering). The BOM is used as a signature or identifier to text
     /// parsers to positively identify the text as having UTF-8 encoding.
     case utf8
-    
+
     /// UTF-16 big-endian byte order. ("UTF-16 (BE)")
     case utf16BigEndian
-    
+
     /// UTF-16 little-endian byte order. ("UTF-16 (LE)")
     case utf16LittleEndian
-    
+
     /// UTF-32 big-endian byte order. ("UTF-32 (BE)")
     case utf32BigEndian
-    
+
     /// UTF-32 little-endian byte order. ("UTF-32 (LE)")
     case utf32LittleEndian
 }
@@ -83,7 +83,7 @@ extension ByteOrderMark {
         case .utf32LittleEndian: "\u{FF}\u{FE}\u{00}\u{00}"
         }
     }
-    
+
     /// Byte array containing the raw code points that correspond to the byte order mark.
     public var bytes: [UInt8] {
         switch self {
@@ -94,12 +94,12 @@ extension ByteOrderMark {
         case .utf32LittleEndian: [0xFF, 0xFE, 0x00, 0x00]
         }
     }
-    
+
     /// Data containing the raw code points that correspond to the byte order mark.
     public var data: Data {
         Data(bytes)
     }
-    
+
     /// Returns the string encoding that corresponds to the byte order mark.
     public var encoding: String.Encoding {
         switch self {
@@ -117,6 +117,10 @@ extension ByteOrderMark {
 extension ByteOrderMark {
     /// The order with which to parse a text stream when matching byte order mark bytes.
     public static let parseOrder: [Self] = [
-        .utf8, .utf32BigEndian, .utf32LittleEndian, .utf16BigEndian, .utf16LittleEndian
+        .utf8,
+        .utf32BigEndian,
+        .utf32LittleEndian,
+        .utf16BigEndian,
+        .utf16LittleEndian
     ]
 }

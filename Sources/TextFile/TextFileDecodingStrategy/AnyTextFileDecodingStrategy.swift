@@ -1,7 +1,7 @@
 //
 //  AnyTextFileDecodingStrategy.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -16,7 +16,7 @@ import struct FoundationEssentials.URL
 public struct AnyTextFileDecodingStrategy {
     /// Type-erased ``TextFileDecodingStrategy`` instance.
     public var wrapped: any TextFileDecodingStrategy
-    
+
     public init(_ wrapped: any TextFileDecodingStrategy) {
         self.wrapped = wrapped
     }
@@ -41,15 +41,15 @@ extension AnyTextFileDecodingStrategy: TextFileDecodingStrategy {
         get { wrapped.convertLineEndings }
         set { wrapped.convertLineEndings = newValue }
     }
-    
+
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(in: data)
     }
-    
+
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(in: data, fileURL: fileURL)
     }
-    
+
     public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         try wrapped.decodeText(fileURL: fileURL)
     }

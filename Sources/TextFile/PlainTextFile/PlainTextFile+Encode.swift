@@ -1,7 +1,7 @@
 //
 //  PlainTextFile+Encode.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -23,7 +23,7 @@ extension PlainTextFile {
         guard var data = content.data(using: encoding) else {
             throw .encodingFailed(underlyingError: nil)
         }
-        
+
         if let bom = encoding.byteOrderMark {
             if includeBOM {
                 if !data.starts(with: bom.data) {
@@ -37,7 +37,7 @@ extension PlainTextFile {
                 }
             }
         }
-        
+
         return data
     }
 }
@@ -54,7 +54,7 @@ extension PlainTextFile {
     ///     not correctly identify the text encoding without it. For UTF-16 and UTF-32 it is highly recommended.
     public func write(to file: URL, includeBOM: Bool = true) throws(TextFileEncodeError) {
         let data = try data(includeBOM: includeBOM)
-        
+
         do {
             try data.write(to: file)
         } catch {

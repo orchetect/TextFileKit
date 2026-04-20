@@ -1,7 +1,7 @@
 //
 //  Collection Extensions.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 // MARK: - contains(anyElementsIn:)
@@ -15,7 +15,7 @@ extension Sequence where Element: Comparable {
             collection.contains(element)
         }
     }
-    
+
     /// Returns a Boolean value indicating whether the sequence contains any of the elements within
     /// the specified collection.
     @inlinable @_disfavoredOverload
@@ -38,7 +38,7 @@ extension Sequence where Element: Comparable {
             collection.contains(element)
         }
     }
-    
+
     /// Returns the number of elements that match any of the elements within the specified collection.
     @inlinable @_disfavoredOverload
     func count(ofElementsIn collections: some Sequence<some Sequence<Element>>) -> Int {

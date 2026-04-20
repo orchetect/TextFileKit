@@ -1,7 +1,7 @@
 //
 //  TSV Parse Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import Testing
@@ -11,7 +11,7 @@ struct TSV_Parse_Tests {
     @Test
     func init_Default() {
         let sv = TSV()
-        
+
         #expect(sv.table == [])
     }
 }
@@ -24,25 +24,25 @@ struct TSV_Parse_Basic_Tests {
         1	2	3
         a	b	c
         """
-    
+
     private let tsvTable_Basic: StringTable = [
         ["header1", "header2", "header3"],
         ["1", "2", "3"],
         ["a", "b", "c"]
     ]
-    
+
     @Test
     func init_RawText_Basic() {
         let sv = TSV(text: tsvRawText_Basic)
-        
+
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.text == tsvRawText_Basic)
     }
-    
+
     @Test
     func init_Table_Basic() {
         let sv = TSV(table: tsvTable_Basic)
-        
+
         #expect(sv.table == tsvTable_Basic)
         #expect(sv.text == tsvRawText_Basic)
     }
@@ -56,25 +56,25 @@ struct TSV_Parse_SingleColumn_Tests {
         1
         a
         """
-    
+
     private let tsvTable_SingleColumn: StringTable = [
         ["header1"],
         ["1"],
         ["a"]
     ]
-    
+
     @Test
     func init_RawText_SingleColumn() {
         let sv = TSV(text: tsvRawText_SingleColumn)
-        
+
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.text == tsvRawText_SingleColumn)
     }
-    
+
     @Test
     func init_Table_SingleColumn() {
         let sv = TSV(table: tsvTable_SingleColumn)
-        
+
         #expect(sv.table == tsvTable_SingleColumn)
         #expect(sv.text == tsvRawText_SingleColumn)
     }
@@ -91,18 +91,18 @@ struct TSV_Parse_QuotedFields_Tests {
         q	w	"e
         ""quoted""	stuff"
         """#
-    
+
     private let tsvTable_QuotedFields: StringTable = [
         ["header1", "header\t2", "header3"],
         ["1", "2", "3 \"quoted\" here"],
         ["one line\nanother line", "b", "c"],
         ["q", "w", "e\n\"quoted\"\tstuff"]
     ]
-    
+
     @Test
     func init_RawText_QuotedFields() {
         let sv = TSV(text: tsvRawText_QuotedFields)
-        
+
         #expect(sv.table == tsvTable_QuotedFields)
         #expect(sv.text == tsvRawText_QuotedFields)
     }

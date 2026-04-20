@@ -1,7 +1,7 @@
 //
 //  PlainTextFile.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -13,10 +13,10 @@ import FoundationEssentials
 public struct PlainTextFile {
     /// Decoded text file content.
     public var content: String
-    
+
     /// The source text file encoding.
     public var encoding: String.Encoding
-    
+
     /// Initialize by directly populating properties without decoding or modification.
     public init(content: String, encoding: String.Encoding = .utf8) {
         self.content = content

@@ -1,7 +1,7 @@
 //
 //  CSV String Decode Tests.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 import class Foundation.Bundle
@@ -19,7 +19,7 @@ struct CSV_StringDecode_Tests {
 
         // parse CSV
         let csv = try CSV(file: url)
-        
+
         #if canImport(Darwin)
         #expect(csv.table[safeRow: 1, col: 0] == "Cliché")
         #expect(csv.table[safeRow: 1, col: 1] == "Français")
@@ -52,7 +52,7 @@ struct CSV_StringDecode_Tests {
     func accentedCharacters_MacRoman_encoding_string() throws {
         let resource = TestResource.TextFiles.macRoman_AccentedCharacters_csv
         let url = try resource.url()
-        
+
         // check detected encoding
         let decoded = try PlainTextFile(
             url: url,
@@ -562,16 +562,16 @@ struct CSV_StringDecode_Tests {
         #expect(decoded.encoding == .windowsCP1252)
     }
     #endif
-    
+
     // MARK: - Windows 1252 with UTF-8 BOM (Malformed)
-    
+
     /// This tests a scenario of a CSV file found in the wild that was malformed.
     /// The file was Windows 1252 encoded, but had a UTF-8 BOM errantly inserted at the start.
     @Test
     func accentedCharacters_windows1252_utf8BOM_content() throws {
         let resource = TestResource.TextFiles.windows1252_AccentedCharacters_WithUTF8BOM_csv
         let url = try resource.url()
-        
+
         // parse CSV
         let csv = try CSV(file: url)
         #expect(csv.table[safeRow: 1, col: 0] == "Cliché")

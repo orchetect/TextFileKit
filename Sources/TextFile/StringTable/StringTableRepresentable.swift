@@ -1,7 +1,7 @@
 //
 //  StringTableRepresentable.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -18,16 +18,16 @@ public protocol StringTableRepresentable where Self: Sendable {
     /// (`self[row, column]` or `self[safe: row, column]`) which allow the column to be specified either as
     /// an index (integer) or column name (string).
     var table: StringTable { get set }
-    
+
     /// Raw text file content. (Computed property)
     ///
     /// This property is typically computed and is not guaranteed to be identical to raw file content that
     /// may have been used to initialize the instance.
     var text: String { get }
-    
+
     /// Initialize from an Array table.
     init(table: StringTable)
-    
+
     /// Initialize from raw text file content.
     ///
     /// > Note:
@@ -49,7 +49,7 @@ extension StringTableRepresentable {
         let decoded = try PlainTextFile(url: file, strategy: .default(), preferring: encoding)
         self.init(text: decoded.content)
     }
-    
+
     /// Initialize from raw data with the specified text encoding.
     ///
     /// - Parameters:
@@ -78,7 +78,7 @@ extension StringTableRepresentable {
         let textFile = PlainTextFile(content: text, encoding: encoding)
         return try textFile.data(includeBOM: includeBOM)
     }
-    
+
     /// Write the text to a file on disk using the specified text encoding.
     ///
     /// - Parameters:

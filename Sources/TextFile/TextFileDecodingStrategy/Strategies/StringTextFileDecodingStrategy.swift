@@ -1,7 +1,7 @@
 //
 //  StringTextFileDecodingStrategy.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -26,7 +26,7 @@ import struct FoundationEssentials.UUID
 /// not already exist as a file.
 public struct StringTextFileDecodingStrategy {
     public var convertLineEndings: Bool
-    
+
     public init(convertLineEndings: Bool = true) {
         self.convertLineEndings = convertLineEndings
     }
@@ -41,15 +41,15 @@ extension StringTextFileDecodingStrategy: Sendable { }
 extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
     public func decodeText(in data: Data) throws(TextFileDecodeError) -> PlainTextFile {
         let (textFileURL, isTemporaryFile) = try writeTemporaryFileIfNecessary(data: data, fileURL: nil)
-        
+
         defer {
             // cleanup file on disk
             if isTemporaryFile { try? FileManager.default.removeItem(at: textFileURL) }
         }
-        
+
         return try decodeText(in: data, fileURL: textFileURL)
     }
-    
+
     public func decodeText(in data: Data, fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         do {
             var usedEncoding: String.Encoding = .utf8
@@ -62,7 +62,7 @@ extension StringTextFileDecodingStrategy: TextFileDecodingStrategy {
             throw .fileReadError(underlyingError: error)
         }
     }
-    
+
     public func decodeText(fileURL: URL) throws(TextFileDecodeError) -> PlainTextFile {
         let data: Data
         do {

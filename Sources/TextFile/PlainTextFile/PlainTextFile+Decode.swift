@@ -1,7 +1,7 @@
 //
 //  PlainTextFile+Decode.swift
 //  swift-textfile • https://github.com/orchetect/swift-textfile
-//  © 2018-2026 Steffan Andrews • Licensed under MIT License
+//  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
 #if canImport(Darwin)
@@ -25,11 +25,11 @@ extension PlainTextFile {
             self = decoded
             return
         }
-        
+
         let strategy: any TextFileDecodingStrategy = .default()
         self = try strategy.decodeText(fileURL: url)
     }
-    
+
     /// Attempt to decode a text file on disk at the specified file URL.
     public init(
         url: URL,
@@ -43,7 +43,7 @@ extension PlainTextFile {
             self = decoded
             return
         }
-        
+
         self = try strategy.decodeText(fileURL: url)
     }
 }
@@ -69,11 +69,11 @@ extension PlainTextFile {
             self = decoded
             return
         }
-        
+
         let strategy: any TextFileDecodingStrategy = .default()
         self = try strategy.decodeText(in: data)
     }
-    
+
     /// Attempt to decode raw text file contents.
     ///
     /// - Parameters:
@@ -95,7 +95,7 @@ extension PlainTextFile {
             self = decoded
             return
         }
-        
+
         self = try strategy.decodeText(in: data)
     }
 }
